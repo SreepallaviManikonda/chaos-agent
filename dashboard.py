@@ -1,5 +1,5 @@
-"""Stage 6: Live Streamlit UI for Autonomous Chaos Engineering & Resilience Observability.
-Fully reactive, interactive console supporting both Local Docker Execution and Cloud Emulation.
+"""Stage 6: Modernized Executive UI/UX Console for Autonomous AI Chaos Engineering.
+Enterprise-grade Glassmorphism Dark Theme, Altair Interactive Charts, and Real-Time Watchdog Controls.
 """
 
 import json
@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -28,58 +29,148 @@ from config import (
 )
 
 st.set_page_config(
-    page_title="AI Chaos Engineering & Resilience Console",
+    page_title="ChaosPulse AI | Autonomous Cloud-Native Resilience",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# Custom Styling
+# ==============================================================================
+# ADVANCED CUSTOM CSS & GLASSMORPHISM DESIGN SYSTEM
+# ==============================================================================
 st.markdown(
     """
 <style>
-    .metric-card {
-        background-color: #1e2130;
-        border-radius: 8px;
-        padding: 16px;
-        border: 1px solid #2e344e;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+    code, pre {
+        font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    /* Main background & container polish */
+    .stApp {
+        background: radial-gradient(circle at top left, #111827 0%, #030712 100%);
+        color: #f3f4f6;
+    }
+
+    /* Glassmorphism Metric Cards */
+    .glass-card {
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .glass-card:hover {
+        border-color: rgba(99, 102, 241, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* Hero Scorecard */
+    .hero-score-box {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        border-radius: 14px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 0 25px rgba(99, 102, 241, 0.15);
+    }
+    .hero-score-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #10b981 0%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1;
+        margin-bottom: 6px;
+    }
+
+    /* Badges & Pills */
     .badge-critical {
-        background-color: #ff4b4b;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: bold;
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
     .badge-high {
-        background-color: #ffa116;
-        color: black;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: bold;
+        background: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
     .badge-medium {
-        background-color: #ffcc00;
-        color: black;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-    .killswitch-pill {
-        background-color: #ff4b4b;
-        color: white;
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.4);
         padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 0.85em;
-        font-weight: bold;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
-    .safe-pill {
-        background-color: #00c853;
-        color: white;
+    .badge-pass {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.4);
         padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 0.85em;
-        font-weight: bold;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+    .watchdog-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        padding: 5px 12px;
+        border-radius: 9999px;
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+    .watchdog-pulse {
+        width: 8px;
+        height: 8px;
+        background-color: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #10b981;
+        animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.8; }
+        50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 14px #10b981; }
+        100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* Sleek buttons */
+    .stButton > button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
     }
 </style>
 """,
@@ -108,7 +199,9 @@ def is_docker_connected() -> bool:
         return False
 
 
-# Initialize Session State
+# ==============================================================================
+# STATE INITIALIZATION
+# ==============================================================================
 if "session_experiments" not in st.session_state:
     st.session_state.session_experiments = []
 if "session_telemetry" not in st.session_state:
@@ -124,113 +217,169 @@ if "error_threshold" not in st.session_state:
 if "p95_threshold" not in st.session_state:
     st.session_state.p95_threshold = 1500
 
-# Load Base Artifacts
+# Base Artifacts
 file_report = load_json(REPORT_JSON_FILE) or {}
 file_topology = load_json(TOPOLOGY_FILE) or {}
 file_plan = load_json(CACHE_PLAN_FILE) or {}
 file_telemetry = load_json(TELEMETRY_LOG_FILE) or []
 
-# Merge file telemetry with session telemetry
 all_telemetry = list(file_telemetry) + st.session_state.session_telemetry
 docker_available = is_docker_connected()
 
-# Sidebar
-st.sidebar.title("🛡️ Chaos Agent Control")
-mode_label = "🟢 Local Docker Engine" if docker_available else "☁️ Cloud Interactive Simulator"
-st.sidebar.markdown(f"**Runtime Mode:** `{mode_label}`")
-st.sidebar.markdown(f"**Target System:** OpenTelemetry Demo")
-st.sidebar.markdown(f"**Endpoint:** `{FRONTEND_URL}`")
+# ==============================================================================
+# SIDEBAR CONTROLS
+# ==============================================================================
+with st.sidebar:
+    st.markdown("### 🛡️ **ChaosPulse Engine**")
+    st.caption("Autonomous Resilience & AI Chaos Orchestrator")
 
-st.sidebar.divider()
-st.sidebar.subheader("Safety Guardrails")
-st.sidebar.info(
-    f"⏱️ **Watchdog:** 500ms cycle\n\n"
-    f"🚨 **Max Error Rate:** {DEFAULT_MAX_ERROR_RATE*100:.0f}%\n\n"
-    f"⚡ **Max p95 Latency:** {DEFAULT_MAX_P95_MS:.0f}ms\n\n"
-    f"🔒 **Rollback:** Automated Instant (<50ms)"
-)
+    mode_badge = "🟢 Docker Engine (M4 Host)" if docker_available else "☁️ Cloud Simulator"
+    st.markdown(f"**Runtime:** `{mode_badge}`")
+    st.markdown(f"**Target Application:** `OpenTelemetry Demo`")
+    st.markdown(f"**Probed Endpoint:** `{FRONTEND_URL}`")
 
-if st.sidebar.button("🚨 EMERGENCY KILL-SWITCH (Rollback All)", type="primary", use_container_width=True):
-    if docker_available:
-        try:
-            from chaos_injector import ChaosInjector
+    st.divider()
 
-            injector = ChaosInjector()
-            injector.emergency_rollback_all()
-            st.sidebar.success("Emergency rollback executed! All services unpaused.")
-        except Exception as e:
-            st.sidebar.error(f"Rollback error: {e}")
-    else:
-        st.sidebar.success("Emergency rollback executed! Cloud simulation restored to baseline.")
+    st.markdown("#### ⚡ Active Safety Guardrails")
+    st.markdown(
+        """
+        <div style="background: rgba(17,24,39,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            <div style="font-size: 0.85rem; margin-bottom: 6px;">⏱️ <strong>Watchdog:</strong> 500ms Active SLA Cycle</div>
+            <div style="font-size: 0.85rem; margin-bottom: 6px;">🚨 <strong>Error SLA:</strong> Max 30% HTTP 5xx</div>
+            <div style="font-size: 0.85rem; margin-bottom: 6px;">⚡ <strong>Latency SLA:</strong> Max 1500ms p95</div>
+            <div style="font-size: 0.85rem;">🔒 <strong>Auto-Rollback:</strong> Instant (&lt;50ms)</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-if st.sidebar.button("🔄 Refresh Data & View", use_container_width=True):
-    st.rerun()
+    if st.button("🚨 EMERGENCY KILL-SWITCH", type="primary", use_container_width=True):
+        if docker_available:
+            try:
+                from chaos_injector import ChaosInjector
 
-# Main Header
-st.title("🛡️ Autonomous AI Chaos Engineering System")
-st.markdown("*Continuous automated resilience probing, fault injection, real-time watchdog safeguards & post-mortems.*")
+                injector = ChaosInjector()
+                injector.emergency_rollback_all()
+                st.success("Kill-switch executed! All services unpaused.")
+            except Exception as e:
+                st.error(f"Rollback error: {e}")
+        else:
+            st.success("Emergency rollback executed! Cluster state reset.")
 
-# Top KPI Metrics Row
-resilience_score = file_report.get("overall_resilience_score", 74)
+    if st.button("🔄 Refresh Data & View", use_container_width=True):
+        st.rerun()
+
+    st.divider()
+    st.caption("Powered by Google DeepMind Antigravity • Gemini 2.5 Flash")
+
+
+# ==============================================================================
+# COCKPIT HERO HEADER
+# ==============================================================================
+score = file_report.get("overall_resilience_score", 74)
+score_grade = "A (Exemplary)" if score >= 85 else ("B+ (Resilient / Cart SPOF)" if score >= 70 else "C (Vulnerable)")
 node_count = file_topology.get("node_count", 11)
 dep_count = file_topology.get("edge_count", 24)
-total_probes = len(all_telemetry)
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    st.metric("Resilience Score", f"{resilience_score} / 100", delta="Post-Audit")
-with col2:
-    st.metric("Discovered Services", node_count)
-with col3:
-    dep_count_metric = dep_count if dep_count else 24
-    st.metric("Dependencies Mapped", dep_count_metric)
-with col4:
-    st.metric("Total Probes (10 RPS)", total_probes)
-with col5:
-    st.metric("Safety Watchdog", "Active (500ms)", delta="Guarded")
+col_hero1, col_hero2, col_hero3, col_hero4 = st.columns([1.2, 1, 1, 1])
 
-st.divider()
+with col_hero1:
+    st.markdown(
+        f"""
+        <div class="hero-score-box">
+            <div style="font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 4px;">System Resilience Score</div>
+            <div class="hero-score-number">{score} <span style="font-size: 1.5rem; color: #64748b;">/ 100</span></div>
+            <div style="font-size: 0.88rem; font-weight: 600; color: #38bdf8;">{score_grade}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-# Tab Layout
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🧪 Interactive Chaos Console",
-    "📈 Real-Time Telemetry & Observability",
-    "🗺️ Architecture Topology DAG",
-    "📋 Campaign History & MTTR",
-    "🤖 AI Findings & Prescribed Remediations",
+with col_hero2:
+    st.markdown(
+        f"""
+        <div class="glass-card">
+            <div style="font-size: 0.78rem; text-transform: uppercase; color: #94a3b8;">Topology Mesh</div>
+            <div style="font-size: 1.8rem; font-weight: 700; color: #f3f4f6; margin: 4px 0;">{node_count} <span style="font-size: 0.9rem; font-weight: 400; color: #94a3b8;">Services</span></div>
+            <div style="font-size: 0.82rem; color: #10b981;">{dep_count} Dependency Edges Mapped</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with col_hero3:
+    st.markdown(
+        f"""
+        <div class="glass-card">
+            <div style="font-size: 0.78rem; text-transform: uppercase; color: #94a3b8;">Observability Traffic</div>
+            <div style="font-size: 1.8rem; font-weight: 700; color: #f3f4f6; margin: 4px 0;">{len(all_telemetry)} <span style="font-size: 0.9rem; font-weight: 400; color: #94a3b8;">Probes</span></div>
+            <div style="font-size: 0.82rem; color: #38bdf8;">Continuous 10 RPS Probing</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with col_hero4:
+    st.markdown(
+        """
+        <div class="glass-card">
+            <div style="font-size: 0.78rem; text-transform: uppercase; color: #94a3b8;">Safety Watchdog</div>
+            <div style="margin: 8px 0;">
+                <div class="watchdog-indicator">
+                    <span class="watchdog-pulse"></span>
+                    <span>ACTIVE (500ms Cycle)</span>
+                </div>
+            </div>
+            <div style="font-size: 0.82rem; color: #94a3b8;">Zero Permanent Crashes</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+
+# ==============================================================================
+# MAIN TAB NAVIGATION
+# ==============================================================================
+tab_cockpit, tab_telemetry, tab_topology, tab_history, tab_ai = st.tabs([
+    "🎮 Chaos Injection Cockpit",
+    "📈 Observability & Telemetry Stream",
+    "🗺️ Microservice Architecture DAG",
+    "📋 Experiment History & MTTR",
+    "🤖 Gemini AI Audit & Remediation",
 ])
 
 # ==============================================================================
-# TAB 1: INTERACTIVE CHAOS CONSOLE
+# TAB 1: CHAOS INJECTION COCKPIT
 # ==============================================================================
-with tab1:
-    st.subheader("🎮 Interactive Experiment Injection & Watchdog Supervision")
-    st.markdown(
-        "Select a target service, configure failure parameters, or click one of the **Quick Presets** below. "
-        "The **500ms Safety Watchdog** will continuously supervise health and trigger an instant rollback if SLAs are breached."
-    )
+with tab_cockpit:
+    st.markdown("### ⚡ **Launch Safeguarded Chaos Experiment**")
+    st.markdown("Select a failure mode or pick a pre-configured AI scenario to stress-test microservice resilience in real-time.")
 
-    # QUICK PRESET BUTTONS
-    st.markdown("#### ⚡ Quick Presets (One-Click Setup)")
-    col_pre1, col_pre2, col_pre3 = st.columns(3)
-    with col_pre1:
-        if st.button("🛒 Preset: EXP-001 (Cart Service Outage)", use_container_width=True):
+    # ONE-CLICK PRESET BUTTONS
+    st.markdown("##### 🎯 **Quick Scenario Presets:**")
+    pcol1, pcol2, pcol3 = st.columns(3)
+
+    with pcol1:
+        if st.button("🛒 **EXP-001: Cart Outage**\nFreeze process • Target: `cart`", use_container_width=True):
             st.session_state.target_service = "cart"
             st.session_state.failure_type = "container_pause"
             st.session_state.exp_duration = 8
             st.session_state.p95_threshold = 1500
             st.session_state.error_threshold = 0.30
             st.rerun()
-    with col_pre2:
-        if st.button("📦 Preset: EXP-002 (Product Catalog CPU Throttling)", use_container_width=True):
+
+    with pcol2:
+        if st.button("📦 **EXP-002: Catalog CPU Choke**\n10% CPU throttle • Target: `product-catalog`", use_container_width=True):
             st.session_state.target_service = "product-catalog"
             st.session_state.failure_type = "cpu_throttle"
             st.session_state.exp_duration = 8
             st.session_state.p95_threshold = 1500
             st.session_state.error_threshold = 0.25
             st.rerun()
-    with col_pre3:
-        if st.button("💡 Preset: EXP-003 (Recommendation Netem Delay)", use_container_width=True):
+
+    with pcol3:
+        if st.button("💡 **EXP-003: Recommendation Delay**\nNetwork delay • Target: `recommendation`", use_container_width=True):
             st.session_state.target_service = "recommendation"
             st.session_state.failure_type = "network_latency"
             st.session_state.exp_duration = 8
@@ -238,107 +387,87 @@ with tab1:
             st.session_state.error_threshold = 0.20
             st.rerun()
 
-    st.markdown("---")
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.06); margin: 20px 0;'>", unsafe_allow_html=True)
 
-    col_ctrl, col_info = st.columns([1, 1])
+    c_left, c_right = st.columns([1.1, 0.9])
 
     available_services = [n.get("name") for n in file_topology.get("nodes", [])] or ALLOWED_TARGET_SERVICES
-    selectable_services = [
-        s for s in available_services if s not in ["frontend-proxy", "otel-collector", "jaeger", "prometheus", "load-generator"]
-    ]
-    if "cart" not in selectable_services:
-        selectable_services.insert(0, "cart")
+    selectable = [s for s in available_services if s not in ["frontend-proxy", "otel-collector", "jaeger", "prometheus", "load-generator"]]
+    if "cart" not in selectable:
+        selectable.insert(0, "cart")
 
-    # Ensure default is in list
-    if st.session_state.target_service not in selectable_services:
-        st.session_state.target_service = selectable_services[0]
+    if st.session_state.target_service not in selectable:
+        st.session_state.target_service = selectable[0]
 
-    with col_ctrl:
-        st.markdown("#### Configure Experiment Parameters")
-        target_idx = selectable_services.index(st.session_state.target_service)
-        selected_service = st.selectbox(
-            "1. Target Microservice",
-            selectable_services,
-            index=target_idx,
-            key="sel_target_service",
-            help="Select the microservice to inject failure into",
+    with c_left:
+        st.markdown("#### ⚙️ **Experiment Parameters**")
+
+        svc_idx = selectable.index(st.session_state.target_service)
+        selected_svc = st.selectbox(
+            "Target Microservice",
+            selectable,
+            index=svc_idx,
+            key="ui_target_svc",
+            help="Microservice container to inject failure into",
         )
-        st.session_state.target_service = selected_service
+        st.session_state.target_service = selected_svc
 
         type_options = ["container_pause", "cpu_throttle", "network_latency"]
         type_labels = {
-            "container_pause": "Container Pause (Freeze Process)",
-            "cpu_throttle": "CPU Quota Throttle (10% CPU choke)",
-            "network_latency": "Network Latency & Flagd Delays (500ms)",
+            "container_pause": "❄️ Container Freeze (docker pause process)",
+            "cpu_throttle": "⚡ CPU Starvation (choke container quota to 10%)",
+            "network_latency": "🌐 Network Latency & Flagd Delays (500ms Netem)",
         }
         type_idx = type_options.index(st.session_state.failure_type) if st.session_state.failure_type in type_options else 0
-        selected_type = st.selectbox(
-            "2. Failure Injection Type",
+        selected_failure = st.selectbox(
+            "Failure Injection Mode",
             type_options,
             format_func=lambda x: type_labels.get(x, x),
             index=type_idx,
-            key="sel_failure_type",
+            key="ui_failure_type",
         )
-        st.session_state.failure_type = selected_type
+        st.session_state.failure_type = selected_failure
 
-        col_p1, col_p2 = st.columns(2)
-        with col_p1:
-            exp_duration = st.slider(
-                "Duration (seconds)",
-                min_value=3,
-                max_value=15,
-                value=st.session_state.exp_duration,
-                step=1,
-                key="slider_duration",
-            )
-            st.session_state.exp_duration = exp_duration
-            error_threshold = st.slider(
-                "Max Tolerated Error Rate",
-                min_value=0.05,
-                max_value=0.50,
-                value=st.session_state.error_threshold,
-                step=0.05,
-                format="%.0f%%",
-                key="slider_error",
-            )
-            st.session_state.error_threshold = error_threshold
-        with col_p2:
-            p95_threshold = st.slider(
-                "Max Tolerated p95 Latency",
-                min_value=500,
-                max_value=3000,
-                value=st.session_state.p95_threshold,
-                step=100,
-                format="%d ms",
-                key="slider_p95",
-            )
-            st.session_state.p95_threshold = p95_threshold
+        col_s1, col_s2 = st.columns(2)
+        with col_s1:
+            dur = st.slider("Duration (seconds)", 3, 15, st.session_state.exp_duration, 1, key="ui_duration")
+            st.session_state.exp_duration = dur
+            err_lim = st.slider("Max Error Rate SLA", 0.05, 0.50, st.session_state.error_threshold, 0.05, format="%.0f%%", key="ui_err_sla")
+            st.session_state.error_threshold = err_lim
+        with col_s2:
+            lat_lim = st.slider("Max p95 Latency SLA", 500, 3000, st.session_state.p95_threshold, 100, format="%d ms", key="ui_lat_sla")
+            st.session_state.p95_threshold = lat_lim
             st.selectbox("Watchdog Polling Rate", ["500 ms (Strict Safety Standard)"], index=0)
 
-        run_btn = st.button("🚀 Execute Experiment with Active Safety Watchdog", type="primary", use_container_width=True)
+        run_action = st.button("🚀 INJECT CHAOS WITH SAFETY WATCHDOG", type="primary", use_container_width=True)
 
-    with col_info:
-        st.markdown("#### Microservice Centrality & Rationale")
-        node_match = next((n for n in file_topology.get("nodes", []) if n.get("name") == selected_service), None)
+    with c_right:
+        node_match = next((n for n in file_topology.get("nodes", []) if n.get("name") == selected_svc), None)
         crit = node_match.get("criticality", "HIGH") if node_match else "HIGH"
         in_deg = node_match.get("in_degree", 1) if node_match else 1
         out_deg = node_match.get("out_degree", 1) if node_match else 1
 
-        badge = "🔴 CRITICAL" if crit == "HIGH" else ("🟠 HIGH" if crit == "MEDIUM" else "🟢 LOW")
-        st.info(
-            f"**Selected Target:** `{selected_service}`\n\n"
-            f"**System Criticality:** {badge} | **Inbound Callers:** {in_deg} | **Outbound Callees:** {out_deg}\n\n"
-            f"**Active Safety Guardrails:**\n"
-            f"• Max Error Rate SLA: `{error_threshold*100:.0f}%`\n"
-            f"• Max p95 Latency SLA: `{p95_threshold}ms`\n"
-            f"• Watchdog Polling Interval: `500ms`\n\n"
-            f"**Behavior:** If `{selected_service}` is perturbed and SLAs breach, the kill-switch restores nominal state immediately (<50ms)."
+        badge_html = "<span class='badge-critical'>TIER-0 CRITICAL</span>" if crit == "HIGH" else "<span class='badge-high'>TIER-1 ESSENTIAL</span>"
+
+        st.markdown(
+            f"""
+            <div class="glass-card" style="margin-top: 26px;">
+                <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">ARCHITECTURAL PROFILE</div>
+                <div style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: #f3f4f6;">{selected_svc} {badge_html}</div>
+                <div style="font-size: 0.88rem; line-height: 1.6; color: #cbd5e1;">
+                    • <strong>Inbound Callers:</strong> {in_deg} services dependent on this component<br>
+                    • <strong>Outbound Dependencies:</strong> {out_deg} downstream services called<br>
+                    • <strong>Safety Kill-Switch:</strong> Polling every <code>500ms</code>. If error rate breaches <code>{err_lim*100:.0f}%</code> or p95 breaches <code>{lat_lim}ms</code>, automated rollback recovers state in &lt;50ms.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
-    # EXECUTION HANDLER
-    if run_btn:
-        progress_bar = st.progress(0, text="Initializing experiment and capturing baseline...")
-        status_box = st.empty()
+    # EXECUTION RUNNER
+    if run_action:
+        prog = st.progress(0, text="Initializing experiment and capturing baseline...")
+        status_banner = st.empty()
 
         if docker_available:
             try:
@@ -346,8 +475,8 @@ with tab1:
                 from safety_guard import SafetyGuard
                 from telemetry import TelemetryCollector
 
-                status_box.info("Connecting to Docker daemon and starting telemetry stream...")
-                progress_bar.progress(20, text="Starting telemetry worker...")
+                status_banner.info("Connecting to Docker daemon and starting telemetry stream...")
+                prog.progress(25, text="Probing steady-state baseline...")
                 tel = TelemetryCollector(target_url=FRONTEND_URL, rate_rps=10)
                 tel.start()
                 time.sleep(1.0)
@@ -355,53 +484,52 @@ with tab1:
                 inj = ChaosInjector()
                 guard = SafetyGuard(inj, tel)
 
-                progress_bar.progress(40, text=f"Injecting {selected_type} on '{selected_service}'...")
+                prog.progress(50, text=f"Executing {selected_failure} on {selected_svc}...")
                 exp_id = f"EXP-{int(time.time())%1000:03d}"
                 res = guard.execute_safeguarded_experiment(
                     experiment_id=exp_id,
-                    target_service=selected_service,
-                    experiment_type=selected_type,
-                    duration_sec=float(exp_duration),
-                    max_error_rate=float(error_threshold),
-                    max_p95_ms=float(p95_threshold),
+                    target_service=selected_svc,
+                    experiment_type=selected_failure,
+                    duration_sec=float(dur),
+                    max_error_rate=float(err_lim),
+                    max_p95_ms=float(lat_lim),
                 )
 
-                progress_bar.progress(90, text="Finalizing metrics and verifying rollback...")
+                prog.progress(90, text="Verifying automated recovery & MTTR...")
                 time.sleep(0.5)
                 tel.stop()
                 inj.emergency_rollback_all()
-                progress_bar.progress(100, text="Experiment completed!")
+                prog.progress(100, text="Completed!")
 
-                exp_record = {
+                record = {
                     "experiment_id": exp_id,
-                    "target_service": selected_service,
-                    "experiment_type": selected_type,
+                    "target_service": selected_svc,
+                    "experiment_type": selected_failure,
                     "kill_switch_triggered": res.kill_switch_triggered,
                     "mttr_sec": res.mttr_sec,
                     "peak_error_rate": res.failure_metrics.get("error_rate", 0.0),
                     "peak_p95_ms": res.failure_metrics.get("p95_latency_ms", 0.0),
                     "actual_duration_sec": res.actual_duration_sec,
-                    "evaluation": f"Watchdog triggered: {res.trigger_reason}" if res.kill_switch_triggered else "Safe complete within SLA thresholds.",
+                    "evaluation": f"Watchdog rollback: {res.trigger_reason}" if res.kill_switch_triggered else "Passed within SLAs",
                 }
-                st.session_state.session_experiments.insert(0, exp_record)
-                status_box.success(f"Experiment {exp_id} finished: {'🚨 Kill-Switch Triggered' if res.kill_switch_triggered else '🛡️ Completed Safely'}!")
+                st.session_state.session_experiments.insert(0, record)
+                status_banner.success(f"Experiment {exp_id} executed! Status: {'🚨 Rollback Triggered' if res.kill_switch_triggered else '🛡️ Passed Safely'}")
 
             except Exception as e:
-                status_box.error(f"Execution error: {e}")
-                progress_bar.empty()
+                status_banner.error(f"Execution error: {e}")
+                prog.empty()
 
         else:
-            # Cloud Interactive Simulation
-            status_box.info(f"Simulating {selected_type} against `{selected_service}` under 500ms safety watchdog...")
-            progress_bar.progress(25, text=f"Injecting fault on {selected_service}...")
+            status_banner.info(f"Simulating {selected_failure} against `{selected_svc}` with 500ms safety watchdog...")
+            prog.progress(30, text=f"Applying failure: {selected_failure} on {selected_svc}...")
 
-            will_trigger_ks = ("cart" in selected_service.lower() and selected_type == "container_pause") or (p95_threshold < 1000) or ("catalog" in selected_service.lower() and p95_threshold < 600)
+            will_trigger_ks = ("cart" in selected_svc.lower() and selected_failure == "container_pause") or (lat_lim < 1000)
             now_ts = time.time()
             sim_samples = []
 
-            for step in range(1, int(exp_duration * 2) + 1):
-                step_err = 0.12 if "cart" in selected_service.lower() else (0.04 if "catalog" in selected_service.lower() else 0.0)
-                step_lat = 2500.0 if "cart" in selected_service.lower() else (1600.0 if selected_type == "cpu_throttle" and step > 4 else random.uniform(40, 180))
+            for step in range(1, int(dur * 2) + 1):
+                step_err = 0.12 if "cart" in selected_svc.lower() else (0.04 if "catalog" in selected_svc.lower() else 0.0)
+                step_lat = 2500.0 if "cart" in selected_svc.lower() else (1600.0 if selected_failure == "cpu_throttle" and step > 4 else random.uniform(40, 180))
 
                 sim_samples.append({
                     "timestamp": now_ts + (step * 0.5),
@@ -409,207 +537,219 @@ with tab1:
                     "status_code": 500 if step_err > 0.05 and random.random() < step_err else 200,
                     "latency_ms": round(step_lat, 2),
                     "is_error": step_err > 0.05,
-                    "event_tag": f"{selected_service}_{selected_type}",
+                    "event_tag": f"{selected_svc}_{selected_failure}",
                 })
 
-                if (step_lat > p95_threshold or step_err > error_threshold) and will_trigger_ks:
-                    status_box.warning(f"🚨 KILL-SWITCH TRIGGERED at {step*0.5:.1f}s: p95 latency reached {step_lat:.1f}ms (Threshold: {p95_threshold}ms). Reverting!")
+                if (step_lat > lat_lim or step_err > err_lim) and will_trigger_ks:
+                    status_banner.warning(f"🚨 KILL-SWITCH TRIGGERED at {step*0.5:.1f}s: p95 latency reached {step_lat:.1f}ms (Threshold: {lat_lim}ms). Reverting!")
                     break
 
-            progress_bar.progress(100, text="Experiment completed & rolled back!")
+            prog.progress(100, text="Simulation complete!")
             st.session_state.session_telemetry.extend(sim_samples)
 
             sim_record = {
                 "experiment_id": f"EXP-{random.randint(100, 999)}",
-                "target_service": selected_service,
-                "experiment_type": selected_type,
+                "target_service": selected_svc,
+                "experiment_type": selected_failure,
                 "kill_switch_triggered": will_trigger_ks,
                 "mttr_sec": 0.48 if will_trigger_ks else 0.12,
-                "peak_error_rate": 0.12 if "cart" in selected_service.lower() else 0.0,
+                "peak_error_rate": 0.12 if "cart" in selected_svc.lower() else 0.0,
                 "peak_p95_ms": 2500.0 if will_trigger_ks else 92.0,
-                "actual_duration_sec": 3.5 if will_trigger_ks else float(exp_duration),
+                "actual_duration_sec": 3.5 if will_trigger_ks else float(dur),
                 "evaluation": "Kill-switch averted cascading outage." if will_trigger_ks else "Safe complete within SLA thresholds.",
             }
             st.session_state.session_experiments.insert(0, sim_record)
-            status_box.success("Experiment simulation finished and recorded in telemetry!")
+            status_banner.success("Experiment simulation finished and recorded in telemetry!")
 
-    # INSPECT EXPERIMENTS
-    all_experiments = st.session_state.session_experiments + file_report.get("experiments_evaluated", [])
-    if all_experiments:
-        st.divider()
-        st.markdown("### 📋 Interactive Experiment Inspector")
-        exp_labels = [f"[{e.get('experiment_id')}] {e.get('target_service')} ({e.get('experiment_type')})" for e in all_experiments]
-        selected_exp_idx = st.selectbox(
-            "Select Experiment to Inspect Detailed Diagnostics:",
-            range(len(exp_labels)),
-            format_func=lambda i: exp_labels[i],
-            key="inspector_selectbox",
-        )
-
-        chosen = all_experiments[selected_exp_idx]
-        c1, c2, c3, c4 = st.columns(4)
-        with c1:
-            st.metric("Target Service", chosen.get("target_service"))
-        with c2:
-            st.metric("Failure Type", chosen.get("experiment_type"))
-        with c3:
-            st.metric("MTTR", f"{chosen.get('mttr_sec', 0.0):.2f}s")
-        with c4:
-            ks_flag = chosen.get("kill_switch_triggered", False)
-            st.metric("Watchdog Kill-Switch", "🚨 TRIGGERED" if ks_flag else "🛡️ Safe Complete")
-
-        st.info(f"**Diagnostic Evaluation:** {chosen.get('evaluation', 'Nominal test completion.')}")
 
 # ==============================================================================
-# TAB 2: TELEMETRY & OBSERVABILITY
+# TAB 2: OBSERVABILITY & TELEMETRY STREAM
 # ==============================================================================
-with tab2:
-    st.subheader("Traffic Generation & Telemetry Stream")
+with tab_telemetry:
+    st.markdown("### 📈 **Real-Time Observability & Telemetry Stream**")
+    st.caption("Live 10 RPS load generation probes, rolling p50/p95 latency, and SLA boundary enforcement.")
+
     if all_telemetry:
-        df_telemetry = pd.DataFrame(all_telemetry)
-        df_telemetry["time"] = pd.to_datetime(df_telemetry["timestamp"], unit="s")
+        df_tel = pd.DataFrame(all_telemetry)
+        df_tel["time"] = pd.to_datetime(df_tel["timestamp"], unit="s")
 
-        col_c1, col_c2 = st.columns([1, 1])
-        with col_c1:
-            smoothing_window = st.slider("Metric Smoothing Window (Probes)", min_value=1, max_value=30, value=5, step=1)
-        with col_c2:
-            available_tags = ["All Events"] + [str(t) for t in df_telemetry["event_tag"].dropna().unique()]
-            selected_tag = st.selectbox("Filter by Experiment Event Tag", available_tags, index=0, key="telemetry_tag_filter")
+        tcol1, tcol2 = st.columns([1, 1])
+        with tcol1:
+            smoothing = st.slider("Metric Smoothing Window (Probes)", 1, 30, 5, 1, key="smooth_slider")
+        with tcol2:
+            tags = ["All Events"] + [str(t) for t in df_tel["event_tag"].dropna().unique()]
+            chosen_tag = st.selectbox("Filter by Incident / Tag", tags, index=0, key="tag_filter_box")
 
-        if selected_tag != "All Events":
-            df_chart = df_telemetry[df_telemetry["event_tag"] == selected_tag].copy()
-        else:
-            df_chart = df_telemetry.copy()
+        df_filtered = df_tel[df_tel["event_tag"] == chosen_tag].copy() if chosen_tag != "All Events" else df_tel.copy()
 
-        if not df_chart.empty:
-            effective_window = max(1, min(smoothing_window, len(df_chart)))
-            df_chart["rolling_p95"] = df_chart["latency_ms"].rolling(window=effective_window, min_periods=1).quantile(0.95)
-            df_chart["rolling_p50"] = df_chart["latency_ms"].rolling(window=effective_window, min_periods=1).median()
-            df_chart["is_5xx"] = df_chart["status_code"] >= 500
-            df_chart["rolling_err_pct"] = df_chart["is_5xx"].rolling(window=effective_window, min_periods=1).mean() * 100.0
+        if not df_filtered.empty:
+            eff_window = max(1, min(smoothing, len(df_filtered)))
+            df_filtered["rolling_p95"] = df_filtered["latency_ms"].rolling(window=eff_window, min_periods=1).quantile(0.95)
+            df_filtered["rolling_p50"] = df_filtered["latency_ms"].rolling(window=eff_window, min_periods=1).median()
+            df_filtered["is_5xx"] = df_filtered["status_code"] >= 500
+            df_filtered["rolling_err"] = df_filtered["is_5xx"].rolling(window=eff_window, min_periods=1).mean() * 100.0
 
-            col_left, col_right = st.columns(2)
-            with col_left:
-                st.markdown("#### Latency Profiles (ms)")
-                chart_latency = df_chart[["time", "rolling_p50", "rolling_p95"]].dropna().set_index("time")
-                chart_latency.columns = ["p50 Latency (ms)", "p95 Latency (ms)"]
-                st.line_chart(chart_latency, color=["#29b5e8", "#ff4b4b"])
-                st.caption("Blue: p50 Median Latency | Red: p95 Tail Latency (Watchdog threshold: 1500ms)")
+            # ALTAIR INTERACTIVE CHARTS
+            chart_col1, chart_col2 = st.columns(2)
 
-            with col_right:
-                st.markdown("#### HTTP 5xx Error Rate (%)")
-                chart_err = df_chart[["time", "rolling_err_pct"]].dropna().set_index("time")
-                chart_err.columns = ["HTTP 5xx Error Rate (%)"]
-                st.line_chart(chart_err, color=["#ff7f0e"])
-                st.caption("Orange: Rolling HTTP error percentage (Watchdog kill-switch threshold: 30%)")
+            with chart_col1:
+                st.markdown("##### ⏱️ **Latency Profiles & 1500ms SLA Threshold**")
+                base_lat = alt.Chart(df_filtered).encode(x=alt.X("time:T", title="Timestamp"))
+                line_p50 = base_lat.mark_line(color="#38bdf8", strokeWidth=2).encode(
+                    y=alt.Y("rolling_p50:Q", title="Latency (ms)"),
+                    tooltip=["time:T", "rolling_p50:Q", "rolling_p95:Q", "status_code:Q"]
+                )
+                line_p95 = base_lat.mark_line(color="#f43f5e", strokeWidth=2.5).encode(
+                    y="rolling_p95:Q"
+                )
+                # 1500ms SLA cutoff rule
+                sla_rule = alt.Chart(pd.DataFrame({"y": [1500]})).mark_rule(color="#ef4444", strokeDash=[4, 4]).encode(y="y:Q")
 
-            st.markdown(f"#### Telemetry Probes ({len(df_chart)} points)")
+                c_lat = (line_p50 + line_p95 + sla_rule).properties(height=280).interactive()
+                st.altair_chart(c_lat, use_container_width=True)
+                st.caption("Cyan: p50 Median | Rose: p95 Tail | Red Dashed: 1500ms SLA Limit")
+
+            with chart_col2:
+                st.markdown("##### 🚨 **HTTP 5xx Error Rate & 30% Kill-Switch SLA**")
+                base_err = alt.Chart(df_filtered).encode(x=alt.X("time:T", title="Timestamp"))
+                line_err = base_err.mark_line(color="#fbbf24", strokeWidth=2).encode(
+                    y=alt.Y("rolling_err:Q", title="Error Rate (%)", scale=alt.Scale(domain=[0, 40])),
+                    tooltip=["time:T", "rolling_err:Q"]
+                )
+                err_rule = alt.Chart(pd.DataFrame({"y": [30]})).mark_rule(color="#f97316", strokeDash=[4, 4]).encode(y="y:Q")
+
+                c_err = (line_err + err_rule).properties(height=280).interactive()
+                st.altair_chart(c_err, use_container_width=True)
+                st.caption("Amber: 5xx Error % | Orange Dashed: 30% Watchdog Kill-Switch Limit")
+
+            st.markdown(f"##### 📋 **Recent Telemetry Samples ({len(df_filtered)} recorded)**")
             st.dataframe(
-                df_chart[["iso_time", "status_code", "latency_ms", "is_error", "event_tag"]].tail(20).sort_values("iso_time", ascending=False),
+                df_filtered[["iso_time", "status_code", "latency_ms", "is_error", "event_tag"]].tail(15).sort_values("iso_time", ascending=False),
                 use_container_width=True,
             )
-        else:
-            st.warning("No data points found for the selected event tag.")
     else:
-        st.info("No telemetry logs recorded yet. Execute an experiment above or run `python main.py`.")
+        st.info("No telemetry logs recorded yet. Execute an experiment to view stream.")
+
 
 # ==============================================================================
-# TAB 3: TOPOLOGY GRAPH
+# TAB 3: TOPOLOGY DAG
 # ==============================================================================
-with tab3:
-    st.subheader("Service Architecture & Dependency Graph")
+with tab_topology:
+    st.markdown("### 🗺️ **Discovered Architecture Topology DAG**")
+    st.caption("Dynamic microservice call graph derived directly from Jaeger Tracing REST API.")
+
     if file_topology:
         st.markdown(f"**Discovery Source:** `{file_topology.get('source')}` | **Captured:** `{file_topology.get('timestamp')}`")
 
-        dot_code = [
+        dot = [
             "digraph G {",
+            "  bgcolor=\"transparent\";",
             "  rankdir=LR;",
-            '  node [shape=box, style="rounded,filled", fillcolor="#1f2937", fontcolor="white", fontname="Helvetica"];',
-            '  edge [color="#6b7280", fontcolor="#9ca3af", fontname="Helvetica", fontsize=9];',
+            '  node [shape=box, style="rounded,filled", fillcolor="#1f2937", fontcolor="#f3f4f6", fontname="Inter", fontsize=11];',
+            '  edge [color="#64748b", fontcolor="#94a3b8", fontname="Inter", fontsize=9];',
         ]
 
-        for node in file_topology.get("nodes", []):
-            name = node["name"]
-            crit = node.get("criticality", "LOW")
-            color = "#ef4444" if crit == "HIGH" else ("#f59e0b" if crit == "MEDIUM" else "#10b981")
-            dot_code.append(
-                f'  "{name}" [label="{name}\\n(In: {node.get("in_degree",0)} | Out: {node.get("out_degree",0)})", color="{color}", penwidth=2.5];'
-            )
+        for n in file_topology.get("nodes", []):
+            name = n["name"]
+            crit = n.get("criticality", "LOW")
+            border = "#ef4444" if crit == "HIGH" else ("#f59e0b" if crit == "MEDIUM" else "#10b981")
+            dot.append(f'  "{name}" [label="{name}\\n(In: {n.get("in_degree",0)} | Out: {n.get("out_degree",0)})", color="{border}", penwidth=2.5];')
 
-        for edge in file_topology.get("edges", []):
-            caller = edge.get("caller")
-            callee = edge.get("callee")
-            calls = edge.get("call_count", 1)
-            dot_code.append(f'  "{caller}" -> "{callee}" [label="{calls} calls"];')
+        for e in file_topology.get("edges", []):
+            dot.append(f'  "{e.get("caller")}" -> "{e.get("callee")}" [label="{e.get("call_count",1)} calls"];')
 
-        dot_code.append("}")
-        st.graphviz_chart("\n".join(dot_code))
+        dot.append("}")
+        st.graphviz_chart("\n".join(dot))
 
-        st.markdown("#### Microservice Inventory & Criticality Analysis")
-        node_df = pd.DataFrame(file_topology.get("nodes", []))
-        if not node_df.empty:
+        st.markdown("##### 📦 **Microservice Inventory & Dependency Centrality**")
+        ndf = pd.DataFrame(file_topology.get("nodes", []))
+        if not ndf.empty:
             st.dataframe(
-                node_df[["name", "criticality", "in_degree", "out_degree", "total_in_calls", "total_out_calls"]],
+                ndf[["name", "criticality", "in_degree", "out_degree", "total_in_calls", "total_out_calls"]],
                 use_container_width=True,
             )
     else:
-        st.info("Topology graph not yet discovered.")
+        st.info("No topology discovered yet.")
+
 
 # ==============================================================================
-# TAB 4: CAMPAIGN HISTORY & MTTR
+# TAB 4: EXPERIMENT HISTORY & MTTR
 # ==============================================================================
-with tab4:
-    st.subheader("Chaos Experiment Execution Log & MTTR")
-    all_experiments = st.session_state.session_experiments + file_report.get("experiments_evaluated", [])
-    if all_experiments:
-        exp_df = pd.DataFrame(all_experiments)
-        st.dataframe(exp_df, use_container_width=True)
+with tab_history:
+    st.markdown("### 📋 **Chaos Experiment Execution Log & MTTR**")
+    st.caption("Post-experiment recovery metrics and watchdog intervention audit log.")
 
-        col_a, col_b = st.columns(2)
-        with col_a:
-            st.markdown("#### Mean Time To Recover (MTTR in seconds)")
-            if "mttr_sec" in exp_df.columns:
-                mttr_chart = exp_df[["target_service", "mttr_sec"]].set_index("target_service")
-                st.bar_chart(mttr_chart)
-        with col_b:
-            st.markdown("#### Peak Latency Under Injection (ms)")
-            if "peak_p95_ms" in exp_df.columns:
-                lat_chart = exp_df[["target_service", "peak_p95_ms"]].set_index("target_service")
-                st.bar_chart(lat_chart)
+    all_exps = st.session_state.session_experiments + file_report.get("experiments_evaluated", [])
+    if all_exps:
+        edf = pd.DataFrame(all_exps)
+        st.dataframe(edf, use_container_width=True)
+
+        hcol1, hcol2 = st.columns(2)
+        with hcol1:
+            st.markdown("##### ⏱️ **Mean Time To Recover (MTTR in seconds)**")
+            if "mttr_sec" in edf.columns:
+                m_chart = alt.Chart(edf).mark_bar(color="#38bdf8", cornerRadius=6).encode(
+                    x=alt.X("target_service:N", title="Microservice"),
+                    y=alt.Y("mttr_sec:Q", title="MTTR (seconds)")
+                ).properties(height=260)
+                st.altair_chart(m_chart, use_container_width=True)
+        with hcol2:
+            st.markdown("##### 💥 **Peak Latency Under Fault Injection (ms)**")
+            if "peak_p95_ms" in edf.columns:
+                p_chart = alt.Chart(edf).mark_bar(color="#f43f5e", cornerRadius=6).encode(
+                    x=alt.X("target_service:N", title="Microservice"),
+                    y=alt.Y("peak_p95_ms:Q", title="Peak p95 Latency (ms)")
+                ).properties(height=260)
+                st.altair_chart(p_chart, use_container_width=True)
     else:
-        st.info("No chaos experiments executed yet.")
+        st.info("No experiments recorded yet.")
+
 
 # ==============================================================================
-# TAB 5: AI FINDINGS & REMEDIATIONS
+# TAB 5: AI FINDINGS & REMEDIATION
 # ==============================================================================
-with tab5:
-    st.subheader("Gemini Flash Post-Mortem Resilience Report")
+with tab_ai:
+    st.markdown("### 🤖 **Gemini 2.5 Flash Post-Mortem Resilience Audit**")
+    st.caption("AI-synthesized failure diagnosis and prescribed cloud-native architectural patterns.")
+
     if file_report:
-        st.markdown(f"### 🛡️ Overall Resilience Score: **{file_report.get('overall_resilience_score', 74)} / 100**")
-        st.write(file_report.get("summary", ""))
-
-        st.divider()
-        st.markdown("### 🔍 Detected Vulnerabilities")
-        for v in file_report.get("vulnerabilities", []):
-            sev = v.get("severity", "MEDIUM")
-            badge_class = "badge-critical" if sev == "CRITICAL" else ("badge-high" if sev == "HIGH" else "badge-medium")
-            st.markdown(
-                f"""
-            <div style="background:#161923; padding:12px; border-radius:6px; margin-bottom:12px; border-left: 5px solid {'#ff4b4b' if sev=='CRITICAL' else ('#ffa116' if sev=='HIGH' else '#ffcc00')}">
-                <span class="{badge_class}">{sev}</span> <strong>{v.get('title')}</strong> (Service: <code>{v.get('service')}</code>)
-                <p style="margin-top:8px; margin-bottom:4px; font-size:0.95em;">{v.get('description')}</p>
-                <small style="color:#aaa;"><strong>Impact:</strong> {v.get('impact')}</small>
+        st.markdown(
+            f"""
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="font-size: 0.82rem; color: #94a3b8; text-transform: uppercase;">Executive Post-Mortem</div>
+                <div style="font-size: 1.05rem; line-height: 1.6; color: #f3f4f6; margin-top: 6px;">
+                    {file_report.get("summary", "")}
+                </div>
             </div>
             """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("#### 🔍 **Detected Architectural Vulnerabilities**")
+        for v in file_report.get("vulnerabilities", []):
+            sev = v.get("severity", "MEDIUM")
+            badge = "<span class='badge-critical'>CRITICAL</span>" if sev == "CRITICAL" else ("<span class='badge-high'>HIGH</span>" if sev == "HIGH" else "<span class='badge-medium'>MEDIUM</span>")
+            border_color = "#ef4444" if sev == "CRITICAL" else ("#f59e0b" if sev == "HIGH" else "#3b82f6")
+
+            st.markdown(
+                f"""
+                <div style="background: rgba(17, 24, 39, 0.7); border-left: 4px solid {border_color}; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: 700; font-size: 1.05rem; color: #f3f4f6;">{v.get('title')}</span>
+                        {badge}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 6px;">{v.get('description')}</div>
+                    <div style="font-size: 0.82rem; color: #94a3b8;"><strong>Impact Scope:</strong> {v.get('impact')}</div>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
 
-        st.divider()
-        st.markdown("### 🛠️ Prescribed Cloud-Native Fixes")
+        st.markdown("#### 🛠️ **Prescribed Remediation Roadmap**")
         fixes = file_report.get("prescribed_fixes", [])
         if fixes:
-            fixes_df = pd.DataFrame(fixes)
-            st.dataframe(fixes_df[["priority", "service", "fix_type", "recommendation", "effort"]], use_container_width=True)
+            fdf = pd.DataFrame(fixes)
+            st.dataframe(fdf[["priority", "service", "fix_type", "recommendation", "effort"]], use_container_width=True)
 
         if REPORT_MD_FILE.exists():
             st.download_button(
@@ -619,4 +759,4 @@ with tab5:
                 mime="text/markdown",
             )
     else:
-        st.info("Run `python main.py` to generate the AI Resilience Report.")
+        st.info("Run `python main.py` to synthesize the Gemini resilience report.")
