@@ -1,6 +1,7 @@
 """Stage 3: Docker-py Chaos Failure Injector with Automated Rollbacks."""
 
 import json
+import os
 import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -24,7 +25,7 @@ class ChaosInjector:
 
     def __init__(self):
         try:
-            self.client = docker.from_env()
+            self.client = docker.from_env(timeout=10)
             logger.info("Connected to Docker daemon successfully.")
         except Exception as e:
             logger.error(f"Failed to connect to Docker daemon: {e}")
@@ -38,34 +39,16 @@ class ChaosInjector:
         if not self.client:
             return None
 
-        clean_name = service_name.lower().replace("service", "").strip()
-
-        try:
-            containers = self.client.containers.list(all=True)
-            # 1. Exact container name match
-            for c in containers:
-                if c.name.lower() == service_name.lower() or c.name.lower() == clean_name:
-                    return c
-
-            # 2. Compose service label match
-            for c in containers:
-                svc_label = c.labels.get("com.docker.compose.service", "").lower()
-                if svc_label == service_name.lower() or svc_label == clean_name:
-                    return c
-
-            # 3. Substring match
-            for c in containers:
-                if clean_name in c.name.lower():
-                    return c
-
-        except Exception as e:
-            logger.error(f"Error querying Docker containers: {e}")
-
-        return None
+        if service_name not in ALLOWED_TARGET_SERVICES:
+            return None
+        project = getattr(self, "project", os.getenv("CHAOS_COMPOSE_PROJECT", "opentelemetry-demo"))
+        containers = self.client.containers.list(all=True, filters={"label": [
+            f"com.docker.compose.project={project}", f"com.docker.compose.service={service_name}"]})
+        return containers[0] if len(containers) == 1 else None
 
     def inject(self, service_name: str, experiment_type: str, **kwargs) -> bool:
         """Dispatches chaos injection according to experiment type."""
-        if service_name in PROTECTED_CONTAINERS:
+        if service_name not in ALLOWED_TARGET_SERVICES or service_name in PROTECTED_CONTAINERS or service_name in self.active_injections:
             logger.warning(f"Aborting injection: '{service_name}' is a protected infrastructure service.")
             return False
 
@@ -92,16 +75,15 @@ class ChaosInjector:
 
         try:
             container.reload()
-            if container.status == "paused":
-                logger.info(f"Container '{container.name}' is already paused.")
-                return True
+            if container.status != "running":
+                return False
 
-            container.pause()
             self.active_injections[service_name] = {
                 "type": "container_pause",
                 "container_id": container.id,
                 "container_name": container.name
             }
+            container.pause()
             logger.info(f"[INJECTED] Container '{container.name}' successfully paused.")
             return True
         except Exception as e:
@@ -117,10 +99,11 @@ class ChaosInjector:
 
         try:
             container.reload()
+            if container.status != "running":
+                return False
             prev_quota = container.attrs.get("HostConfig", {}).get("CpuQuota", 0)
             prev_period = container.attrs.get("HostConfig", {}).get("CpuPeriod", 0)
 
-            container.update(cpu_quota=cpu_quota, cpu_period=cpu_period)
             self.active_injections[service_name] = {
                 "type": "cpu_throttle",
                 "container_id": container.id,
@@ -128,196 +111,59 @@ class ChaosInjector:
                 "prev_quota": prev_quota,
                 "prev_period": prev_period
             }
+            container.update(cpu_quota=cpu_quota, cpu_period=cpu_period)
             logger.info(f"[INJECTED] CPU throttled for '{container.name}': quota={cpu_quota}, period={cpu_period}")
             return True
         except Exception as e:
             logger.error(f"Failed to throttle CPU for '{container.name}': {e}")
             return False
 
-    def inject_network_latency(self, service_name: str, delay_ms: int = 500) -> bool:
-        """Injects true kernel-level network delay (tc netem) in target container's network namespace."""
+    def _tc(self, container_id, command):
+        return self.client.containers.run(os.getenv("CHAOS_NETSHOOT_IMAGE", "local-netshoot:latest"),
+            command=command, network_mode=f"container:{container_id}", cap_add=["NET_ADMIN"], remove=True, detach=False)
+
+    def inject_network_latency(self, service_name, delay_ms=500):
         container = self.find_container(service_name)
-        if not container:
-            logger.error(f"Container for service '{service_name}' not found.")
+        if container is None:
+            return False
+        try:
+            container.reload()
+            if container.status != "running" or not 1 <= int(delay_ms) <= 5000:
+                return False
+            rules = json.loads(self._tc(container.id, ["tc", "-j", "qdisc", "show", "dev", "eth0"]))
+            if any(r.get("kind") != "noqueue" for r in rules):
+                return False
+            self.active_injections[service_name] = {"type": "network_latency", "container_id": container.id}
+            self._tc(container.id, ["tc", "qdisc", "add", "dev", "eth0", "root", "handle", "7a01:", "netem", "delay", f"{int(delay_ms)}ms"])
+            return True
+        except Exception:
+            logger.exception("Network injection failed")
+            self.revert(service_name)
             return False
 
-        target_name = container.name
-
-        # Method 1: Infrastructure-level tc netem via local-netshoot sidecar
-        try:
-            cmd = f"tc qdisc del dev eth0 root 2>/dev/null || true; tc qdisc add dev eth0 root netem delay {delay_ms}ms"
-            self.client.containers.run(
-                image="local-netshoot:latest",
-                command=["sh", "-c", cmd],
-                network_mode=f"container:{target_name}",
-                cap_add=["NET_ADMIN"],
-                remove=True,
-                detach=False,
-            )
-            self.active_injections[service_name] = {
-                "type": "network_latency",
-                "method": "tc_netem_sidecar",
-                "delay_ms": delay_ms,
-                "container_name": target_name,
-            }
-            logger.info(f"[INJECTED] Kernel-level 'tc netem delay {delay_ms}ms' successfully applied to '{target_name}'.")
+    def revert(self, service_name):
+        record = self.active_injections.get(service_name)
+        if record is None:
             return True
-        except Exception as e:
-            logger.warning(f"Could not apply tc netem via sidecar ({e}); falling back to app-level flag...")
-
-        # Method 2: App-level Flagd fallback for comparison
-        flag_map = {
-            "product-catalog": "productCatalogLockContention",
-            "cart": "cartFailure",
-            "shipping": "intlShippingSlowdown",
-            "payment": "paymentFailure",
-            "recommendation": "recommendationCacheFailure",
-            "ad": "adHighCpu"
-        }
-        flag_name = flag_map.get(service_name.lower().replace("service", ""))
-        if flag_name and FLAGD_CONFIG_PATH.exists():
-            try:
-                with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                if "flags" in data and flag_name in data["flags"]:
-                    data["flags"][flag_name]["defaultVariant"] = "on"
-                    with open(FLAGD_CONFIG_PATH, "w", encoding="utf-8") as f:
-                        json.dump(data, f, indent=2)
-                    self.active_injections[service_name] = {
-                        "type": "network_latency",
-                        "method": "flagd_app_level",
-                        "flag_name": flag_name,
-                        "container_name": target_name
-                    }
-                    logger.info(f"[INJECTED] App-level Flagd feature flag '{flag_name}' set to 'on'.")
-                    return True
-            except Exception as e:
-                logger.warning(f"Flagd fallback failed: {e}")
-
-        return False
-        logger.info(f"Falling back to CPU choke delay simulation for {service_name}...")
-        return self.inject_cpu_throttle(service_name, cpu_quota=10000)
-
-    def revert(self, service_name: str) -> bool:
-        """Reverts active chaos injection on target service."""
-        injection = self.active_injections.get(service_name)
-        container = self.find_container(service_name)
-
-        success = True
-        logger.info(f"Reverting chaos on '{service_name}'...")
-
-        if container:
-            try:
-                container.reload()
+        try:
+            container = self.client.containers.get(record["container_id"])
+            container.reload()
+            if record["type"] == "container_pause":
                 if container.status == "paused":
                     container.unpause()
-                    logger.info(f"[REVERTED] Unpaused container '{container.name}'.")
-
-                # Reset CPU quota to unlimited (-1 or 0)
-                container.update(cpu_quota=-1)
-                logger.info(f"[REVERTED] Reset CPU quota for container '{container.name}'.")
-            except Exception as e:
-                logger.error(f"Error reverting container '{container.name}': {e}")
-                success = False
-
-        # Reset kernel tc netem
-        if injection and injection.get("method") == "tc_netem_sidecar" and container:
-            try:
-                self.client.containers.run(
-                    image="local-netshoot:latest",
-                    command=["sh", "-c", "tc qdisc del dev eth0 root 2>/dev/null || true"],
-                    network_mode=f"container:{container.name}",
-                    cap_add=["NET_ADMIN"],
-                    remove=True,
-                    detach=False,
-                )
-                logger.info(f"[REVERTED] Cleared kernel tc netem delay on '{container.name}'.")
-            except Exception as e:
-                logger.warning(f"Could not clear tc qdisc: {e}")
-
-        # Reset any modified Flagd flags
-        if injection and injection.get("method") in ["flagd_toggle", "flagd_app_level"] and FLAGD_CONFIG_PATH.exists():
-            flag_name = injection.get("flag_name")
-            try:
-                with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                if flag_name and "flags" in data and flag_name in data["flags"]:
-                    data["flags"][flag_name]["defaultVariant"] = "off"
-                    with open(FLAGD_CONFIG_PATH, "w", encoding="utf-8") as f:
-                        json.dump(data, f, indent=2)
-                logger.info(f"[REVERTED] Reset Flagd flag '{flag_name}' to 'off'.")
-            except Exception as e:
-                logger.error(f"Error resetting Flagd flag {flag_name}: {e}")
-                success = False
-
-        if service_name in self.active_injections:
+            elif record["type"] == "cpu_throttle":
+                container.update(cpu_quota=record["prev_quota"], cpu_period=record["prev_period"])
+            elif record["type"] == "network_latency":
+                rules = json.loads(self._tc(container.id, ["tc", "-j", "qdisc", "show", "dev", "eth0"]))
+                if any(r.get("kind") == "netem" and r.get("handle") == "7a01:" for r in rules):
+                    self._tc(container.id, ["tc", "qdisc", "del", "dev", "eth0", "root", "handle", "7a01:"])
+                elif any(r.get("kind") != "noqueue" for r in rules):
+                    raise RuntimeError("Network rule ownership changed")
             del self.active_injections[service_name]
+            return True
+        except Exception:
+            logger.exception("Rollback failed; retained for retry")
+            return False
 
-        return success
-
-    def emergency_rollback_all(self) -> None:
-        """Failsafe kill-switch: restores all containers, CPU quotas, tc qdiscs, and flags."""
-        logger.warning("🚨 EMERGENCY ROLLBACK TRIGGERED: Restoring all services to normal state...")
-        if not self.client:
-            return
-
-        try:
-            # 1. Clean up active tc netem sidecars
-            for svc, inj_info in list(self.active_injections.items()):
-                if inj_info.get("method") == "tc_netem_sidecar":
-                    target_c = inj_info.get("container_name")
-                    try:
-                        self.client.containers.run(
-                            image="local-netshoot:latest",
-                            command=["sh", "-c", "tc qdisc del dev eth0 root 2>/dev/null || true"],
-                            network_mode=f"container:{target_c}",
-                            cap_add=["NET_ADMIN"],
-                            remove=True,
-                            detach=False,
-                        )
-                        logger.warning(f"Emergency reset tc netem on {target_c}")
-                    except Exception as e:
-                        logger.error(f"Error emergency resetting tc netem: {e}")
-
-            # 2. Unpause any paused container and reset CPU quota
-            for c in self.client.containers.list(all=True):
-                try:
-                    c.reload()
-                    if c.status == "paused":
-                        c.unpause()
-                        logger.warning(f"Emergency unpaused container: {c.name}")
-                    # Reset CPU quota
-                    c.update(cpu_quota=-1)
-                except Exception as e:
-                    logger.error(f"Error resetting container {c.name}: {e}")
-
-            # 3. Reset all Flagd flags to 'off'
-            if FLAGD_CONFIG_PATH.exists():
-                try:
-                    with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                    modified = False
-                    for flag_val in data.get("flags", {}).values():
-                        if isinstance(flag_val, dict) and flag_val.get("defaultVariant") == "on":
-                            flag_val["defaultVariant"] = "off"
-                            modified = True
-                    if modified:
-                        with open(FLAGD_CONFIG_PATH, "w", encoding="utf-8") as f:
-                            json.dump(data, f, indent=2)
-                        logger.warning("Emergency reset all Flagd flags to 'off'.")
-                except Exception as e:
-                    logger.error(f"Error resetting Flagd config: {e}")
-
-            self.active_injections.clear()
-            logger.info("Emergency rollback completed. All systems nominal.")
-        except Exception as e:
-            logger.error(f"Fatal error during emergency rollback: {e}")
-
-
-if __name__ == "__main__":
-    injector = ChaosInjector()
-    container = injector.find_container("cart")
-    if container:
-        print(f"Found container: {container.name} (Status: {container.status})")
-    else:
-        print("Cart container not found.")
+    def emergency_rollback_all(self):
+        return all([self.revert(service) for service in list(self.active_injections)])

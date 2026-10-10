@@ -1,6 +1,6 @@
 {
-  "overall_resilience_score": 38,
-  "summary": "Autonomous Chaos Engineering audit completed across 3 microservice targets. The architecture demonstrated an overall resilience score of 38/100. The automated safety watchdog successfully guarded all tests, preventing catastrophic system crashes. Key vulnerabilities identified in synchronous cart dependency and catalog response throttling.",
+  "overall_resilience_score": 46,
+  "summary": "Historical audit; score recalculated from saved summary metrics. Rollback timing and recovery estimates are unverified. No new experiment was run. 3 of 3 experiments produced evaluable results. Score: 46. Findings describe aggregate probe observations; architectural causes remain hypotheses.",
   "experiments_evaluated": [
     {
       "experiment_id": "EXP-001",
@@ -10,7 +10,7 @@
       "mttr_sec": 0.51,
       "peak_error_rate": 0.1,
       "peak_p95_ms": 2500.0,
-      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
+      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
     },
     {
       "experiment_id": "EXP-002",
@@ -20,7 +20,7 @@
       "mttr_sec": 0.1,
       "peak_error_rate": 0.1,
       "peak_p95_ms": 2500.0,
-      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
+      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
     },
     {
       "experiment_id": "EXP-003",
@@ -30,53 +30,53 @@
       "mttr_sec": 0.51,
       "peak_error_rate": 0.0,
       "peak_p95_ms": 1996.19,
-      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 1996.2ms (Threshold: 1500.0ms)"
+      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
     }
   ],
   "vulnerabilities": [
     {
       "service": "cart",
-      "severity": "CRITICAL",
-      "title": "Cascading Outage on Cart Dependency Outage",
-      "description": "Frontend lacks local session storage or circuit-breaking for cart operations. Unavailability of cart container halts user shopping workflow and propagates 5xx errors.",
-      "impact": "Severe direct checkout and revenue loss; storefront degraded."
+      "severity": "HIGH",
+      "title": "Observed degradation during fault",
+      "description": "Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.",
+      "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     },
     {
       "service": "valkey-cart",
-      "severity": "CRITICAL",
-      "title": "Stateful Redis/Valkey Session Datastore SPOF",
-      "description": "Cart service has a direct, hard synchronous dependency on valkey-cart. When the session datastore is unavailable, all cart operations hang and throw timeouts.",
-      "impact": "Complete loss of customer cart sessions and checkout initiation."
+      "severity": "HIGH",
+      "title": "Observed degradation during fault",
+      "description": "Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.",
+      "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     },
     {
       "service": "recommendation",
-      "severity": "MEDIUM",
-      "title": "Non-Critical Service Degradation Blast Radius",
-      "description": "Service recommendation disruption induced MTTR of 0.51s before telemetry stabilized back to baseline.",
-      "impact": "Subsystem delay without immediate catastrophic outage."
+      "severity": "HIGH",
+      "title": "Observed degradation during fault",
+      "description": "Aggregate probes reached p95 1996.2ms and error rate 0.0%. Root cause and affected user journeys require further investigation.",
+      "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     }
   ],
   "prescribed_fixes": [
     {
       "service": "cart",
-      "fix_type": "Circuit Breaker & Degraded Cart Mode",
-      "recommendation": "Implement an Envoy/gRPC circuit breaker between frontend and cart. Fallback to client-side localStorage or read-only cart view with asynchronous queueing for pending add-to-cart events.",
+      "fix_type": "Investigate dependency resilience",
+      "recommendation": "Inspect affected traces and request paths. Evaluate bounded timeouts, circuit breakers, fallback behavior, and datastore redundancy where applicable; repeat the same experiment after changes.",
       "priority": 1,
       "effort": "MEDIUM"
     },
     {
       "service": "valkey-cart",
-      "fix_type": "Redis Sentinel Replication & In-Memory Fallback Cache",
-      "recommendation": "Deploy Valkey/Redis in high-availability mode with Sentinel replication. Equip cart service with an in-process LRU cache for read degradation when Valkey is unreachable.",
+      "fix_type": "Investigate dependency resilience",
+      "recommendation": "Inspect affected traces and request paths. Evaluate bounded timeouts, circuit breakers, fallback behavior, and datastore redundancy where applicable; repeat the same experiment after changes.",
       "priority": 1,
       "effort": "MEDIUM"
     },
     {
       "service": "recommendation",
-      "fix_type": "Graceful Degradation & Hedged Requests",
-      "recommendation": "Wrap recommendation calls in non-blocking async promises with empty fallbacks and exponential backoff retry policies.",
-      "priority": 3,
-      "effort": "LOW"
+      "fix_type": "Investigate dependency resilience",
+      "recommendation": "Inspect affected traces and request paths. Evaluate bounded timeouts, circuit breakers, fallback behavior, and datastore redundancy where applicable; repeat the same experiment after changes.",
+      "priority": 1,
+      "effort": "MEDIUM"
     }
   ]
 }

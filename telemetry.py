@@ -46,6 +46,7 @@ class RollingStats:
     p95_latency_ms: float
     avg_latency_ms: float
     healthy: bool
+    latest_sample_timestamp: float = 0.0
 
 
 class TelemetryCollector:
@@ -173,6 +174,7 @@ class TelemetryCollector:
             p50_latency_ms=p50,
             p95_latency_ms=p95,
             avg_latency_ms=avg,
+            latest_sample_timestamp=max(s.timestamp for s in recent),
             healthy=is_healthy
         )
 
@@ -189,12 +191,14 @@ class TelemetryCollector:
         self.last_recovery_confirmed = False
         consecutive_healthy = 0
         required_healthy_checks = 2
+        last_seen = t_start
 
         while (time.time() - t_start) < timeout_sec:
             stats = self.get_stats(window_sec=2.0)
-            is_recovered = (stats.total_requests >= 5) and (stats.error_rate <= target_error_threshold) and (stats.p95_latency_ms <= target_p95_threshold_ms)
+            is_recovered = (stats.latest_sample_timestamp > last_seen) and (stats.total_requests >= 5) and (stats.error_rate <= target_error_threshold) and (stats.p95_latency_ms <= target_p95_threshold_ms)
 
             if is_recovered:
+                last_seen = stats.latest_sample_timestamp
                 consecutive_healthy += 1
                 if consecutive_healthy >= required_healthy_checks:
                     mttr = round(time.time() - t_start, 2)

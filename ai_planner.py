@@ -27,9 +27,9 @@ class ChaosExperiment(BaseModel):
     experiment_type: Literal["container_pause", "cpu_throttle", "network_latency"] = Field(
         description="Type of failure injection"
     )
-    duration_sec: int = Field(default=8, description="Target duration of failure injection in seconds")
-    max_error_rate: float = Field(default=DEFAULT_MAX_ERROR_RATE, description="Tolerated 5xx error rate (0.0 - 1.0)")
-    max_p95_ms: float = Field(default=DEFAULT_MAX_P95_MS, description="Tolerated p95 latency in ms before kill-switch")
+    duration_sec: int = Field(default=8, ge=1, le=60, description="Target duration of failure injection in seconds")
+    max_error_rate: float = Field(default=DEFAULT_MAX_ERROR_RATE, gt=0, le=0.5, description="Tolerated 5xx error rate (0.0 - 1.0)")
+    max_p95_ms: float = Field(default=DEFAULT_MAX_P95_MS, gt=0, le=3000, description="Tolerated p95 latency in ms before kill-switch")
     hypothesis: str = Field(description="Scientific hypothesis on expected system behavior")
     rationale: str = Field(description="Architectural rationale based on dependency topology")
     priority: int = Field(default=1, description="Execution priority (1 = highest)")

@@ -1,5 +1,5 @@
 {
-  "score": 38,
+  "score": 46,
   "baseline": {
     "p50": 31.3,
     "p95": 464.9,
@@ -415,5 +415,7 @@
         "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 1996.2ms (Threshold: 1500.0ms)"
       }
     }
-  ]
+  ],
+  "legacy_score": 38,
+  "provenance": "legacy summary; score recalculated; timelines illustrative; recovery unverified"
 }
