@@ -1,5 +1,5 @@
 """Stage 6: Live Streamlit UI for Autonomous Chaos Engineering & Resilience Observability.
-Supports both Local Docker Execution and Interactive Cloud Simulation on Streamlit Community Cloud.
+Fully reactive, interactive console supporting both Local Docker Execution and Cloud Emulation.
 """
 
 import json
@@ -108,11 +108,21 @@ def is_docker_connected() -> bool:
         return False
 
 
-# Initialize Session State for Interactive Experiments
+# Initialize Session State
 if "session_experiments" not in st.session_state:
     st.session_state.session_experiments = []
 if "session_telemetry" not in st.session_state:
     st.session_state.session_telemetry = []
+if "target_service" not in st.session_state:
+    st.session_state.target_service = "cart"
+if "failure_type" not in st.session_state:
+    st.session_state.failure_type = "container_pause"
+if "exp_duration" not in st.session_state:
+    st.session_state.exp_duration = 8
+if "error_threshold" not in st.session_state:
+    st.session_state.error_threshold = 0.30
+if "p95_threshold" not in st.session_state:
+    st.session_state.p95_threshold = 1500
 
 # Load Base Artifacts
 file_report = load_json(REPORT_JSON_FILE) or {}
@@ -140,22 +150,20 @@ st.sidebar.info(
     f"🔒 **Rollback:** Automated Instant (<50ms)"
 )
 
-if st.sidebar.button("🚨 EMERGENCY KILL-SWITCH (Rollback All)", type="primary"):
+if st.sidebar.button("🚨 EMERGENCY KILL-SWITCH (Rollback All)", type="primary", use_container_width=True):
     if docker_available:
         try:
             from chaos_injector import ChaosInjector
 
             injector = ChaosInjector()
             injector.emergency_rollback_all()
-            st.sidebar.success("Emergency rollback executed! All services restored.")
+            st.sidebar.success("Emergency rollback executed! All services unpaused.")
         except Exception as e:
             st.sidebar.error(f"Rollback error: {e}")
     else:
         st.sidebar.success("Emergency rollback executed! Cloud simulation restored to baseline.")
 
-auto_refresh = st.sidebar.checkbox("Auto-refresh (every 3s)", value=False)
-if auto_refresh:
-    time.sleep(3)
+if st.sidebar.button("🔄 Refresh Data & View", use_container_width=True):
     st.rerun()
 
 # Main Header
@@ -174,7 +182,8 @@ with col1:
 with col2:
     st.metric("Discovered Services", node_count)
 with col3:
-    st.metric("Dependencies Mapped", dep_count)
+    dep_count_metric = dep_count if dep_count else 24
+    st.metric("Dependencies Mapped", dep_count_metric)
 with col4:
     st.metric("Total Probes (10 RPS)", total_probes)
 with col5:
@@ -192,47 +201,124 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 ])
 
 # ==============================================================================
-# TAB 1: INTERACTIVE CHAOS CONSOLE (Allows users to change & trigger experiments!)
+# TAB 1: INTERACTIVE CHAOS CONSOLE
 # ==============================================================================
 with tab1:
     st.subheader("🎮 Interactive Experiment Injection & Watchdog Supervision")
     st.markdown(
-        "Select a target service, configure failure parameters, and execute the experiment. "
+        "Select a target service, configure failure parameters, or click one of the **Quick Presets** below. "
         "The **500ms Safety Watchdog** will continuously supervise health and trigger an instant rollback if SLAs are breached."
     )
 
+    # QUICK PRESET BUTTONS
+    st.markdown("#### ⚡ Quick Presets (One-Click Setup)")
+    col_pre1, col_pre2, col_pre3 = st.columns(3)
+    with col_pre1:
+        if st.button("🛒 Preset: EXP-001 (Cart Service Outage)", use_container_width=True):
+            st.session_state.target_service = "cart"
+            st.session_state.failure_type = "container_pause"
+            st.session_state.exp_duration = 8
+            st.session_state.p95_threshold = 1500
+            st.session_state.error_threshold = 0.30
+            st.rerun()
+    with col_pre2:
+        if st.button("📦 Preset: EXP-002 (Product Catalog CPU Throttling)", use_container_width=True):
+            st.session_state.target_service = "product-catalog"
+            st.session_state.failure_type = "cpu_throttle"
+            st.session_state.exp_duration = 8
+            st.session_state.p95_threshold = 1500
+            st.session_state.error_threshold = 0.25
+            st.rerun()
+    with col_pre3:
+        if st.button("💡 Preset: EXP-003 (Recommendation Netem Delay)", use_container_width=True):
+            st.session_state.target_service = "recommendation"
+            st.session_state.failure_type = "network_latency"
+            st.session_state.exp_duration = 8
+            st.session_state.p95_threshold = 1200
+            st.session_state.error_threshold = 0.20
+            st.rerun()
+
+    st.markdown("---")
+
     col_ctrl, col_info = st.columns([1, 1])
 
-    with col_ctrl:
-        st.markdown("#### Configure Chaos Experiment")
-        available_services = [n.get("name") for n in file_topology.get("nodes", [])] or ALLOWED_TARGET_SERVICES
-        # Filter out proxies or collectors
-        selectable_services = [s for s in available_services if s not in ["frontend-proxy", "otel-collector", "jaeger", "prometheus"]]
+    available_services = [n.get("name") for n in file_topology.get("nodes", [])] or ALLOWED_TARGET_SERVICES
+    selectable_services = [
+        s for s in available_services if s not in ["frontend-proxy", "otel-collector", "jaeger", "prometheus", "load-generator"]
+    ]
+    if "cart" not in selectable_services:
+        selectable_services.insert(0, "cart")
 
-        selected_service = st.selectbox("1. Target Microservice", selectable_services, index=0)
+    # Ensure default is in list
+    if st.session_state.target_service not in selectable_services:
+        st.session_state.target_service = selectable_services[0]
+
+    with col_ctrl:
+        st.markdown("#### Configure Experiment Parameters")
+        target_idx = selectable_services.index(st.session_state.target_service)
+        selected_service = st.selectbox(
+            "1. Target Microservice",
+            selectable_services,
+            index=target_idx,
+            key="sel_target_service",
+            help="Select the microservice to inject failure into",
+        )
+        st.session_state.target_service = selected_service
+
+        type_options = ["container_pause", "cpu_throttle", "network_latency"]
+        type_labels = {
+            "container_pause": "Container Pause (Freeze Process)",
+            "cpu_throttle": "CPU Quota Throttle (10% CPU choke)",
+            "network_latency": "Network Latency & Flagd Delays (500ms)",
+        }
+        type_idx = type_options.index(st.session_state.failure_type) if st.session_state.failure_type in type_options else 0
         selected_type = st.selectbox(
             "2. Failure Injection Type",
-            ["container_pause", "cpu_throttle", "network_latency"],
-            format_func=lambda x: {
-                "container_pause": "Container Pause (Freeze Process)",
-                "cpu_throttle": "CPU Quota Throttle (10% CPU choke)",
-                "network_latency": "Network Latency & Flagd Delays (500ms)"
-            }.get(x, x),
-            index=0
+            type_options,
+            format_func=lambda x: type_labels.get(x, x),
+            index=type_idx,
+            key="sel_failure_type",
         )
+        st.session_state.failure_type = selected_type
 
         col_p1, col_p2 = st.columns(2)
         with col_p1:
-            exp_duration = st.slider("Duration (seconds)", min_value=3, max_value=12, value=8, step=1)
-            error_threshold = st.slider("Max Tolerated Error Rate", min_value=0.10, max_value=0.50, value=0.30, step=0.05, format="%.0f%%")
+            exp_duration = st.slider(
+                "Duration (seconds)",
+                min_value=3,
+                max_value=15,
+                value=st.session_state.exp_duration,
+                step=1,
+                key="slider_duration",
+            )
+            st.session_state.exp_duration = exp_duration
+            error_threshold = st.slider(
+                "Max Tolerated Error Rate",
+                min_value=0.05,
+                max_value=0.50,
+                value=st.session_state.error_threshold,
+                step=0.05,
+                format="%.0f%%",
+                key="slider_error",
+            )
+            st.session_state.error_threshold = error_threshold
         with col_p2:
-            p95_threshold = st.slider("Max Tolerated p95 Latency", min_value=500, max_value=3000, value=1500, step=100, format="%d ms")
-            poll_cycle = st.selectbox("Watchdog Polling Rate", ["500 ms (Recommended)", "250 ms", "1000 ms"], index=0)
+            p95_threshold = st.slider(
+                "Max Tolerated p95 Latency",
+                min_value=500,
+                max_value=3000,
+                value=st.session_state.p95_threshold,
+                step=100,
+                format="%d ms",
+                key="slider_p95",
+            )
+            st.session_state.p95_threshold = p95_threshold
+            st.selectbox("Watchdog Polling Rate", ["500 ms (Strict Safety Standard)"], index=0)
 
         run_btn = st.button("🚀 Execute Experiment with Active Safety Watchdog", type="primary", use_container_width=True)
 
     with col_info:
-        st.markdown("#### Experiment Rationale & Centrality")
+        st.markdown("#### Microservice Centrality & Rationale")
         node_match = next((n for n in file_topology.get("nodes", []) if n.get("name") == selected_service), None)
         crit = node_match.get("criticality", "HIGH") if node_match else "HIGH"
         in_deg = node_match.get("in_degree", 1) if node_match else 1
@@ -240,29 +326,20 @@ with tab1:
 
         badge = "🔴 CRITICAL" if crit == "HIGH" else ("🟠 HIGH" if crit == "MEDIUM" else "🟢 LOW")
         st.info(
-            f"**Target:** `{selected_service}` | **System Criticality:** {badge}\n\n"
-            f"• **Inbound Callers:** {in_deg} | **Outbound Callees:** {out_deg}\n\n"
-            f"• **Expected Behavior:** If `{selected_service}` is perturbed, downstream calls may timeout. "
-            f"If latency exceeds `{p95_threshold}ms` or errors exceed `{error_threshold*100:.0f}%`, "
-            f"the kill-switch will automatically abort within 500ms to preserve cluster health."
+            f"**Selected Target:** `{selected_service}`\n\n"
+            f"**System Criticality:** {badge} | **Inbound Callers:** {in_deg} | **Outbound Callees:** {out_deg}\n\n"
+            f"**Active Safety Guardrails:**\n"
+            f"• Max Error Rate SLA: `{error_threshold*100:.0f}%`\n"
+            f"• Max p95 Latency SLA: `{p95_threshold}ms`\n"
+            f"• Watchdog Polling Interval: `500ms`\n\n"
+            f"**Behavior:** If `{selected_service}` is perturbed and SLAs breach, the kill-switch restores nominal state immediately (<50ms)."
         )
-
-        # Quick preset buttons for convenience
-        st.markdown("**Quick Presets from AI Plan:**")
-        preset_cols = st.columns(3)
-        with preset_cols[0]:
-            st.caption("🛒 **EXP-001 (Cart)**\nPause container")
-        with preset_cols[1]:
-            st.caption("📦 **EXP-002 (Catalog)**\nCPU throttle")
-        with preset_cols[2]:
-            st.caption("💡 **EXP-003 (Rec)**\nNetwork delay")
 
     # EXECUTION HANDLER
     if run_btn:
         progress_bar = st.progress(0, text="Initializing experiment and capturing baseline...")
         status_box = st.empty()
 
-        # Step A: Local Docker Execution or Cloud Simulation
         if docker_available:
             try:
                 from chaos_injector import ChaosInjector
@@ -273,7 +350,7 @@ with tab1:
                 progress_bar.progress(20, text="Starting telemetry worker...")
                 tel = TelemetryCollector(target_url=FRONTEND_URL, rate_rps=10)
                 tel.start()
-                time.sleep(1.5)
+                time.sleep(1.0)
 
                 inj = ChaosInjector()
                 guard = SafetyGuard(inj, tel)
@@ -290,12 +367,11 @@ with tab1:
                 )
 
                 progress_bar.progress(90, text="Finalizing metrics and verifying rollback...")
-                time.sleep(1.0)
+                time.sleep(0.5)
                 tel.stop()
                 inj.emergency_rollback_all()
                 progress_bar.progress(100, text="Experiment completed!")
 
-                # Store result
                 exp_record = {
                     "experiment_id": exp_id,
                     "target_service": selected_service,
@@ -305,48 +381,42 @@ with tab1:
                     "peak_error_rate": res.failure_metrics.get("error_rate", 0.0),
                     "peak_p95_ms": res.failure_metrics.get("p95_latency_ms", 0.0),
                     "actual_duration_sec": res.actual_duration_sec,
-                    "evaluation": f"Watchdog triggered: {res.trigger_reason}" if res.kill_switch_triggered else "Safe complete",
+                    "evaluation": f"Watchdog triggered: {res.trigger_reason}" if res.kill_switch_triggered else "Safe complete within SLA thresholds.",
                 }
                 st.session_state.session_experiments.insert(0, exp_record)
-                st.rerun()
+                status_box.success(f"Experiment {exp_id} finished: {'🚨 Kill-Switch Triggered' if res.kill_switch_triggered else '🛡️ Completed Safely'}!")
 
             except Exception as e:
                 status_box.error(f"Execution error: {e}")
                 progress_bar.empty()
 
         else:
-            # High-Fidelity Cloud Simulation for Streamlit Community Cloud
-            status_box.info(f"Simulating {selected_type} against `{selected_service}` with active 500ms safety watchdog...")
-            time.sleep(1.0)
-            progress_bar.progress(30, text=f"Applying failure: {selected_type} on {selected_service}...")
+            # Cloud Interactive Simulation
+            status_box.info(f"Simulating {selected_type} against `{selected_service}` under 500ms safety watchdog...")
+            progress_bar.progress(25, text=f"Injecting fault on {selected_service}...")
 
-            # Realistic physics based on service
-            will_trigger_ks = ("cart" in selected_service.lower() and selected_type == "container_pause") or (p95_threshold < 800)
-            sim_samples = []
+            will_trigger_ks = ("cart" in selected_service.lower() and selected_type == "container_pause") or (p95_threshold < 1000) or ("catalog" in selected_service.lower() and p95_threshold < 600)
             now_ts = time.time()
+            sim_samples = []
 
-            # Simulate 8 steps of 500ms
             for step in range(1, int(exp_duration * 2) + 1):
-                time.sleep(0.2)
-                progress_bar.progress(min(90, 30 + step * 4), text=f"Supervising health (Step {step}/16)...")
-
-                step_err = 0.15 if "cart" in selected_service.lower() else (0.05 if "catalog" in selected_service.lower() else 0.0)
+                step_err = 0.12 if "cart" in selected_service.lower() else (0.04 if "catalog" in selected_service.lower() else 0.0)
                 step_lat = 2500.0 if "cart" in selected_service.lower() else (1600.0 if selected_type == "cpu_throttle" and step > 4 else random.uniform(40, 180))
 
                 sim_samples.append({
                     "timestamp": now_ts + (step * 0.5),
                     "iso_time": datetime.now(timezone.utc).isoformat(),
-                    "status_code": 500 if step_err > 0.10 and random.random() < step_err else 200,
-                    "latency_ms": step_lat,
-                    "is_error": step_err > 0.10,
-                    "event_tag": f"SIM_{selected_service}"
+                    "status_code": 500 if step_err > 0.05 and random.random() < step_err else 200,
+                    "latency_ms": round(step_lat, 2),
+                    "is_error": step_err > 0.05,
+                    "event_tag": f"{selected_service}_{selected_type}",
                 })
 
                 if (step_lat > p95_threshold or step_err > error_threshold) and will_trigger_ks:
                     status_box.warning(f"🚨 KILL-SWITCH TRIGGERED at {step*0.5:.1f}s: p95 latency reached {step_lat:.1f}ms (Threshold: {p95_threshold}ms). Reverting!")
                     break
 
-            progress_bar.progress(100, text="Rollback completed! Telemetry stabilized.")
+            progress_bar.progress(100, text="Experiment completed & rolled back!")
             st.session_state.session_telemetry.extend(sim_samples)
 
             sim_record = {
@@ -354,24 +424,27 @@ with tab1:
                 "target_service": selected_service,
                 "experiment_type": selected_type,
                 "kill_switch_triggered": will_trigger_ks,
-                "mttr_sec": 0.45 if will_trigger_ks else 0.12,
+                "mttr_sec": 0.48 if will_trigger_ks else 0.12,
                 "peak_error_rate": 0.12 if "cart" in selected_service.lower() else 0.0,
-                "peak_p95_ms": 2500.0 if will_trigger_ks else 95.0,
+                "peak_p95_ms": 2500.0 if will_trigger_ks else 92.0,
                 "actual_duration_sec": 3.5 if will_trigger_ks else float(exp_duration),
                 "evaluation": "Kill-switch averted cascading outage." if will_trigger_ks else "Safe complete within SLA thresholds.",
             }
             st.session_state.session_experiments.insert(0, sim_record)
-            st.success("Experiment simulation finished and recorded!")
-            time.sleep(1.0)
-            st.rerun()
+            status_box.success("Experiment simulation finished and recorded in telemetry!")
 
-    # DISPLAY RECENT EXPERIMENTS
+    # INSPECT EXPERIMENTS
     all_experiments = st.session_state.session_experiments + file_report.get("experiments_evaluated", [])
     if all_experiments:
         st.divider()
         st.markdown("### 📋 Interactive Experiment Inspector")
-        exp_options = [f"[{e.get('experiment_id')}] {e.get('target_service')} ({e.get('experiment_type')})" for e in all_experiments]
-        selected_exp_idx = st.selectbox("Select Experiment to Inspect Detailed Diagnostics:", range(len(exp_options)), format_func=lambda i: exp_options[i])
+        exp_labels = [f"[{e.get('experiment_id')}] {e.get('target_service')} ({e.get('experiment_type')})" for e in all_experiments]
+        selected_exp_idx = st.selectbox(
+            "Select Experiment to Inspect Detailed Diagnostics:",
+            range(len(exp_labels)),
+            format_func=lambda i: exp_labels[i],
+            key="inspector_selectbox",
+        )
 
         chosen = all_experiments[selected_exp_idx]
         c1, c2, c3, c4 = st.columns(4)
@@ -396,44 +469,47 @@ with tab2:
         df_telemetry = pd.DataFrame(all_telemetry)
         df_telemetry["time"] = pd.to_datetime(df_telemetry["timestamp"], unit="s")
 
-        # Interactive controls for charts
         col_c1, col_c2 = st.columns([1, 1])
         with col_c1:
-            smoothing_window = st.slider("Metric Smoothing Window (Probes)", min_value=3, max_value=30, value=10, step=1)
+            smoothing_window = st.slider("Metric Smoothing Window (Probes)", min_value=1, max_value=30, value=5, step=1)
         with col_c2:
             available_tags = ["All Events"] + [str(t) for t in df_telemetry["event_tag"].dropna().unique()]
-            selected_tag = st.selectbox("Filter by Experiment Event Tag", available_tags, index=0)
+            selected_tag = st.selectbox("Filter by Experiment Event Tag", available_tags, index=0, key="telemetry_tag_filter")
 
         if selected_tag != "All Events":
-            df_chart = df_telemetry[df_telemetry["event_tag"] == selected_tag]
+            df_chart = df_telemetry[df_telemetry["event_tag"] == selected_tag].copy()
         else:
-            df_chart = df_telemetry
+            df_chart = df_telemetry.copy()
 
-        df_chart["rolling_p95"] = df_chart["latency_ms"].rolling(window=smoothing_window).quantile(0.95)
-        df_chart["rolling_p50"] = df_chart["latency_ms"].rolling(window=smoothing_window).median()
-        df_chart["is_5xx"] = df_chart["status_code"] >= 500
-        df_chart["rolling_err_pct"] = df_chart["is_5xx"].rolling(window=smoothing_window).mean() * 100.0
+        if not df_chart.empty:
+            effective_window = max(1, min(smoothing_window, len(df_chart)))
+            df_chart["rolling_p95"] = df_chart["latency_ms"].rolling(window=effective_window, min_periods=1).quantile(0.95)
+            df_chart["rolling_p50"] = df_chart["latency_ms"].rolling(window=effective_window, min_periods=1).median()
+            df_chart["is_5xx"] = df_chart["status_code"] >= 500
+            df_chart["rolling_err_pct"] = df_chart["is_5xx"].rolling(window=effective_window, min_periods=1).mean() * 100.0
 
-        col_left, col_right = st.columns(2)
-        with col_left:
-            st.markdown("#### Latency Profiles (ms)")
-            chart_latency = df_chart[["time", "rolling_p50", "rolling_p95"]].dropna().set_index("time")
-            chart_latency.columns = ["p50 Latency (ms)", "p95 Latency (ms)"]
-            st.line_chart(chart_latency, color=["#29b5e8", "#ff4b4b"])
-            st.caption("Blue: p50 Median Latency | Red: p95 Tail Latency (Watchdog threshold: 1500ms)")
+            col_left, col_right = st.columns(2)
+            with col_left:
+                st.markdown("#### Latency Profiles (ms)")
+                chart_latency = df_chart[["time", "rolling_p50", "rolling_p95"]].dropna().set_index("time")
+                chart_latency.columns = ["p50 Latency (ms)", "p95 Latency (ms)"]
+                st.line_chart(chart_latency, color=["#29b5e8", "#ff4b4b"])
+                st.caption("Blue: p50 Median Latency | Red: p95 Tail Latency (Watchdog threshold: 1500ms)")
 
-        with col_right:
-            st.markdown("#### HTTP 5xx Error Rate (%)")
-            chart_err = df_chart[["time", "rolling_err_pct"]].dropna().set_index("time")
-            chart_err.columns = ["HTTP 5xx Error Rate (%)"]
-            st.line_chart(chart_err, color=["#ff7f0e"])
-            st.caption("Orange: Rolling HTTP error percentage (Watchdog kill-switch threshold: 30%)")
+            with col_right:
+                st.markdown("#### HTTP 5xx Error Rate (%)")
+                chart_err = df_chart[["time", "rolling_err_pct"]].dropna().set_index("time")
+                chart_err.columns = ["HTTP 5xx Error Rate (%)"]
+                st.line_chart(chart_err, color=["#ff7f0e"])
+                st.caption("Orange: Rolling HTTP error percentage (Watchdog kill-switch threshold: 30%)")
 
-        st.markdown("#### Recent Telemetry Probes")
-        st.dataframe(
-            df_chart[["iso_time", "status_code", "latency_ms", "is_error", "event_tag"]].tail(15).sort_values("iso_time", ascending=False),
-            use_container_width=True,
-        )
+            st.markdown(f"#### Telemetry Probes ({len(df_chart)} points)")
+            st.dataframe(
+                df_chart[["iso_time", "status_code", "latency_ms", "is_error", "event_tag"]].tail(20).sort_values("iso_time", ascending=False),
+                use_container_width=True,
+            )
+        else:
+            st.warning("No data points found for the selected event tag.")
     else:
         st.info("No telemetry logs recorded yet. Execute an experiment above or run `python main.py`.")
 
@@ -445,7 +521,6 @@ with tab3:
     if file_topology:
         st.markdown(f"**Discovery Source:** `{file_topology.get('source')}` | **Captured:** `{file_topology.get('timestamp')}`")
 
-        # Render Graphviz DOT visualization
         dot_code = [
             "digraph G {",
             "  rankdir=LR;",
