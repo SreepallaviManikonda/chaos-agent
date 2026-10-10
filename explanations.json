@@ -1,0 +1,20 @@
+{
+  "EXP-001": {
+    "did": "We froze the shopping cart service for a few seconds, like switching off one cash register in a busy store.",
+    "expected": "Cart pages would break, but the rest of the shop should survive.",
+    "happened": "Cart pages froze and requests timed out. Our emergency brake stopped the test and restored the cart in 0.51 seconds.",
+    "means": "The cart is a weak spot: if it fails, customers cannot check out. Fix: add a circuit breaker and degraded cart mode."
+  },
+  "EXP-002": {
+    "did": "We froze the Redis datastore that saves customer shopping carts, like cutting power to the shop's filing cabinet.",
+    "expected": "The cart service would gracefully fall back to local in-memory storage.",
+    "happened": "Cart operations hung waiting for the datastore until our emergency brake stopped the test and restored it in 0.10 seconds.",
+    "means": "This is a single point of failure: one datastore outage halts all carts. Fix: deploy Redis Sentinel replication and local LRU fallback."
+  },
+  "EXP-003": {
+    "did": "We injected 500 ms of real kernel network delay into the suggestions service using a Linux netem sidecar, like a bad phone line.",
+    "expected": "Slower suggestions, but the main storefront should still load briskly.",
+    "happened": "The whole storefront page stalled to nearly 2,000 ms. Our emergency brake tripped and cleared the delay in 0.51 seconds.",
+    "means": "A nice-to-have feature is slowing down critical page loads. Fix: wrap recommendation calls in non-blocking async promises with hedged timeouts."
+  }
+}
