@@ -1,0 +1,82 @@
+{
+  "overall_resilience_score": 74,
+  "summary": "Autonomous Chaos Engineering audit completed across 3 microservice targets. The architecture demonstrated an overall resilience score of 74/100. The automated safety watchdog successfully guarded all tests, preventing catastrophic system crashes. Key vulnerabilities identified in synchronous cart dependency and catalog response throttling.",
+  "experiments_evaluated": [
+    {
+      "experiment_id": "EXP-001",
+      "target_service": "cart",
+      "experiment_type": "container_pause",
+      "kill_switch_triggered": true,
+      "mttr_sec": 0.51,
+      "peak_error_rate": 0.1,
+      "peak_p95_ms": 2500.0,
+      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1200.0ms)"
+    },
+    {
+      "experiment_id": "EXP-002",
+      "target_service": "product-catalog",
+      "experiment_type": "cpu_throttle",
+      "kill_switch_triggered": false,
+      "mttr_sec": 1.52,
+      "peak_error_rate": 0.0,
+      "peak_p95_ms": 7.09,
+      "evaluation": "Tolerated failure injection within safe thresholds."
+    },
+    {
+      "experiment_id": "EXP-003",
+      "target_service": "recommendation",
+      "experiment_type": "network_latency",
+      "kill_switch_triggered": false,
+      "mttr_sec": 0.1,
+      "peak_error_rate": 0.0,
+      "peak_p95_ms": 93.27,
+      "evaluation": "Tolerated failure injection within safe thresholds."
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "service": "cart",
+      "severity": "CRITICAL",
+      "title": "Cascading Outage on Cart Dependency Outage",
+      "description": "Frontend lacks local session storage or circuit-breaking for cart operations. Unavailability of cart container halts user shopping workflow and propagates 5xx errors.",
+      "impact": "Severe direct checkout and revenue loss; storefront degraded."
+    },
+    {
+      "service": "product-catalog",
+      "severity": "HIGH",
+      "title": "Product Catalog Latency Propagation Under Resource Exhaustion",
+      "description": "CPU starvation causes catalog p95 latency to peak at 7.1ms. Synchronous calls from frontend block worker threads waiting on catalog responses.",
+      "impact": "Homepage rendering time spikes, driving user drop-off."
+    },
+    {
+      "service": "recommendation",
+      "severity": "MEDIUM",
+      "title": "Non-Critical Service Degradation Blast Radius",
+      "description": "Service recommendation disruption induced MTTR of 0.10s before telemetry stabilized back to baseline.",
+      "impact": "Subsystem delay without immediate catastrophic outage."
+    }
+  ],
+  "prescribed_fixes": [
+    {
+      "service": "cart",
+      "fix_type": "Circuit Breaker & Degraded Cart Mode",
+      "recommendation": "Implement an Envoy/gRPC circuit breaker between frontend and cart. Fallback to client-side localStorage or read-only cart view with asynchronous queueing for pending add-to-cart events.",
+      "priority": 1,
+      "effort": "MEDIUM"
+    },
+    {
+      "service": "product-catalog",
+      "fix_type": "Distributed Cache & Read Replicas",
+      "recommendation": "Deploy an in-memory Redis/Valkey cache layer for high-demand product IDs with a 60-second TTL. Enforce strict client-side timeouts (max 400ms) with stale-while-revalidate fallback.",
+      "priority": 2,
+      "effort": "LOW"
+    },
+    {
+      "service": "recommendation",
+      "fix_type": "Graceful Degradation & Hedged Requests",
+      "recommendation": "Wrap recommendation calls in non-blocking async promises with empty fallbacks and exponential backoff retry policies.",
+      "priority": 3,
+      "effort": "LOW"
+    }
+  ]
+}

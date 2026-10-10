@@ -1,0 +1,42 @@
+{
+  "plan_name": "Cloud-Native Resilience & Cascade Prevention Audit",
+  "architecture_summary": "Evaluated 11 microservices and 24 inter-service call paths. Frontend proxies traffic into core domain services: cart, catalog, and checkout. Primary systemic risk identified in single-point-of-failure cascade between frontend and stateful services.",
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "name": "Cart Service Total Outage Simulation",
+      "target_service": "cart",
+      "experiment_type": "container_pause",
+      "duration_sec": 8,
+      "max_error_rate": 0.3,
+      "max_p95_ms": 1200.0,
+      "hypothesis": "Pausing cart will trigger 500 errors in user add-to-cart operations unless fallback in-memory or degraded cart mode exists.",
+      "rationale": "Cart is directly downstream of frontend proxy; high caller volume makes it critical for shopping workflow.",
+      "priority": 1
+    },
+    {
+      "id": "EXP-002",
+      "name": "Product Catalog CPU Starvation & Lock Contention",
+      "target_service": "product-catalog",
+      "experiment_type": "cpu_throttle",
+      "duration_sec": 8,
+      "max_error_rate": 0.25,
+      "max_p95_ms": 1500.0,
+      "hypothesis": "Throttling CPU to 10% on catalog service will cause p95 latency spikes on homepage rendering; connection pool exhaustion may occur.",
+      "rationale": "Product catalog serves all product detail queries. Slowness directly degrades storefront p95 latency.",
+      "priority": 2
+    },
+    {
+      "id": "EXP-003",
+      "name": "Recommendation Engine Degradation & Netem Delay",
+      "target_service": "recommendation",
+      "experiment_type": "network_latency",
+      "duration_sec": 8,
+      "max_error_rate": 0.2,
+      "max_p95_ms": 1200.0,
+      "hypothesis": "Recommendation slowness should be masked gracefully by timeout or empty recommendation fallback without impacting purchase checkout.",
+      "rationale": "Non-critical dependency; tests whether circuit breaker or graceful degradation pattern is correctly implemented.",
+      "priority": 3
+    }
+  ]
+}
