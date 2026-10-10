@@ -443,6 +443,19 @@ with tab_cockpit:
     st.markdown("### ⚡ **Launch Safeguarded Chaos Experiment**")
     st.markdown("Select a failure mode or pick a pre-configured AI scenario to stress-test microservice resilience in real-time.")
 
+    if not docker_available:
+        st.markdown(
+            """
+            <div style="background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 14px; margin-bottom: 16px; font-size: 0.88rem; color: #93c5fd;">
+                <strong>☁️ CLOUD SHOWCASE & REPLAY MODE:</strong><br>
+                This public Streamlit Cloud deployment displays the verified empirical results recorded on our local Apple Silicon (M4) OpenTelemetry cluster. 
+                Because cloud sandboxes cannot access local host Docker sockets, live Docker container pause and kernel <code>tc netem</code> injections execute in our local testbed (<code>http://localhost:8501</code>). 
+                Below, you can replay or simulate the scenarios with identical 500ms watchdog logic!
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
     # ONE-CLICK PRESET BUTTONS
     st.markdown("##### 🎯 **Quick Scenario Presets:**")
     pcol1, pcol2, pcol3 = st.columns(3)
@@ -526,7 +539,8 @@ with tab_cockpit:
             st.session_state.p95_threshold = lat_lim
             st.selectbox("Watchdog Polling Rate", ["500 ms (Strict Safety Standard)"], index=0)
 
-        run_action = st.button("🚀 INJECT CHAOS WITH SAFETY WATCHDOG", type="primary", use_container_width=True)
+        btn_label = "🚀 INJECT LIVE DOCKER CHAOS (M4 Daemon)" if docker_available else "▶️ REPLAY / SIMULATE SCENARIO (Cloud Showcase)"
+        run_action = st.button(btn_label, type="primary", use_container_width=True)
 
     with c_right:
         node_match = next((n for n in file_topology.get("nodes", []) if n.get("name") == selected_svc), None)

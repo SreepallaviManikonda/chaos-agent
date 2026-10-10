@@ -135,11 +135,37 @@ class ChaosInjector:
             return False
 
     def inject_network_latency(self, service_name: str, delay_ms: int = 500) -> bool:
-        """Injects network latency or service-level delays via Flagd feature toggles."""
+        """Injects true kernel-level network delay (tc netem) in target container's network namespace."""
         container = self.find_container(service_name)
-        target_name = container.name if container else service_name
+        if not container:
+            logger.error(f"Container for service '{service_name}' not found.")
+            return False
 
-        # Mapping services to known Flagd delay or failure flags
+        target_name = container.name
+
+        # Method 1: Infrastructure-level tc netem via local-netshoot sidecar
+        try:
+            cmd = f"tc qdisc del dev eth0 root 2>/dev/null || true; tc qdisc add dev eth0 root netem delay {delay_ms}ms"
+            self.client.containers.run(
+                image="local-netshoot:latest",
+                command=["sh", "-c", cmd],
+                network_mode=f"container:{target_name}",
+                cap_add=["NET_ADMIN"],
+                remove=True,
+                detach=False,
+            )
+            self.active_injections[service_name] = {
+                "type": "network_latency",
+                "method": "tc_netem_sidecar",
+                "delay_ms": delay_ms,
+                "container_name": target_name,
+            }
+            logger.info(f"[INJECTED] Kernel-level 'tc netem delay {delay_ms}ms' successfully applied to '{target_name}'.")
+            return True
+        except Exception as e:
+            logger.warning(f"Could not apply tc netem via sidecar ({e}); falling back to app-level flag...")
+
+        # Method 2: App-level Flagd fallback for comparison
         flag_map = {
             "product-catalog": "productCatalogLockContention",
             "cart": "cartFailure",
@@ -148,31 +174,27 @@ class ChaosInjector:
             "recommendation": "recommendationCacheFailure",
             "ad": "adHighCpu"
         }
-
         flag_name = flag_map.get(service_name.lower().replace("service", ""))
-
         if flag_name and FLAGD_CONFIG_PATH.exists():
             try:
                 with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:
                     data = json.load(f)
-
                 if "flags" in data and flag_name in data["flags"]:
                     data["flags"][flag_name]["defaultVariant"] = "on"
                     with open(FLAGD_CONFIG_PATH, "w", encoding="utf-8") as f:
                         json.dump(data, f, indent=2)
-
                     self.active_injections[service_name] = {
                         "type": "network_latency",
-                        "method": "flagd_toggle",
+                        "method": "flagd_app_level",
                         "flag_name": flag_name,
                         "container_name": target_name
                     }
-                    logger.info(f"[INJECTED] Toggled Flagd feature flag '{flag_name}' to 'on' for {service_name}.")
+                    logger.info(f"[INJECTED] App-level Flagd feature flag '{flag_name}' set to 'on'.")
                     return True
             except Exception as e:
-                logger.warning(f"Could not toggle Flagd flag {flag_name}: {e}")
+                logger.warning(f"Flagd fallback failed: {e}")
 
-        # Fallback: CPU throttle or pause pulse if flagd is not accessible
+        return False
         logger.info(f"Falling back to CPU choke delay simulation for {service_name}...")
         return self.inject_cpu_throttle(service_name, cpu_quota=10000)
 
@@ -198,8 +220,23 @@ class ChaosInjector:
                 logger.error(f"Error reverting container '{container.name}': {e}")
                 success = False
 
+        # Reset kernel tc netem
+        if injection and injection.get("method") == "tc_netem_sidecar" and container:
+            try:
+                self.client.containers.run(
+                    image="local-netshoot:latest",
+                    command=["sh", "-c", "tc qdisc del dev eth0 root 2>/dev/null || true"],
+                    network_mode=f"container:{container.name}",
+                    cap_add=["NET_ADMIN"],
+                    remove=True,
+                    detach=False,
+                )
+                logger.info(f"[REVERTED] Cleared kernel tc netem delay on '{container.name}'.")
+            except Exception as e:
+                logger.warning(f"Could not clear tc qdisc: {e}")
+
         # Reset any modified Flagd flags
-        if injection and injection.get("method") == "flagd_toggle" and FLAGD_CONFIG_PATH.exists():
+        if injection and injection.get("method") in ["flagd_toggle", "flagd_app_level"] and FLAGD_CONFIG_PATH.exists():
             flag_name = injection.get("flag_name")
             try:
                 with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:
@@ -219,13 +256,30 @@ class ChaosInjector:
         return success
 
     def emergency_rollback_all(self) -> None:
-        """Failsafe kill-switch: restores all containers and resets all flags."""
+        """Failsafe kill-switch: restores all containers, CPU quotas, tc qdiscs, and flags."""
         logger.warning("🚨 EMERGENCY ROLLBACK TRIGGERED: Restoring all services to normal state...")
         if not self.client:
             return
 
         try:
-            # 1. Unpause any paused container
+            # 1. Clean up active tc netem sidecars
+            for svc, inj_info in list(self.active_injections.items()):
+                if inj_info.get("method") == "tc_netem_sidecar":
+                    target_c = inj_info.get("container_name")
+                    try:
+                        self.client.containers.run(
+                            image="local-netshoot:latest",
+                            command=["sh", "-c", "tc qdisc del dev eth0 root 2>/dev/null || true"],
+                            network_mode=f"container:{target_c}",
+                            cap_add=["NET_ADMIN"],
+                            remove=True,
+                            detach=False,
+                        )
+                        logger.warning(f"Emergency reset tc netem on {target_c}")
+                    except Exception as e:
+                        logger.error(f"Error emergency resetting tc netem: {e}")
+
+            # 2. Unpause any paused container and reset CPU quota
             for c in self.client.containers.list(all=True):
                 try:
                     c.reload()
@@ -237,7 +291,7 @@ class ChaosInjector:
                 except Exception as e:
                     logger.error(f"Error resetting container {c.name}: {e}")
 
-            # 2. Reset all Flagd flags to 'off'
+            # 3. Reset all Flagd flags to 'off'
             if FLAGD_CONFIG_PATH.exists():
                 try:
                     with open(FLAGD_CONFIG_PATH, "r", encoding="utf-8") as f:

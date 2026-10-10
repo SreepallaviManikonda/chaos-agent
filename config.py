@@ -45,6 +45,7 @@ TOPOLOGY_FILE = BASE_DIR / "discovered_topology.json"
 # Safe Chaos Injection Targets (services that can be safely targeted without destroying proxy/infra)
 ALLOWED_TARGET_SERVICES = [
     "cart",
+    "valkey-cart",
     "product-catalog",
     "recommendation",
     "payment",

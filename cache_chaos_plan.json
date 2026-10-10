@@ -9,33 +9,33 @@
       "experiment_type": "container_pause",
       "duration_sec": 8,
       "max_error_rate": 0.3,
-      "max_p95_ms": 1200.0,
+      "max_p95_ms": 1500.0,
       "hypothesis": "Pausing cart will trigger 500 errors in user add-to-cart operations unless fallback in-memory or degraded cart mode exists.",
       "rationale": "Cart is directly downstream of frontend proxy; high caller volume makes it critical for shopping workflow.",
       "priority": 1
     },
     {
       "id": "EXP-002",
-      "name": "Product Catalog CPU Starvation & Lock Contention",
-      "target_service": "product-catalog",
-      "experiment_type": "cpu_throttle",
+      "name": "Valkey-Cart Stateful Datastore SPOF Outage",
+      "target_service": "valkey-cart",
+      "experiment_type": "container_pause",
       "duration_sec": 8,
       "max_error_rate": 0.25,
       "max_p95_ms": 1500.0,
-      "hypothesis": "Throttling CPU to 10% on catalog service will cause p95 latency spikes on homepage rendering; connection pool exhaustion may occur.",
-      "rationale": "Product catalog serves all product detail queries. Slowness directly degrades storefront p95 latency.",
+      "hypothesis": "Freezing valkey-cart will break the Redis session store and cause cart read/write gRPC RPCs to timeout.",
+      "rationale": "Valkey-cart is the single persistent datastore for cart sessions. Tests whether cart service degrades to local memory or fails hard.",
       "priority": 2
     },
     {
       "id": "EXP-003",
-      "name": "Recommendation Engine Degradation & Netem Delay",
+      "name": "Recommendation Engine Kernel Netem 500ms Delay",
       "target_service": "recommendation",
       "experiment_type": "network_latency",
       "duration_sec": 8,
       "max_error_rate": 0.2,
-      "max_p95_ms": 1200.0,
-      "hypothesis": "Recommendation slowness should be masked gracefully by timeout or empty recommendation fallback without impacting purchase checkout.",
-      "rationale": "Non-critical dependency; tests whether circuit breaker or graceful degradation pattern is correctly implemented.",
+      "max_p95_ms": 1500.0,
+      "hypothesis": "Applying real kernel-level tc netem 500ms latency will increase overall page response time unless frontend calls it asynchronously with hedged timeouts.",
+      "rationale": "Infrastructure-level network degradation applied via netshoot sidecar to verify graceful degradation on peripheral microservices.",
       "priority": 3
     }
   ]

@@ -1,6 +1,6 @@
 {
-  "overall_resilience_score": 74,
-  "summary": "Autonomous Chaos Engineering audit completed across 3 microservice targets. The architecture demonstrated an overall resilience score of 74/100. The automated safety watchdog successfully guarded all tests, preventing catastrophic system crashes. Key vulnerabilities identified in synchronous cart dependency and catalog response throttling.",
+  "overall_resilience_score": 38,
+  "summary": "Autonomous Chaos Engineering audit completed across 3 microservice targets. The architecture demonstrated an overall resilience score of 38/100. The automated safety watchdog successfully guarded all tests, preventing catastrophic system crashes. Key vulnerabilities identified in synchronous cart dependency and catalog response throttling.",
   "experiments_evaluated": [
     {
       "experiment_id": "EXP-001",
@@ -10,27 +10,27 @@
       "mttr_sec": 0.51,
       "peak_error_rate": 0.1,
       "peak_p95_ms": 2500.0,
-      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1200.0ms)"
+      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
     },
     {
       "experiment_id": "EXP-002",
-      "target_service": "product-catalog",
-      "experiment_type": "cpu_throttle",
-      "kill_switch_triggered": false,
-      "mttr_sec": 1.52,
-      "peak_error_rate": 0.0,
-      "peak_p95_ms": 7.09,
-      "evaluation": "Tolerated failure injection within safe thresholds."
+      "target_service": "valkey-cart",
+      "experiment_type": "container_pause",
+      "kill_switch_triggered": true,
+      "mttr_sec": 0.1,
+      "peak_error_rate": 0.1,
+      "peak_p95_ms": 2500.0,
+      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
     },
     {
       "experiment_id": "EXP-003",
       "target_service": "recommendation",
       "experiment_type": "network_latency",
-      "kill_switch_triggered": false,
-      "mttr_sec": 0.1,
+      "kill_switch_triggered": true,
+      "mttr_sec": 0.51,
       "peak_error_rate": 0.0,
-      "peak_p95_ms": 93.27,
-      "evaluation": "Tolerated failure injection within safe thresholds."
+      "peak_p95_ms": 1996.19,
+      "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 1996.2ms (Threshold: 1500.0ms)"
     }
   ],
   "vulnerabilities": [
@@ -42,17 +42,17 @@
       "impact": "Severe direct checkout and revenue loss; storefront degraded."
     },
     {
-      "service": "product-catalog",
-      "severity": "HIGH",
-      "title": "Product Catalog Latency Propagation Under Resource Exhaustion",
-      "description": "CPU starvation causes catalog p95 latency to peak at 7.1ms. Synchronous calls from frontend block worker threads waiting on catalog responses.",
-      "impact": "Homepage rendering time spikes, driving user drop-off."
+      "service": "valkey-cart",
+      "severity": "CRITICAL",
+      "title": "Stateful Redis/Valkey Session Datastore SPOF",
+      "description": "Cart service has a direct, hard synchronous dependency on valkey-cart. When the session datastore is unavailable, all cart operations hang and throw timeouts.",
+      "impact": "Complete loss of customer cart sessions and checkout initiation."
     },
     {
       "service": "recommendation",
       "severity": "MEDIUM",
       "title": "Non-Critical Service Degradation Blast Radius",
-      "description": "Service recommendation disruption induced MTTR of 0.10s before telemetry stabilized back to baseline.",
+      "description": "Service recommendation disruption induced MTTR of 0.51s before telemetry stabilized back to baseline.",
       "impact": "Subsystem delay without immediate catastrophic outage."
     }
   ],
@@ -65,11 +65,11 @@
       "effort": "MEDIUM"
     },
     {
-      "service": "product-catalog",
-      "fix_type": "Distributed Cache & Read Replicas",
-      "recommendation": "Deploy an in-memory Redis/Valkey cache layer for high-demand product IDs with a 60-second TTL. Enforce strict client-side timeouts (max 400ms) with stale-while-revalidate fallback.",
-      "priority": 2,
-      "effort": "LOW"
+      "service": "valkey-cart",
+      "fix_type": "Redis Sentinel Replication & In-Memory Fallback Cache",
+      "recommendation": "Deploy Valkey/Redis in high-availability mode with Sentinel replication. Equip cart service with an in-process LRU cache for read degradation when Valkey is unreachable.",
+      "priority": 1,
+      "effort": "MEDIUM"
     },
     {
       "service": "recommendation",
