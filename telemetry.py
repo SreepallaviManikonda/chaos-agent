@@ -1,6 +1,7 @@
 """Stage 2 & 4: Continuous Traffic Generation, Real-Time Observability & MTTR Measurement."""
 
 import json
+from concurrent.futures import ThreadPoolExecutor
 import logging
 import math
 import threading
@@ -88,62 +89,45 @@ class TelemetryCollector:
         """Stops background traffic generation."""
         self._running = False
         if self._thread and self._thread.is_alive():
-            self._thread.join(timeout=3.0)
+            self._thread.join()
         logger.info("Telemetry load generator stopped.")
 
     def _worker_loop(self) -> None:
-        """Continuous probing loop executing at targeted RPS."""
-        transport = httpx.HTTPTransport(retries=0)
-        client = httpx.Client(timeout=PROBE_TIMEOUT_SEC, transport=transport)
+        # Bounded concurrency sustains the configured arrival rate during slow requests.
+        workers = max(4, int(self.rate_rps * PROBE_TIMEOUT_SEC * 2))
+        pending = set()
+        with httpx.Client(timeout=PROBE_TIMEOUT_SEC) as client, ThreadPoolExecutor(max_workers=workers) as pool:
+            while self._running:
+                pending = {f for f in pending if not f.done()}
+                if len(pending) < workers:
+                    with self._lock:
+                        path = self.probe_paths[self._path_idx % len(self.probe_paths)]
+                        self._path_idx += 1
+                        tag = self._current_event_tag
+                    pending.add(pool.submit(self._probe, client, path, tag))
+                time.sleep(self.interval_sec)
 
-        while self._running:
-            t0 = time.perf_counter()
-            now_ts = time.time()
-            iso_str = datetime.now(timezone.utc).isoformat()
-            tag = self._current_event_tag
-
-            status_code = 0
-            is_error = False
-            latency_ms = 0.0
-
-            with self._lock:
-                req_path = self.probe_paths[self._path_idx % len(self.probe_paths)]
-                self._path_idx += 1
-            probe_target = f"{self.target_url.rstrip('/')}{req_path}"
-
-            try:
-                resp = client.get(probe_target)
-                latency_ms = (time.perf_counter() - t0) * 1000.0
-                status_code = resp.status_code
-                if status_code >= 500 or status_code == 0:
-                    is_error = True
-            except httpx.TimeoutException:
-                latency_ms = PROBE_TIMEOUT_SEC * 1000.0
-                status_code = 504
-                is_error = True
-            except Exception:
-                latency_ms = (time.perf_counter() - t0) * 1000.0
-                status_code = 502
-                is_error = True
-
-            sample = ProbeSample(
-                timestamp=now_ts,
-                iso_time=iso_str,
-                status_code=status_code,
-                latency_ms=round(latency_ms, 2),
-                is_error=is_error,
-                event_tag=tag
-            )
-
-            with self._lock:
-                self._samples.append(sample)
-                self._full_history.append(asdict(sample))
-
-            elapsed = time.perf_counter() - t0
-            sleep_time = max(0.0, self.interval_sec - elapsed)
-            time.sleep(sleep_time)
-
-        client.close()
+    def _probe(self, client, path, tag):
+        started = time.perf_counter()
+        try:
+            response = client.get(f"{self.target_url.rstrip('/')}{path}")
+            status = response.status_code
+        except httpx.TimeoutException:
+            status = 504
+        except Exception:
+            status = 502
+        completed = time.time()
+        sample = ProbeSample(
+            timestamp=completed,
+            iso_time=datetime.fromtimestamp(completed, timezone.utc).isoformat(),
+            status_code=status,
+            latency_ms=round((time.perf_counter() - started) * 1000, 2),
+            is_error=not 200 <= status < 400,
+            event_tag=tag,
+        )
+        with self._lock:
+            self._samples.append(sample)
+            self._full_history.append(asdict(sample))
 
     def get_stats(self, window_sec: float = 1.0) -> RollingStats:
         """Calculates rolling statistics over the requested window (default 1.0s)."""
@@ -153,9 +137,6 @@ class TelemetryCollector:
         with self._lock:
             # Filter samples within window
             recent = [s for s in self._samples if s.timestamp >= cutoff]
-            if not recent and self._samples:
-                # If window is very tight, take the last 10 samples
-                recent = list(self._samples)[-10:]
 
         if not recent:
             return RollingStats(
@@ -167,7 +148,7 @@ class TelemetryCollector:
                 p50_latency_ms=0.0,
                 p95_latency_ms=0.0,
                 avg_latency_ms=0.0,
-                healthy=True
+                healthy=False
             )
 
         total = len(recent)
@@ -205,19 +186,21 @@ class TelemetryCollector:
         """Calculates elapsed seconds until error rate drops back to 0.0 and latency normalizes."""
         logger.info(f"Measuring MTTR (timeout: {timeout_sec}s, target error rate <= {target_error_threshold})...")
         t_start = time.time()
+        self.last_recovery_confirmed = False
         consecutive_healthy = 0
         required_healthy_checks = 2
 
         while (time.time() - t_start) < timeout_sec:
             stats = self.get_stats(window_sec=2.0)
-            is_recovered = (stats.error_rate <= target_error_threshold) and (stats.p95_latency_ms <= target_p95_threshold_ms)
+            is_recovered = (stats.total_requests >= 5) and (stats.error_rate <= target_error_threshold) and (stats.p95_latency_ms <= target_p95_threshold_ms)
 
             if is_recovered:
                 consecutive_healthy += 1
                 if consecutive_healthy >= required_healthy_checks:
-                    mttr = round(time.time() - t_start - (consecutive_healthy - 1) * poll_interval_sec, 2)
+                    mttr = round(time.time() - t_start, 2)
                     mttr = max(0.1, mttr)
                     logger.info(f"System recovered! Measured MTTR: {mttr}s (Error rate: {stats.error_rate}, p95: {stats.p95_latency_ms}ms)")
+                    self.last_recovery_confirmed = True
                     return mttr
             else:
                 consecutive_healthy = 0
