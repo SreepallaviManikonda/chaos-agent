@@ -534,6 +534,164 @@ def point_state(r: Dict[str, Any], base_p95: float, name: str) -> tuple:
     return "green", "GREEN FLAG: TRACK NOMINAL", "The shop is running smoothly within SLA thresholds."
 
 
+def build_circuit_track_svg() -> str:
+    """Zero-dependency HTML5 SVG Circuit Track Map of microservice dependencies."""
+    return """
+<div style="width: 100%; overflow-x: auto; margin-bottom: 20px;">
+<svg width="100%" height="600" viewBox="0 0 980 600" xmlns="http://www.w3.org/2000/svg" style="background: #141721; border-radius: 8px; border: 1px solid #2A2D38; font-family: 'Titillium Web', -apple-system, sans-serif; min-width: 850px;">
+  <defs>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1FD18B" />
+    </marker>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E10600" />
+    </marker>
+    <marker id="arr-y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#FFD60A" />
+    </marker>
+    <marker id="arr-m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+    <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#E10600" flood-opacity="0.8" />
+    </filter>
+    <filter id="glow-yellow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FFD60A" flood-opacity="0.7" />
+    </filter>
+  </defs>
+
+  <!-- COLUMN HEADERS -->
+  <text x="95" y="32" fill="#9AA0AE" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">TIER 0: TRAFFIC INGRESS</text>
+  <text x="305" y="32" fill="#9AA0AE" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">TIER 1: CORE GATEWAYS</text>
+  <text x="525" y="32" fill="#9AA0AE" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">TIER 2: DOMAIN SERVICES</text>
+  <text x="760" y="32" fill="#9AA0AE" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">TIER 3: DATASTORES &amp; INFRA</text>
+
+  <!-- SECTOR DIVIDERS -->
+  <line x1="200" y1="15" x2="200" y2="580" stroke="#2A2D38" stroke-dasharray="4,4" />
+  <line x1="415" y1="15" x2="415" y2="580" stroke="#2A2D38" stroke-dasharray="4,4" />
+  <line x1="645" y1="15" x2="645" y2="580" stroke="#2A2D38" stroke-dasharray="4,4" />
+
+  <!-- EDGES / CALL PATHS -->
+  <!-- Load Generator -> Frontend Proxy -->
+  <path d="M 95 210 L 95 270" stroke="#35C8FF" stroke-width="2.5" fill="none" marker-end="url(#arr-g)" />
+  <!-- Frontend Proxy -> Frontend -->
+  <path d="M 170 300 C 195 300, 205 215, 230 215" stroke="#1FD18B" stroke-width="2.5" fill="none" marker-end="url(#arr-g)" />
+  <!-- Frontend Proxy -> Image Provider -->
+  <path d="M 170 320 C 350 320, 500 480, 680 480" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr-m)" />
+
+  <!-- Frontend -> Cart (CRITICAL RED SPOF PATH) -->
+  <path d="M 380 200 C 405 200, 415 95, 445 95" stroke="#E10600" stroke-width="3" stroke-dasharray="6,3" fill="none" marker-end="url(#arr-r)" />
+  <!-- Cart -> Valkey-Cart (SPOF DATASTORE PATH) -->
+  <path d="M 605 95 L 680 95" stroke="#E10600" stroke-width="3.5" fill="none" marker-end="url(#arr-r)" />
+
+  <!-- Frontend -> Product Catalog -->
+  <path d="M 380 215 L 445 215" stroke="#1FD18B" stroke-width="2.5" fill="none" marker-end="url(#arr-g)" />
+  <!-- Frontend -> Recommendations (YELLOW 500ms NETEM PATH) -->
+  <path d="M 380 230 C 405 230, 415 320, 445 320" stroke="#FFD60A" stroke-width="2.8" stroke-dasharray="5,3" fill="none" marker-end="url(#arr-y)" />
+  <!-- Frontend -> Checkout -->
+  <path d="M 305 245 L 305 370" stroke="#1FD18B" stroke-width="2.5" fill="none" marker-end="url(#arr-g)" />
+
+  <!-- Checkout -> Cart -->
+  <path d="M 380 385 C 415 385, 415 125, 445 125" stroke="#E10600" stroke-width="2" fill="none" marker-end="url(#arr-r)" />
+  <!-- Checkout -> Payment -->
+  <path d="M 380 405 L 445 405" stroke="#1FD18B" stroke-width="2" fill="none" marker-end="url(#arr-g)" />
+  <!-- Checkout -> Currency -->
+  <path d="M 380 420 C 405 420, 415 490, 445 490" stroke="#1FD18B" stroke-width="2" fill="none" marker-end="url(#arr-g)" />
+
+  <!-- Recommendation -> Product Catalog -->
+  <path d="M 525 290 L 525 250" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr-m)" />
+  <!-- Recommendation -> Flagd -->
+  <path d="M 605 325 C 640 325, 645 250, 680 250" stroke="#64748b" stroke-width="1.5" fill="none" marker-end="url(#arr-m)" />
+
+  <!-- NODES -->
+  <!-- 1. Load Generator -->
+  <g transform="translate(20, 150)">
+    <rect width="150" height="60" rx="6" fill="#171921" stroke="#35C8FF" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Load Generator</text>
+    <text x="14" y="46" fill="#35C8FF" font-size="10" font-weight="600" letter-spacing="1">10 RPS PROBING</text>
+  </g>
+
+  <!-- 2. Frontend Proxy -->
+  <g transform="translate(20, 270)">
+    <rect width="150" height="60" rx="6" fill="#171921" stroke="#35C8FF" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Frontend Proxy</text>
+    <text x="14" y="46" fill="#9AA0AE" font-size="10">ENVOY (PORT 8080)</text>
+  </g>
+
+  <!-- 3. Storefront -->
+  <g transform="translate(230, 185)">
+    <rect width="150" height="60" rx="6" fill="#171921" stroke="#1FD18B" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Storefront Proxy</text>
+    <text x="14" y="46" fill="#1FD18B" font-size="10" font-weight="600">ENTRY ROUTE (/)</text>
+  </g>
+
+  <!-- 4. Checkout -->
+  <g transform="translate(230, 370)">
+    <rect width="150" height="60" rx="6" fill="#171921" stroke="#1FD18B" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Checkout Flow</text>
+    <text x="14" y="46" fill="#1FD18B" font-size="10" font-weight="600">RPC WORKFLOW</text>
+  </g>
+
+  <!-- 5. Cart (CRITICAL FAULT TARGET EXP-001) -->
+  <g transform="translate(445, 65)" filter="url(#glow-red)">
+    <rect width="160" height="65" rx="6" fill="#2A0B0B" stroke="#E10600" stroke-width="3" />
+    <text x="14" y="26" fill="#ffffff" font-size="13" font-weight="900">Shopping Cart</text>
+    <text x="14" y="46" fill="#E10600" font-size="10" font-weight="700" letter-spacing="1">🚨 EXP-001: PAUSE SPOF</text>
+  </g>
+
+  <!-- 6. Valkey-Cart (CRITICAL FAULT TARGET EXP-002) -->
+  <g transform="translate(680, 65)" filter="url(#glow-red)">
+    <rect width="160" height="65" rx="6" fill="#2A0B0B" stroke="#E10600" stroke-width="3" />
+    <text x="14" y="26" fill="#ffffff" font-size="13" font-weight="900">Valkey / Redis</text>
+    <text x="14" y="46" fill="#E10600" font-size="10" font-weight="700" letter-spacing="1">🚨 EXP-002: REDIS SPOF</text>
+  </g>
+
+  <!-- 7. Product Catalog -->
+  <g transform="translate(445, 185)">
+    <rect width="160" height="60" rx="6" fill="#171921" stroke="#1FD18B" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Product Catalog</text>
+    <text x="14" y="46" fill="#1FD18B" font-size="10" font-weight="600">IN-MEMORY GO DB</text>
+  </g>
+
+  <!-- 8. Recommendation (FAULT TARGET EXP-003) -->
+  <g transform="translate(445, 290)" filter="url(#glow-yellow)">
+    <rect width="160" height="65" rx="6" fill="#2B230B" stroke="#FFD60A" stroke-width="2.8" />
+    <text x="14" y="26" fill="#ffffff" font-size="13" font-weight="700">Recommendations</text>
+    <text x="14" y="46" fill="#FFD60A" font-size="10" font-weight="700" letter-spacing="1">🟡 EXP-003: 500MS NETEM</text>
+  </g>
+
+  <!-- 9. Payment -->
+  <g transform="translate(445, 375)">
+    <rect width="160" height="60" rx="6" fill="#171921" stroke="#1FD18B" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Payment Gateway</text>
+    <text x="14" y="46" fill="#1FD18B" font-size="10">CREDIT CARD AUTH</text>
+  </g>
+
+  <!-- 10. Currency -->
+  <g transform="translate(445, 465)">
+    <rect width="160" height="60" rx="6" fill="#171921" stroke="#1FD18B" stroke-width="2" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Currency Converter</text>
+    <text x="14" y="46" fill="#1FD18B" font-size="10">RATES ENGINE</text>
+  </g>
+
+  <!-- 11. Flagd -->
+  <g transform="translate(680, 220)">
+    <rect width="160" height="60" rx="6" fill="#171921" stroke="#64748b" stroke-width="1.5" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Flagd Config</text>
+    <text x="14" y="46" fill="#9AA0AE" font-size="10">FEATURE FLAGS</text>
+  </g>
+
+  <!-- 12. Image Provider -->
+  <g transform="translate(680, 450)">
+    <rect width="160" height="60" rx="6" fill="#171921" stroke="#64748b" stroke-width="1.5" />
+    <text x="14" y="26" fill="#ECECF1" font-size="13" font-weight="700">Image Provider</text>
+    <text x="14" y="46" fill="#9AA0AE" font-size="10">STATIC MEDIA CDN</text>
+  </g>
+</svg>
+</div>
+"""
+
+
 # ==============================================================================
 # MAIN PAGE RENDER
 # ==============================================================================
@@ -877,8 +1035,24 @@ with tab_radio:
 # ------------------------------------------------------------------------------
 with tab_track:
     st.markdown("### 🗺️ **Circuit Track Map (Discovered Architecture Topology)**")
-    st.caption("Runtime dependency call graph mapped directly from Jaeger Tracing REST API.")
+    st.markdown(
+        "Interactive architectural call graph discovered directly from Jaeger Tracing REST API (`/jaeger/ui/api/dependencies`). "
+        "Shows all 13 microservices, 30 inter-service call edges, and highlights where our chaos experiments stress the system."
+    )
 
+    # 1. Zero-dependency interactive SVG Circuit Track Map
+    st.markdown(build_circuit_track_svg(), unsafe_allow_html=True)
+
+    # 2. Sector Status Legend
+    lcol1, lcol2, lcol3, lcol4 = st.columns(4)
+    lcol1.markdown(f"<div style='border-left: 4px solid {RED}; padding-left: 8px;'><b>🔴 RED SECTOR</b><br><span style='color: {MUTED}; font-size: 0.85rem;'>Target SPOFs (Cart & Valkey-Cart)</span></div>", unsafe_allow_html=True)
+    lcol2.markdown(f"<div style='border-left: 4px solid {YELLOW}; padding-left: 8px;'><b>🟡 YELLOW SECTOR</b><br><span style='color: {MUTED}; font-size: 0.85rem;'>Netem Latency (Recommendations)</span></div>", unsafe_allow_html=True)
+    lcol3.markdown(f"<div style='border-left: 4px solid {GREEN}; padding-left: 8px;'><b>🟢 GREEN SECTOR</b><br><span style='color: {MUTED}; font-size: 0.85rem;'>Nominal Microservices</span></div>", unsafe_allow_html=True)
+    lcol4.markdown(f"<div style='border-left: 4px solid {CYAN}; padding-left: 8px;'><b>🔵 CYAN SECTOR</b><br><span style='color: {MUTED}; font-size: 0.85rem;'>Traffic Ingress & Load Generator</span></div>", unsafe_allow_html=True)
+
+    st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
+
+    # 3. Interactive Microservice Inspector
     topo = {}
     if TOPOLOGY_PATH.exists():
         try:
@@ -886,32 +1060,58 @@ with tab_track:
         except Exception:
             pass
 
-    if topo:
-        dot = [
-            "digraph G {",
-            "  bgcolor=\"transparent\";",
-            "  rankdir=LR;",
-            '  node [shape=box, style="rounded,filled", fillcolor="#171921", fontcolor="#ECECF1", fontname="Titillium Web", fontsize=11];',
-            '  edge [color="#64748b", fontcolor="#94a3b8", fontname="Titillium Web", fontsize=9];',
-        ]
+    nodes = topo.get("nodes", [])
+    node_names = sorted([n["name"] for n in nodes]) if nodes else ["cart", "valkey-cart", "recommendation", "frontend", "checkout", "product-catalog"]
 
-        for n in topo.get("nodes", []):
-            name = n["name"]
-            if "cart" in name:
-                color = RED
-            elif "recommendation" in name:
-                color = YELLOW
+    st.markdown("#### 🔍 **Service Inspector: Deep-Dive Dependencies & Blast Radius**")
+    selected_inspect = st.selectbox("Inspect Microservice Details:", node_names, index=1 if "cart" in node_names else 0)
+
+    matched_node = next((n for n in nodes if n["name"] == selected_inspect), None)
+    if matched_node:
+        c_i1, c_i2, c_i3 = st.columns(3)
+        c_i1.metric("Callers (Inbound Dependencies)", f"{matched_node.get('in_degree', 0)} services", f"{matched_node.get('total_in_calls', 0):,} calls")
+        c_i2.metric("Callees (Outbound Dependencies)", f"{matched_node.get('out_degree', 0)} services", f"{matched_node.get('total_out_calls', 0):,} calls")
+        c_i3.metric("Criticality Tier", matched_node.get("criticality", "HIGH"))
+
+        col_dep_in, col_dep_out = st.columns(2)
+        with col_dep_in:
+            st.markdown(f"**Upstream Callers (Who depends on `{selected_inspect}`):**")
+            callers = matched_node.get("dependents", [])
+            if callers:
+                for c in callers:
+                    st.markdown(f"• `{c}`")
             else:
-                color = GREEN
-            dot.append(f'  "{name}" [label="{name}\\n(In: {n.get("in_degree", 0)} | Out: {n.get("out_degree", 0)})", color="{color}", penwidth=2.5];')
+                st.caption("No inbound callers recorded in trace sample.")
 
-        for e_edge in topo.get("edges", []):
-            dot.append(f'  "{e_edge.get("caller")}" -> "{e_edge.get("callee")}" [label="{e_edge.get("call_count", 1)} calls"];')
+        with col_dep_out:
+            st.markdown(f"**Downstream Dependencies (Who `{selected_inspect}` calls):**")
+            deps = matched_node.get("dependencies", [])
+            if deps:
+                for d in deps:
+                    st.markdown(f"• `{d}`")
+            else:
+                st.caption("Leaf node: no downstream calls.")
 
-        dot.append("}")
-        st.graphviz_chart("\n".join(dot))
-    else:
-        st.info("Run `python main.py` to map the live Jaeger call graph.")
+    # 4. Microservice Centrality Inventory Table
+    st.markdown("#### 📦 **Discovered Microservice Topology Inventory**")
+    if nodes:
+        df_topo = pd.DataFrame(nodes)
+        cols_to_show = [c for c in ["name", "criticality", "in_degree", "out_degree", "total_in_calls", "total_out_calls"] if c in df_topo.columns]
+        st.dataframe(df_topo[cols_to_show], use_container_width=True, hide_index=True)
+
+    # Optional Graphviz view if dot is installed
+    with st.expander("🛠️ View Raw Graphviz DOT Specification"):
+        dot_str = "digraph G {\n  bgcolor=\"transparent\";\n  rankdir=LR;\n"
+        for n in nodes:
+            dot_str += f'  "{n["name"]}" [shape=box, style="rounded,filled", fillcolor="#171921", fontcolor="#ECECF1"];\n'
+        for e in topo.get("edges", []):
+            dot_str += f'  "{e.get("caller")}" -> "{e.get("callee")}" [label="{e.get("call_count", 1)} calls"];\n'
+        dot_str += "}"
+        st.code(dot_str, language="dot")
+        try:
+            st.graphviz_chart(dot_str)
+        except Exception:
+            pass
 
 # ------------------------------------------------------------------------------
 # TAB 5: LIVE RACE CONTROL COCKPIT
