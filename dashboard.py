@@ -336,7 +336,94 @@ with col_hero4:
         unsafe_allow_html=True,
     )
 
-st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
+
+# ==============================================================================
+# BEGINNER'S GUIDE & SYSTEM EXPLAINER
+# ==============================================================================
+with st.expander("💡 **What is Happening Here? Click for a 30-Second Beginner's Guide & Analogy**", expanded=False):
+    st.markdown(
+        """
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 12px; padding: 20px; margin-bottom: 12px;">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">
+                🚗 Think of this as a Crash-Test Safety Lab for Cloud Software
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+                In the physical world, car manufacturers deliberately crash cars in controlled testing labs to verify that airbags deploy and seatbelts lock <em>before</em> real customers drive them. 
+                <strong>Chaos Engineering does the exact same thing for cloud websites:</strong> we purposefully inject controlled failures (freezing servers, choking CPU, adding network lag) to prove our systems can survive real-world outages without dropping customer transactions.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    gcol1, gcol2, gcol3, gcol4 = st.columns(4)
+
+    with gcol1:
+        st.markdown(
+            """
+            <div class="glass-card" style="height: 100%;">
+                <div style="font-size: 1.2rem; margin-bottom: 6px;">🧪 <strong>1. The Chaos Faults</strong></div>
+                <div style="font-size: 0.84rem; color: #94a3b8; line-height: 1.5;">
+                    We simulate real disasters: freezing the <code>cart</code> container, choking <code>product-catalog</code> CPU to 10%, or introducing network lag in <code>recommendation</code>.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with gcol2:
+        st.markdown(
+            """
+            <div class="glass-card" style="height: 100%;">
+                <div style="font-size: 1.2rem; margin-bottom: 6px;">🛡️ <strong>2. The 500ms Brake</strong></div>
+                <div style="font-size: 0.84rem; color: #94a3b8; line-height: 1.5;">
+                    <strong>Safety First:</strong> An automated watchdog checks website health every 0.5s. If errors exceed 30% or delays exceed 1.5s, the <strong>emergency kill-switch</strong> immediately rolls back (<50ms).
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with gcol3:
+        st.markdown(
+            """
+            <div class="glass-card" style="height: 100%;">
+                <div style="font-size: 1.2rem; margin-bottom: 6px;">🤖 <strong>3. The AI Brain</strong></div>
+                <div style="font-size: 0.84rem; color: #94a3b8; line-height: 1.5;">
+                    <strong>Gemini 2.5 Flash</strong> acts as an autonomous Senior Reliability Engineer: mapping dependencies, choosing highest-risk services, and prescribing exact cloud-native code fixes.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with gcol4:
+        st.markdown(
+            """
+            <div class="glass-card" style="height: 100%;">
+                <div style="font-size: 1.2rem; margin-bottom: 6px;">📊 <strong>4. Score (74/100)</strong></div>
+                <div style="font-size: 0.84rem; color: #94a3b8; line-height: 1.5;">
+                    Grade B+: Catalog and recommendation services handled disruption gracefully, but pausing the Shopping Cart triggered a cascade that required the safety kill-switch to intervene.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.markdown(
+        """
+        <div style="background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 12px; margin-top: 14px; font-size: 0.88rem; color: #cbd5e1;">
+            🎯 <strong>Quick 30-Second Demo:</strong>
+            1. In <strong>Tab 1</strong> below, click <code>🛒 EXP-001: Cart Outage</code>.<br>
+            2. Click <strong>"🚀 INJECT CHAOS"</strong> — watch the watchdog detect the bottleneck and trigger an emergency rollback.<br>
+            3. Switch to <strong>Tab 2 (Observability)</strong> to see the latency spike, or <strong>Tab 5 (AI Audit)</strong> to see Gemini's prescribed code remedies!
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
 
 # ==============================================================================
 # MAIN TAB NAVIGATION
@@ -622,6 +709,13 @@ with tab_telemetry:
                 st.altair_chart(c_err, use_container_width=True)
                 st.caption("Amber: 5xx Error % | Orange Dashed: 30% Watchdog Kill-Switch Limit")
 
+            st.info(
+                "💡 **Plain-English Guide to These Charts:**\n\n"
+                "• **Latency (Left):** Measures website speed. **Cyan (p50)** is what typical shoppers experience (~10–50ms). "
+                "**Rose (p95)** is the worst-case speed for the slowest 5% of requests. If this crosses above the **Red dashed line (1500ms)**, the watchdog triggers!\n\n"
+                "• **Error Rate (Right):** Tracks broken 500 server errors. If error spikes cross the **Orange dashed line (30%)**, the automated kill-switch rescues the service."
+            )
+
             st.markdown(f"##### 📋 **Recent Telemetry Samples ({len(df_filtered)} recorded)**")
             st.dataframe(
                 df_filtered[["iso_time", "status_code", "latency_ms", "is_error", "event_tag"]].tail(15).sort_values("iso_time", ascending=False),
@@ -637,6 +731,14 @@ with tab_telemetry:
 with tab_topology:
     st.markdown("### 🗺️ **Discovered Architecture Topology DAG**")
     st.caption("Dynamic microservice call graph derived directly from Jaeger Tracing REST API.")
+
+    st.info(
+        "💡 **Plain-English Guide to the Network Map:**\n\n"
+        "This map shows how microservices call each other behind the scenes. Arrows indicate live communication.\n\n"
+        "• 🔴 **Red Boxes (Tier-0 Critical):** If these components crash without fallbacks (like `cart`), shopping transactions freeze.\n"
+        "• 🟠 **Amber Boxes (Tier-1 Essential):** Browsing slows down if degraded.\n"
+        "• 🟢 **Green Boxes (Tier-2 Peripheral):** Can degrade silently without impacting purchases."
+    )
 
     if file_topology:
         st.markdown(f"**Discovery Source:** `{file_topology.get('source')}` | **Captured:** `{file_topology.get('timestamp')}`")
@@ -678,6 +780,13 @@ with tab_topology:
 with tab_history:
     st.markdown("### 📋 **Chaos Experiment Execution Log & MTTR**")
     st.caption("Post-experiment recovery metrics and watchdog intervention audit log.")
+
+    st.info(
+        "💡 **Plain-English Guide to MTTR & Resilience Scoring:**\n\n"
+        "• **MTTR (Mean Time To Recover):** Measures how many seconds it took for the website to bounce back to 100% normal speed after a fault was reverted. "
+        "Lower is better! Notice `cart` recovered in just **0.51s** and `recommendation` in **0.10s**.\n\n"
+        "• **Watchdog Kill-Switch:** When this reads **'🚨 TRIGGERED'**, it proves the automated safety brake rescued the application before real users were impacted."
+    )
 
     all_exps = st.session_state.session_experiments + file_report.get("experiments_evaluated", [])
     if all_exps:
