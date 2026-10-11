@@ -1,0 +1,48 @@
+{
+  "control_run": {
+    "trial": "CONTROL_NO_FAULT",
+    "duration_sec": 7.0,
+    "p50_ms": 12.57,
+    "p95_ms": 240.17,
+    "avg_ms": 60.32,
+    "error_rate": 0.0,
+    "kill_switch_triggered": false,
+    "notes": "Healthy steady state; no faults injected"
+  },
+  "cart_multi_run": {
+    "trials": [
+      {
+        "trial": 1,
+        "mttr_sec": 3.01,
+        "rollback_sec": 0.1053,
+        "peak_p95_ms": 2501.72,
+        "peak_error_rate": 11.110000000000001,
+        "kill_switch_triggered": true,
+        "status": "aborted"
+      },
+      {
+        "trial": 2,
+        "mttr_sec": 3.02,
+        "rollback_sec": 0.0378,
+        "peak_p95_ms": 2502.33,
+        "peak_error_rate": 18.18,
+        "kill_switch_triggered": true,
+        "status": "aborted"
+      },
+      {
+        "trial": 3,
+        "mttr_sec": 3.02,
+        "rollback_sec": 0.0201,
+        "peak_p95_ms": 2501.77,
+        "peak_error_rate": 11.110000000000001,
+        "kill_switch_triggered": true,
+        "status": "aborted"
+      }
+    ],
+    "mean_mttr_sec": 3.02,
+    "mttr_min_sec": 3.01,
+    "mttr_max_sec": 3.02,
+    "mttr_spread_sec": 0.01,
+    "mean_rollback_ms": 54.4
+  }
+}

@@ -1,36 +1,36 @@
 {
-  "overall_resilience_score": 46,
-  "summary": "Historical audit; score recalculated from saved summary metrics. Rollback timing and recovery estimates are unverified. No new experiment was run. 3 of 3 experiments produced evaluable results. Score: 46. Findings describe aggregate probe observations; architectural causes remain hypotheses.",
+  "overall_resilience_score": 36,
+  "summary": "3 of 3 experiments produced evaluable results. Score: 36. Findings describe aggregate probe observations; architectural causes remain hypotheses.",
   "experiments_evaluated": [
     {
       "experiment_id": "EXP-001",
       "target_service": "cart",
       "experiment_type": "container_pause",
       "kill_switch_triggered": true,
-      "mttr_sec": 0.51,
-      "peak_error_rate": 0.1,
-      "peak_p95_ms": 2500.0,
-      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
+      "mttr_sec": 2.52,
+      "peak_error_rate": 0.2222,
+      "peak_p95_ms": 2501.86,
+      "evaluation": "aborted: Safety threshold breached: p95_latency_ms=2501.86; recovery confirmed=True"
     },
     {
       "experiment_id": "EXP-002",
       "target_service": "valkey-cart",
       "experiment_type": "container_pause",
       "kill_switch_triggered": true,
-      "mttr_sec": 0.1,
-      "peak_error_rate": 0.1,
-      "peak_p95_ms": 2500.0,
-      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
+      "mttr_sec": 2.52,
+      "peak_error_rate": 0.125,
+      "peak_p95_ms": 2501.77,
+      "evaluation": "aborted: Safety threshold breached: p95_latency_ms=2501.77; recovery confirmed=True"
     },
     {
       "experiment_id": "EXP-003",
       "target_service": "recommendation",
       "experiment_type": "network_latency",
       "kill_switch_triggered": true,
-      "mttr_sec": 0.51,
+      "mttr_sec": 3.51,
       "peak_error_rate": 0.0,
-      "peak_p95_ms": 1996.19,
-      "evaluation": "aborted: Historical threshold breach; recovery confirmed=False"
+      "peak_p95_ms": 1556.01,
+      "evaluation": "aborted: Safety threshold breached: p95_latency_ms=1556.01; recovery confirmed=True"
     }
   ],
   "vulnerabilities": [
@@ -38,21 +38,21 @@
       "service": "cart",
       "severity": "HIGH",
       "title": "Observed degradation during fault",
-      "description": "Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.",
+      "description": "Aggregate probes reached p95 2501.9ms and error rate 22.2%. Root cause and affected user journeys require further investigation.",
       "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     },
     {
       "service": "valkey-cart",
       "severity": "HIGH",
       "title": "Observed degradation during fault",
-      "description": "Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.",
+      "description": "Aggregate probes reached p95 2501.8ms and error rate 12.5%. Root cause and affected user journeys require further investigation.",
       "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     },
     {
       "service": "recommendation",
       "severity": "HIGH",
       "title": "Observed degradation during fault",
-      "description": "Aggregate probes reached p95 1996.2ms and error rate 0.0%. Root cause and affected user journeys require further investigation.",
+      "description": "Aggregate probes reached p95 1556.0ms and error rate 0.0%. Root cause and affected user journeys require further investigation.",
       "impact": "Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established."
     }
   ],

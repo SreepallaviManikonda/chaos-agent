@@ -119,8 +119,15 @@ class ChaosInjector:
             return False
 
     def _tc(self, container_id, command):
-        return self.client.containers.run(os.getenv("CHAOS_NETSHOOT_IMAGE", "local-netshoot:latest"),
-            command=command, network_mode=f"container:{container_id}", cap_add=["NET_ADMIN"], remove=True, detach=False)
+        import subprocess
+        image = os.getenv("CHAOS_NETSHOOT_IMAGE", "local-netshoot:latest")
+        res = subprocess.run(
+            ["docker", "run", "--rm", f"--net=container:{container_id}", "--cap-add=NET_ADMIN", image] + list(command),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        return res.stdout
 
     def inject_network_latency(self, service_name, delay_ms=500):
         container = self.find_container(service_name)

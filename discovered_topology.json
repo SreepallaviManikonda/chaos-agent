@@ -1,15 +1,15 @@
 {
   "source": "jaeger_api",
-  "timestamp": "2026-10-10T10:20:28.092303+00:00",
-  "node_count": 13,
-  "edge_count": 30,
+  "timestamp": "2026-10-11T18:53:46.197981+00:00",
+  "node_count": 16,
+  "edge_count": 39,
   "nodes": [
     {
       "name": "ad",
       "in_degree": 2,
       "out_degree": 2,
-      "total_in_calls": 759,
-      "total_out_calls": 387,
+      "total_in_calls": 91,
+      "total_out_calls": 52,
       "dependents": [
         "ad",
         "frontend"
@@ -24,8 +24,8 @@
       "name": "cart",
       "in_degree": 3,
       "out_degree": 2,
-      "total_in_calls": 3436,
-      "total_out_calls": 2010,
+      "total_in_calls": 718,
+      "total_out_calls": 438,
       "dependents": [
         "cart",
         "checkout",
@@ -40,9 +40,9 @@
     {
       "name": "checkout",
       "in_degree": 2,
-      "out_degree": 4,
-      "total_in_calls": 6,
-      "total_out_calls": 8,
+      "out_degree": 7,
+      "total_in_calls": 84,
+      "total_out_calls": 143,
       "dependents": [
         "checkout",
         "frontend"
@@ -51,7 +51,10 @@
         "cart",
         "checkout",
         "currency",
-        "product-catalog"
+        "email",
+        "payment",
+        "product-catalog",
+        "shipping"
       ],
       "criticality": "HIGH"
     },
@@ -59,7 +62,7 @@
       "name": "currency",
       "in_degree": 2,
       "out_degree": 0,
-      "total_in_calls": 948,
+      "total_in_calls": 173,
       "total_out_calls": 0,
       "dependents": [
         "checkout",
@@ -69,11 +72,26 @@
       "criticality": "HIGH"
     },
     {
+      "name": "email",
+      "in_degree": 2,
+      "out_degree": 1,
+      "total_in_calls": 24,
+      "total_out_calls": 18,
+      "dependents": [
+        "checkout",
+        "email"
+      ],
+      "dependencies": [
+        "email"
+      ],
+      "criticality": "HIGH"
+    },
+    {
       "name": "flagd",
       "in_degree": 7,
       "out_degree": 1,
-      "total_in_calls": 11815,
-      "total_out_calls": 10998,
+      "total_in_calls": 1525,
+      "total_out_calls": 1343,
       "dependents": [
         "ad",
         "cart",
@@ -91,9 +109,9 @@
     {
       "name": "frontend",
       "in_degree": 2,
-      "out_degree": 7,
-      "total_in_calls": 30465,
-      "total_out_calls": 26332,
+      "out_degree": 8,
+      "total_in_calls": 5599,
+      "total_out_calls": 4464,
       "dependents": [
         "frontend",
         "frontend-proxy"
@@ -105,7 +123,8 @@
         "currency",
         "frontend",
         "product-catalog",
-        "recommendation"
+        "recommendation",
+        "shipping"
       ],
       "criticality": "HIGH"
     },
@@ -113,8 +132,8 @@
       "name": "frontend-proxy",
       "in_degree": 3,
       "out_degree": 4,
-      "total_in_calls": 24936,
-      "total_out_calls": 35597,
+      "total_in_calls": 4053,
+      "total_out_calls": 6084,
       "dependents": [
         "frontend-proxy",
         "frontend-web",
@@ -132,8 +151,8 @@
       "name": "frontend-web",
       "in_degree": 1,
       "out_degree": 2,
-      "total_in_calls": 7777,
-      "total_out_calls": 14071,
+      "total_in_calls": 1522,
+      "total_out_calls": 2323,
       "dependents": [
         "frontend-web"
       ],
@@ -147,20 +166,20 @@
       "name": "image-provider",
       "in_degree": 1,
       "out_degree": 0,
-      "total_in_calls": 4188,
+      "total_in_calls": 498,
       "total_out_calls": 0,
       "dependents": [
         "frontend-proxy"
       ],
       "dependencies": [],
-      "criticality": "HIGH"
+      "criticality": "MEDIUM"
     },
     {
       "name": "load-generator",
       "in_degree": 1,
       "out_degree": 3,
-      "total_in_calls": 825,
-      "total_out_calls": 1799,
+      "total_in_calls": 207,
+      "total_out_calls": 422,
       "dependents": [
         "load-generator"
       ],
@@ -169,26 +188,30 @@
         "frontend-proxy",
         "load-generator"
       ],
-      "criticality": "HIGH"
+      "criticality": "MEDIUM"
     },
     {
       "name": "payment",
-      "in_degree": 0,
-      "out_degree": 1,
-      "total_in_calls": 0,
-      "total_out_calls": 1,
-      "dependents": [],
-      "dependencies": [
-        "flagd"
+      "in_degree": 2,
+      "out_degree": 2,
+      "total_in_calls": 16,
+      "total_out_calls": 12,
+      "dependents": [
+        "checkout",
+        "payment"
       ],
-      "criticality": "LOW"
+      "dependencies": [
+        "flagd",
+        "payment"
+      ],
+      "criticality": "HIGH"
     },
     {
       "name": "product-catalog",
       "in_degree": 4,
       "out_degree": 1,
-      "total_in_calls": 12100,
-      "total_out_calls": 6050,
+      "total_in_calls": 1395,
+      "total_out_calls": 697,
       "dependents": [
         "checkout",
         "frontend",
@@ -201,11 +224,26 @@
       "criticality": "HIGH"
     },
     {
+      "name": "quote",
+      "in_degree": 2,
+      "out_degree": 1,
+      "total_in_calls": 85,
+      "total_out_calls": 58,
+      "dependents": [
+        "quote",
+        "shipping"
+      ],
+      "dependencies": [
+        "quote"
+      ],
+      "criticality": "HIGH"
+    },
+    {
       "name": "recommendation",
       "in_degree": 2,
       "out_degree": 3,
-      "total_in_calls": 3054,
-      "total_out_calls": 3056,
+      "total_in_calls": 505,
+      "total_out_calls": 447,
       "dependents": [
         "frontend",
         "recommendation"
@@ -216,158 +254,220 @@
         "recommendation"
       ],
       "criticality": "HIGH"
+    },
+    {
+      "name": "shipping",
+      "in_degree": 3,
+      "out_degree": 2,
+      "total_in_calls": 60,
+      "total_out_calls": 54,
+      "dependents": [
+        "checkout",
+        "frontend",
+        "shipping"
+      ],
+      "dependencies": [
+        "quote",
+        "shipping"
+      ],
+      "criticality": "HIGH"
     }
   ],
   "edges": [
     {
-      "caller": "frontend-proxy",
-      "callee": "image-provider",
-      "call_count": 4188
-    },
-    {
-      "caller": "cart",
-      "callee": "cart",
-      "call_count": 1962
-    },
-    {
-      "caller": "frontend",
-      "callee": "product-catalog",
-      "call_count": 5031
-    },
-    {
-      "caller": "frontend",
-      "callee": "frontend",
-      "call_count": 17488
-    },
-    {
-      "caller": "frontend-proxy",
-      "callee": "frontend-proxy",
-      "call_count": 17808
-    },
-    {
-      "caller": "frontend",
-      "callee": "recommendation",
-      "call_count": 1018
-    },
-    {
-      "caller": "checkout",
-      "callee": "currency",
-      "call_count": 1
-    },
-    {
-      "caller": "frontend",
-      "callee": "cart",
-      "call_count": 1473
-    },
-    {
-      "caller": "recommendation",
-      "callee": "product-catalog",
-      "call_count": 1018
-    },
-    {
-      "caller": "recommendation",
-      "callee": "flagd",
-      "call_count": 2
-    },
-    {
-      "caller": "ad",
-      "callee": "ad",
-      "call_count": 385
-    },
-    {
-      "caller": "ad",
-      "callee": "flagd",
-      "call_count": 2
-    },
-    {
       "caller": "load-generator",
-      "callee": "flagd",
-      "call_count": 140
-    },
-    {
-      "caller": "payment",
-      "callee": "flagd",
-      "call_count": 1
-    },
-    {
-      "caller": "recommendation",
-      "callee": "recommendation",
-      "call_count": 2036
-    },
-    {
-      "caller": "checkout",
-      "callee": "product-catalog",
-      "call_count": 1
-    },
-    {
-      "caller": "frontend-proxy",
-      "callee": "frontend",
-      "call_count": 12977
-    },
-    {
-      "caller": "product-catalog",
-      "callee": "product-catalog",
-      "call_count": 6050
-    },
-    {
-      "caller": "frontend-web",
-      "callee": "frontend-proxy",
-      "call_count": 6294
+      "callee": "load-generator",
+      "call_count": 207
     },
     {
       "caller": "frontend",
       "callee": "checkout",
-      "call_count": 1
+      "call_count": 7
+    },
+    {
+      "caller": "recommendation",
+      "callee": "recommendation",
+      "call_count": 337
+    },
+    {
+      "caller": "recommendation",
+      "callee": "product-catalog",
+      "call_count": 109
+    },
+    {
+      "caller": "shipping",
+      "callee": "quote",
+      "call_count": 27
     },
     {
       "caller": "checkout",
-      "callee": "cart",
-      "call_count": 1
+      "callee": "payment",
+      "call_count": 6
     },
     {
-      "caller": "flagd",
+      "caller": "load-generator",
       "callee": "flagd",
-      "call_count": 10998
+      "call_count": 36
+    },
+    {
+      "caller": "payment",
+      "callee": "payment",
+      "call_count": 10
+    },
+    {
+      "caller": "frontend-proxy",
+      "callee": "frontend",
+      "call_count": 2392
     },
     {
       "caller": "frontend",
-      "callee": "currency",
-      "call_count": 947
+      "callee": "product-catalog",
+      "call_count": 579
+    },
+    {
+      "caller": "checkout",
+      "callee": "shipping",
+      "call_count": 12
+    },
+    {
+      "caller": "frontend-proxy",
+      "callee": "frontend-proxy",
+      "call_count": 3073
+    },
+    {
+      "caller": "frontend",
+      "callee": "recommendation",
+      "call_count": 168
+    },
+    {
+      "caller": "cart",
+      "callee": "cart",
+      "call_count": 419
     },
     {
       "caller": "frontend-web",
       "callee": "frontend-web",
-      "call_count": 7777
-    },
-    {
-      "caller": "load-generator",
-      "callee": "load-generator",
-      "call_count": 825
-    },
-    {
-      "caller": "frontend-proxy",
-      "callee": "flagd",
-      "call_count": 624
-    },
-    {
-      "caller": "load-generator",
-      "callee": "frontend-proxy",
-      "call_count": 834
+      "call_count": 1522
     },
     {
       "caller": "cart",
       "callee": "flagd",
-      "call_count": 48
+      "call_count": 19
+    },
+    {
+      "caller": "checkout",
+      "callee": "cart",
+      "call_count": 13
+    },
+    {
+      "caller": "recommendation",
+      "callee": "flagd",
+      "call_count": 1
+    },
+    {
+      "caller": "frontend-proxy",
+      "callee": "flagd",
+      "call_count": 121
     },
     {
       "caller": "frontend",
-      "callee": "ad",
-      "call_count": 374
+      "callee": "frontend",
+      "call_count": 3207
+    },
+    {
+      "caller": "frontend-web",
+      "callee": "frontend-proxy",
+      "call_count": 801
+    },
+    {
+      "caller": "quote",
+      "callee": "quote",
+      "call_count": 58
     },
     {
       "caller": "checkout",
       "callee": "checkout",
-      "call_count": 5
+      "call_count": 77
+    },
+    {
+      "caller": "ad",
+      "callee": "ad",
+      "call_count": 49
+    },
+    {
+      "caller": "checkout",
+      "callee": "currency",
+      "call_count": 19
+    },
+    {
+      "caller": "flagd",
+      "callee": "flagd",
+      "call_count": 1343
+    },
+    {
+      "caller": "shipping",
+      "callee": "shipping",
+      "call_count": 27
+    },
+    {
+      "caller": "frontend-proxy",
+      "callee": "image-provider",
+      "call_count": 498
+    },
+    {
+      "caller": "frontend",
+      "callee": "currency",
+      "call_count": 154
+    },
+    {
+      "caller": "load-generator",
+      "callee": "frontend-proxy",
+      "call_count": 179
+    },
+    {
+      "caller": "checkout",
+      "callee": "email",
+      "call_count": 6
+    },
+    {
+      "caller": "frontend",
+      "callee": "ad",
+      "call_count": 42
+    },
+    {
+      "caller": "checkout",
+      "callee": "product-catalog",
+      "call_count": 10
+    },
+    {
+      "caller": "email",
+      "callee": "email",
+      "call_count": 18
+    },
+    {
+      "caller": "payment",
+      "callee": "flagd",
+      "call_count": 2
+    },
+    {
+      "caller": "ad",
+      "callee": "flagd",
+      "call_count": 3
+    },
+    {
+      "caller": "frontend",
+      "callee": "cart",
+      "call_count": 286
+    },
+    {
+      "caller": "product-catalog",
+      "callee": "product-catalog",
+      "call_count": 697
+    },
+    {
+      "caller": "frontend",
+      "callee": "shipping",
+      "call_count": 21
     }
   ]
 }

@@ -1,1105 +1,2625 @@
 [
   {
-    "timestamp": 1791627628.198422,
-    "iso_time": "2026-10-10T10:20:28.198426+00:00",
+    "timestamp": 1791744826.214932,
+    "iso_time": "2026-10-11T18:53:46.214932+00:00",
     "status_code": 200,
-    "latency_ms": 899.56,
+    "latency_ms": 8.97,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627629.098203,
-    "iso_time": "2026-10-10T10:20:29.098207+00:00",
+    "timestamp": 1791744826.321645,
+    "iso_time": "2026-10-11T18:53:46.321645+00:00",
     "status_code": 200,
-    "latency_ms": 464.92,
+    "latency_ms": 10.24,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627629.56317,
-    "iso_time": "2026-10-10T10:20:29.563173+00:00",
+    "timestamp": 1791744826.4208,
+    "iso_time": "2026-10-11T18:53:46.420800+00:00",
     "status_code": 200,
-    "latency_ms": 38.66,
+    "latency_ms": 5.12,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627629.663577,
-    "iso_time": "2026-10-10T10:20:29.663582+00:00",
+    "timestamp": 1791744826.622875,
+    "iso_time": "2026-10-11T18:53:46.622875+00:00",
     "status_code": 200,
-    "latency_ms": 300.87,
+    "latency_ms": 102.59,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627629.964488,
-    "iso_time": "2026-10-10T10:20:29.964493+00:00",
+    "timestamp": 1791744826.6288671,
+    "iso_time": "2026-10-11T18:53:46.628867+00:00",
     "status_code": 200,
-    "latency_ms": 416.64,
+    "latency_ms": 7.91,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.381166,
-    "iso_time": "2026-10-10T10:20:30.381168+00:00",
+    "timestamp": 1791744826.747064,
+    "iso_time": "2026-10-11T18:53:46.747064+00:00",
     "status_code": 200,
-    "latency_ms": 25.5,
+    "latency_ms": 20.5,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.482611,
-    "iso_time": "2026-10-10T10:20:30.482621+00:00",
+    "timestamp": 1791744826.8358579,
+    "iso_time": "2026-10-11T18:53:46.835858+00:00",
     "status_code": 200,
-    "latency_ms": 23.73,
+    "latency_ms": 6.39,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.58558,
-    "iso_time": "2026-10-10T10:20:30.585587+00:00",
+    "timestamp": 1791744826.98886,
+    "iso_time": "2026-10-11T18:53:46.988860+00:00",
     "status_code": 200,
-    "latency_ms": 147.45,
+    "latency_ms": 54.42,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.733069,
-    "iso_time": "2026-10-10T10:20:30.733071+00:00",
+    "timestamp": 1791744827.044849,
+    "iso_time": "2026-10-11T18:53:47.044849+00:00",
     "status_code": 200,
-    "latency_ms": 22.14,
+    "latency_ms": 9.43,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.834549,
-    "iso_time": "2026-10-10T10:20:30.834558+00:00",
+    "timestamp": 1791744827.1558359,
+    "iso_time": "2026-10-11T18:53:47.155836+00:00",
     "status_code": 200,
-    "latency_ms": 33.59,
+    "latency_ms": 15.27,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627630.9355881,
-    "iso_time": "2026-10-10T10:20:30.935594+00:00",
+    "timestamp": 1791744827.2543712,
+    "iso_time": "2026-10-11T18:53:47.254371+00:00",
     "status_code": 200,
-    "latency_ms": 31.3,
+    "latency_ms": 8.7,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.037508,
-    "iso_time": "2026-10-10T10:20:31.037517+00:00",
+    "timestamp": 1791744827.440203,
+    "iso_time": "2026-10-11T18:53:47.440203+00:00",
     "status_code": 200,
-    "latency_ms": 167.89,
+    "latency_ms": 92.4,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.205467,
-    "iso_time": "2026-10-10T10:20:31.205469+00:00",
+    "timestamp": 1791744827.4567292,
+    "iso_time": "2026-10-11T18:53:47.456729+00:00",
     "status_code": 200,
-    "latency_ms": 20.58,
+    "latency_ms": 8.25,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.308481,
-    "iso_time": "2026-10-10T10:20:31.308486+00:00",
+    "timestamp": 1791744827.562052,
+    "iso_time": "2026-10-11T18:53:47.562052+00:00",
     "status_code": 200,
-    "latency_ms": 18.43,
+    "latency_ms": 8.83,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.4105868,
-    "iso_time": "2026-10-10T10:20:31.410597+00:00",
+    "timestamp": 1791744827.661303,
+    "iso_time": "2026-10-11T18:53:47.661303+00:00",
     "status_code": 200,
-    "latency_ms": 27.67,
+    "latency_ms": 5.85,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.5107148,
-    "iso_time": "2026-10-10T10:20:31.510721+00:00",
+    "timestamp": 1791744827.833778,
+    "iso_time": "2026-10-11T18:53:47.833778+00:00",
     "status_code": 200,
-    "latency_ms": 146.99,
+    "latency_ms": 76.92,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.657726,
-    "iso_time": "2026-10-10T10:20:31.657728+00:00",
+    "timestamp": 1791744827.866299,
+    "iso_time": "2026-10-11T18:53:47.866299+00:00",
     "status_code": 200,
-    "latency_ms": 26.59,
+    "latency_ms": 6.36,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.762618,
-    "iso_time": "2026-10-10T10:20:31.762626+00:00",
+    "timestamp": 1791744827.9784021,
+    "iso_time": "2026-10-11T18:53:47.978402+00:00",
     "status_code": 200,
-    "latency_ms": 81.83,
+    "latency_ms": 13.29,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.867168,
-    "iso_time": "2026-10-10T10:20:31.867172+00:00",
+    "timestamp": 1791744828.073639,
+    "iso_time": "2026-10-11T18:53:48.073639+00:00",
     "status_code": 200,
-    "latency_ms": 50.82,
+    "latency_ms": 5.45,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627631.96853,
-    "iso_time": "2026-10-10T10:20:31.968535+00:00",
+    "timestamp": 1791744828.225871,
+    "iso_time": "2026-10-11T18:53:48.225871+00:00",
     "status_code": 200,
-    "latency_ms": 67.77,
+    "latency_ms": 54.27,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.068675,
-    "iso_time": "2026-10-10T10:20:32.068680+00:00",
+    "timestamp": 1791744828.2863512,
+    "iso_time": "2026-10-11T18:53:48.286351+00:00",
     "status_code": 200,
-    "latency_ms": 11.72,
+    "latency_ms": 9.69,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.169512,
-    "iso_time": "2026-10-10T10:20:32.169516+00:00",
+    "timestamp": 1791744828.390871,
+    "iso_time": "2026-10-11T18:53:48.390871+00:00",
     "status_code": 200,
-    "latency_ms": 18.66,
+    "latency_ms": 11.32,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.2696111,
-    "iso_time": "2026-10-10T10:20:32.269616+00:00",
+    "timestamp": 1791744828.4915369,
+    "iso_time": "2026-10-11T18:53:48.491537+00:00",
     "status_code": 200,
-    "latency_ms": 11.75,
+    "latency_ms": 7.21,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.3701818,
-    "iso_time": "2026-10-10T10:20:32.370190+00:00",
+    "timestamp": 1791744828.7111309,
+    "iso_time": "2026-10-11T18:53:48.711131+00:00",
     "status_code": 200,
-    "latency_ms": 93.58,
+    "latency_ms": 123.85,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.47053,
-    "iso_time": "2026-10-10T10:20:32.470535+00:00",
+    "timestamp": 1791744828.717602,
+    "iso_time": "2026-10-11T18:53:48.717602+00:00",
     "status_code": 200,
-    "latency_ms": 13.97,
+    "latency_ms": 29.91,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.575566,
-    "iso_time": "2026-10-10T10:20:32.575573+00:00",
+    "timestamp": 1791744828.8141649,
+    "iso_time": "2026-10-11T18:53:48.814165+00:00",
     "status_code": 200,
-    "latency_ms": 14.86,
+    "latency_ms": 21.38,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.680075,
-    "iso_time": "2026-10-10T10:20:32.680083+00:00",
+    "timestamp": 1791744828.899327,
+    "iso_time": "2026-10-11T18:53:48.899327+00:00",
     "status_code": 200,
-    "latency_ms": 9.01,
+    "latency_ms": 5.57,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.780766,
-    "iso_time": "2026-10-10T10:20:32.780784+00:00",
+    "timestamp": 1791744829.103806,
+    "iso_time": "2026-10-11T18:53:49.103806+00:00",
     "status_code": 200,
-    "latency_ms": 78.94,
+    "latency_ms": 8.5,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.883903,
-    "iso_time": "2026-10-10T10:20:32.883909+00:00",
+    "timestamp": 1791744829.295073,
+    "iso_time": "2026-10-11T18:53:49.295073+00:00",
     "status_code": 200,
-    "latency_ms": 29.45,
+    "latency_ms": 96.36,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627632.98653,
-    "iso_time": "2026-10-10T10:20:32.986533+00:00",
+    "timestamp": 1791744829.305322,
+    "iso_time": "2026-10-11T18:53:49.305322+00:00",
     "status_code": 200,
-    "latency_ms": 13.98,
+    "latency_ms": 5.72,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627633.091557,
-    "iso_time": "2026-10-10T10:20:33.091561+00:00",
+    "timestamp": 1791744829.37119,
+    "iso_time": "2026-10-11T18:53:49.371190+00:00",
     "status_code": 200,
-    "latency_ms": 17.85,
+    "latency_ms": 376.52,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627633.19168,
-    "iso_time": "2026-10-10T10:20:33.191684+00:00",
+    "timestamp": 1791744829.521131,
+    "iso_time": "2026-10-11T18:53:49.521131+00:00",
     "status_code": 200,
-    "latency_ms": 57.97,
+    "latency_ms": 20.22,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744829.6659079,
+    "iso_time": "2026-10-11T18:53:49.665908+00:00",
+    "status_code": 200,
+    "latency_ms": 64.36,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744829.708606,
+    "iso_time": "2026-10-11T18:53:49.708606+00:00",
+    "status_code": 200,
+    "latency_ms": 6.59,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744829.744277,
+    "iso_time": "2026-10-11T18:53:49.744277+00:00",
+    "status_code": 200,
+    "latency_ms": 344.54,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744829.879404,
+    "iso_time": "2026-10-11T18:53:49.879404+00:00",
+    "status_code": 200,
+    "latency_ms": 72.96,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744829.9161222,
+    "iso_time": "2026-10-11T18:53:49.916122+00:00",
+    "status_code": 200,
+    "latency_ms": 6.92,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.036582,
+    "iso_time": "2026-10-11T18:53:50.036582+00:00",
+    "status_code": 200,
+    "latency_ms": 25.4,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.118782,
+    "iso_time": "2026-10-11T18:53:50.118782+00:00",
+    "status_code": 200,
+    "latency_ms": 6.25,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.30253,
+    "iso_time": "2026-10-11T18:53:50.302530+00:00",
+    "status_code": 200,
+    "latency_ms": 84.74,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.3299809,
+    "iso_time": "2026-10-11T18:53:50.329981+00:00",
+    "status_code": 200,
+    "latency_ms": 8.69,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.506603,
+    "iso_time": "2026-10-11T18:53:50.506603+00:00",
+    "status_code": 200,
+    "latency_ms": 80.16,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.536343,
+    "iso_time": "2026-10-11T18:53:50.536343+00:00",
+    "status_code": 200,
+    "latency_ms": 4.77,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.6631832,
+    "iso_time": "2026-10-11T18:53:50.663183+00:00",
+    "status_code": 200,
+    "latency_ms": 28.49,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.745738,
+    "iso_time": "2026-10-11T18:53:50.745738+00:00",
+    "status_code": 200,
+    "latency_ms": 5.88,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.861414,
+    "iso_time": "2026-10-11T18:53:50.861414+00:00",
+    "status_code": 200,
+    "latency_ms": 20.91,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744830.948752,
+    "iso_time": "2026-10-11T18:53:50.948752+00:00",
+    "status_code": 200,
+    "latency_ms": 5.23,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744831.159922,
+    "iso_time": "2026-10-11T18:53:51.159922+00:00",
+    "status_code": 200,
+    "latency_ms": 7.41,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744831.2649841,
+    "iso_time": "2026-10-11T18:53:51.264984+00:00",
+    "status_code": 200,
+    "latency_ms": 217.21,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744831.268041,
+    "iso_time": "2026-10-11T18:53:51.268041+00:00",
+    "status_code": 200,
+    "latency_ms": 10.5,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627633.2937322,
-    "iso_time": "2026-10-10T10:20:33.293740+00:00",
+    "timestamp": 1791744831.547539,
+    "iso_time": "2026-10-11T18:53:51.547539+00:00",
     "status_code": 200,
-    "latency_ms": 39.97,
+    "latency_ms": 87.72,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627633.393812,
-    "iso_time": "2026-10-10T10:20:33.393815+00:00",
+    "timestamp": 1791744831.571084,
+    "iso_time": "2026-10-11T18:53:51.571084+00:00",
     "status_code": 200,
-    "latency_ms": 15.95,
+    "latency_ms": 7.17,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627633.494518,
-    "iso_time": "2026-10-10T10:20:33.494521+00:00",
+    "timestamp": 1791744831.715775,
+    "iso_time": "2026-10-11T18:53:51.715775+00:00",
+    "status_code": 200,
+    "latency_ms": 48.08,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744831.953606,
+    "iso_time": "2026-10-11T18:53:51.953606+00:00",
+    "status_code": 200,
+    "latency_ms": 75.56,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744831.990052,
+    "iso_time": "2026-10-11T18:53:51.990052+00:00",
+    "status_code": 200,
+    "latency_ms": 6.25,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.102222,
+    "iso_time": "2026-10-11T18:53:52.102222+00:00",
+    "status_code": 200,
+    "latency_ms": 16.76,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.367203,
+    "iso_time": "2026-10-11T18:53:52.367203+00:00",
+    "status_code": 200,
+    "latency_ms": 77.53,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.39901,
+    "iso_time": "2026-10-11T18:53:52.399010+00:00",
+    "status_code": 200,
+    "latency_ms": 5.85,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.509593,
+    "iso_time": "2026-10-11T18:53:52.509593+00:00",
+    "status_code": 200,
+    "latency_ms": 15.85,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.7378502,
+    "iso_time": "2026-10-11T18:53:52.737850+00:00",
+    "status_code": 200,
+    "latency_ms": 37.03,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.813983,
+    "iso_time": "2026-10-11T18:53:52.813983+00:00",
+    "status_code": 200,
+    "latency_ms": 8.61,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744832.926961,
+    "iso_time": "2026-10-11T18:53:52.926961+00:00",
+    "status_code": 200,
+    "latency_ms": 19.33,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.1730719,
+    "iso_time": "2026-10-11T18:53:53.173072+00:00",
+    "status_code": 200,
+    "latency_ms": 60.89,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.224714,
+    "iso_time": "2026-10-11T18:53:53.224714+00:00",
+    "status_code": 200,
+    "latency_ms": 11.23,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.333577,
+    "iso_time": "2026-10-11T18:53:53.333577+00:00",
+    "status_code": 200,
+    "latency_ms": 15.59,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.56882,
+    "iso_time": "2026-10-11T18:53:53.568820+00:00",
+    "status_code": 200,
+    "latency_ms": 45.13,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.6351948,
+    "iso_time": "2026-10-11T18:53:53.635195+00:00",
+    "status_code": 200,
+    "latency_ms": 7.42,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.752008,
+    "iso_time": "2026-10-11T18:53:53.752008+00:00",
+    "status_code": 200,
+    "latency_ms": 21.51,
+    "is_error": false,
+    "event_tag": "EXP-001_active"
+  },
+  {
+    "timestamp": 1791744833.8615072,
+    "iso_time": "2026-10-11T18:53:53.861507+00:00",
     "status_code": 504,
-    "latency_ms": 2500.0,
+    "latency_ms": 2501.86,
     "is_error": true,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627635.998049,
-    "iso_time": "2026-10-10T10:20:35.998053+00:00",
+    "timestamp": 1791744833.9770749,
+    "iso_time": "2026-10-11T18:53:53.977075+00:00",
     "status_code": 200,
-    "latency_ms": 57.52,
+    "latency_ms": 39.91,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627636.099688,
-    "iso_time": "2026-10-10T10:20:36.099693+00:00",
+    "timestamp": 1791744834.0447319,
+    "iso_time": "2026-10-11T18:53:54.044732+00:00",
     "status_code": 200,
-    "latency_ms": 15.17,
+    "latency_ms": 6.94,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627636.202484,
-    "iso_time": "2026-10-10T10:20:36.202488+00:00",
+    "timestamp": 1791744834.2102048,
+    "iso_time": "2026-10-11T18:53:54.210205+00:00",
     "status_code": 200,
-    "latency_ms": 39.93,
+    "latency_ms": 72.24,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627636.303683,
-    "iso_time": "2026-10-10T10:20:36.303689+00:00",
+    "timestamp": 1791744834.273804,
+    "iso_time": "2026-10-11T18:53:54.273804+00:00",
     "status_code": 504,
-    "latency_ms": 2500.0,
+    "latency_ms": 2501.04,
     "is_error": true,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627638.8090382,
-    "iso_time": "2026-10-10T10:20:38.809056+00:00",
-    "status_code": 504,
-    "latency_ms": 2500.0,
-    "is_error": true,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627641.333049,
-    "iso_time": "2026-10-10T10:20:41.333060+00:00",
+    "timestamp": 1791744834.303497,
+    "iso_time": "2026-10-11T18:53:54.303497+00:00",
     "status_code": 200,
-    "latency_ms": 80.33,
+    "latency_ms": 2114.11,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627641.436554,
-    "iso_time": "2026-10-10T10:20:41.436559+00:00",
+    "timestamp": 1791744834.323773,
+    "iso_time": "2026-10-11T18:53:54.323773+00:00",
     "status_code": 200,
-    "latency_ms": 1134.98,
+    "latency_ms": 1727.28,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627642.57162,
-    "iso_time": "2026-10-10T10:20:42.571623+00:00",
+    "timestamp": 1791744834.325832,
+    "iso_time": "2026-10-11T18:53:54.325832+00:00",
     "status_code": 200,
-    "latency_ms": 19.64,
+    "latency_ms": 902.68,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627642.672201,
-    "iso_time": "2026-10-10T10:20:42.672206+00:00",
+    "timestamp": 1791744834.327132,
+    "iso_time": "2026-10-11T18:53:54.327132+00:00",
     "status_code": 200,
-    "latency_ms": 197.99,
+    "latency_ms": 84.99,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627642.870254,
-    "iso_time": "2026-10-10T10:20:42.870257+00:00",
+    "timestamp": 1791744834.3273668,
+    "iso_time": "2026-10-11T18:53:54.327367+00:00",
     "status_code": 200,
-    "latency_ms": 69.34,
+    "latency_ms": 492.96,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627642.971442,
-    "iso_time": "2026-10-10T10:20:42.971452+00:00",
+    "timestamp": 1791744834.327571,
+    "iso_time": "2026-10-11T18:53:54.327571+00:00",
     "status_code": 200,
-    "latency_ms": 86.03,
+    "latency_ms": 1318.78,
     "is_error": false,
     "event_tag": "EXP-001_active"
   },
   {
-    "timestamp": 1791627643.072883,
-    "iso_time": "2026-10-10T10:20:43.072888+00:00",
+    "timestamp": 1791744834.393418,
+    "iso_time": "2026-10-11T18:53:54.393418+00:00",
     "status_code": 200,
-    "latency_ms": 57.06,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627643.176314,
-    "iso_time": "2026-10-10T10:20:43.176321+00:00",
-    "status_code": 200,
-    "latency_ms": 231.08,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627643.4075148,
-    "iso_time": "2026-10-10T10:20:43.407523+00:00",
-    "status_code": 200,
-    "latency_ms": 106.03,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627643.5136,
-    "iso_time": "2026-10-10T10:20:43.513604+00:00",
-    "status_code": 200,
-    "latency_ms": 83.05,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627643.616707,
-    "iso_time": "2026-10-10T10:20:43.616716+00:00",
-    "status_code": 200,
-    "latency_ms": 141.29,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627643.7583811,
-    "iso_time": "2026-10-10T10:20:43.758451+00:00",
-    "status_code": 200,
-    "latency_ms": 1755.0,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627645.513658,
-    "iso_time": "2026-10-10T10:20:45.513668+00:00",
-    "status_code": 200,
-    "latency_ms": 238.79,
-    "is_error": false,
-    "event_tag": "EXP-001_active"
-  },
-  {
-    "timestamp": 1791627645.7525198,
-    "iso_time": "2026-10-10T10:20:45.752523+00:00",
-    "status_code": 200,
-    "latency_ms": 315.16,
+    "latency_ms": 50.18,
     "is_error": false,
     "event_tag": "EXP-001_recovery"
   },
   {
-    "timestamp": 1791627646.067731,
-    "iso_time": "2026-10-10T10:20:46.067735+00:00",
+    "timestamp": 1791744834.4553962,
+    "iso_time": "2026-10-11T18:53:54.455396+00:00",
     "status_code": 200,
-    "latency_ms": 509.51,
+    "latency_ms": 7.09,
     "is_error": false,
     "event_tag": "EXP-001_recovery"
   },
   {
-    "timestamp": 1791627646.577287,
-    "iso_time": "2026-10-10T10:20:46.577290+00:00",
+    "timestamp": 1791744834.583473,
+    "iso_time": "2026-10-11T18:53:54.583473+00:00",
     "status_code": 200,
-    "latency_ms": 2121.76,
+    "latency_ms": 34.93,
     "is_error": false,
     "event_tag": "EXP-001_recovery"
   },
   {
-    "timestamp": 1791627648.6992378,
-    "iso_time": "2026-10-10T10:20:48.699247+00:00",
+    "timestamp": 1791744834.658867,
+    "iso_time": "2026-10-11T18:53:54.658867+00:00",
     "status_code": 200,
-    "latency_ms": 27.09,
+    "latency_ms": 5.21,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744834.81903,
+    "iso_time": "2026-10-11T18:53:54.819030+00:00",
+    "status_code": 200,
+    "latency_ms": 60.23,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744834.8707461,
+    "iso_time": "2026-10-11T18:53:54.870746+00:00",
+    "status_code": 200,
+    "latency_ms": 6.61,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744834.986012,
+    "iso_time": "2026-10-11T18:53:54.986012+00:00",
+    "status_code": 200,
+    "latency_ms": 16.83,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.079386,
+    "iso_time": "2026-10-11T18:53:55.079386+00:00",
+    "status_code": 200,
+    "latency_ms": 5.03,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.250378,
+    "iso_time": "2026-10-11T18:53:55.250378+00:00",
+    "status_code": 200,
+    "latency_ms": 73.3,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.285859,
+    "iso_time": "2026-10-11T18:53:55.285859+00:00",
+    "status_code": 200,
+    "latency_ms": 6.03,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.395893,
+    "iso_time": "2026-10-11T18:53:55.395893+00:00",
+    "status_code": 200,
+    "latency_ms": 11.26,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.494942,
+    "iso_time": "2026-10-11T18:53:55.494942+00:00",
+    "status_code": 200,
+    "latency_ms": 5.21,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.629132,
+    "iso_time": "2026-10-11T18:53:55.629132+00:00",
+    "status_code": 200,
+    "latency_ms": 34.32,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.707811,
+    "iso_time": "2026-10-11T18:53:55.707811+00:00",
+    "status_code": 200,
+    "latency_ms": 10.12,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.8101618,
+    "iso_time": "2026-10-11T18:53:55.810162+00:00",
+    "status_code": 200,
+    "latency_ms": 7.44,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744835.910557,
+    "iso_time": "2026-10-11T18:53:55.910557+00:00",
+    "status_code": 200,
+    "latency_ms": 6.59,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.0362508,
+    "iso_time": "2026-10-11T18:53:56.036251+00:00",
+    "status_code": 200,
+    "latency_ms": 30.45,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.120039,
+    "iso_time": "2026-10-11T18:53:56.120039+00:00",
+    "status_code": 200,
+    "latency_ms": 13.62,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.2204852,
+    "iso_time": "2026-10-11T18:53:56.220485+00:00",
+    "status_code": 200,
+    "latency_ms": 13.77,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.314683,
+    "iso_time": "2026-10-11T18:53:56.314683+00:00",
+    "status_code": 200,
+    "latency_ms": 5.03,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.460379,
+    "iso_time": "2026-10-11T18:53:56.460379+00:00",
+    "status_code": 200,
+    "latency_ms": 45.65,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.5310621,
+    "iso_time": "2026-10-11T18:53:56.531062+00:00",
+    "status_code": 200,
+    "latency_ms": 11.21,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.63132,
+    "iso_time": "2026-10-11T18:53:56.631320+00:00",
+    "status_code": 200,
+    "latency_ms": 9.28,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.731832,
+    "iso_time": "2026-10-11T18:53:56.731832+00:00",
+    "status_code": 200,
+    "latency_ms": 5.81,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.915626,
+    "iso_time": "2026-10-11T18:53:56.915626+00:00",
+    "status_code": 200,
+    "latency_ms": 88.01,
+    "is_error": false,
+    "event_tag": "EXP-001_recovery"
+  },
+  {
+    "timestamp": 1791744836.937911,
+    "iso_time": "2026-10-11T18:53:56.937911+00:00",
+    "status_code": 200,
+    "latency_ms": 8.58,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627648.8007848,
-    "iso_time": "2026-10-10T10:20:48.800791+00:00",
+    "timestamp": 1791744837.0486138,
+    "iso_time": "2026-10-11T18:53:57.048614+00:00",
     "status_code": 200,
-    "latency_ms": 36.1,
+    "latency_ms": 15.31,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627648.9022038,
-    "iso_time": "2026-10-10T10:20:48.902209+00:00",
+    "timestamp": 1791744837.176867,
+    "iso_time": "2026-10-11T18:53:57.176867+00:00",
     "status_code": 200,
-    "latency_ms": 14.28,
+    "latency_ms": 42.45,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.004701,
-    "iso_time": "2026-10-10T10:20:49.004715+00:00",
+    "timestamp": 1791744837.3564641,
+    "iso_time": "2026-10-11T18:53:57.356464+00:00",
     "status_code": 200,
-    "latency_ms": 57.1,
+    "latency_ms": 16.46,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.107071,
-    "iso_time": "2026-10-10T10:20:49.107076+00:00",
+    "timestamp": 1791744837.3864372,
+    "iso_time": "2026-10-11T18:53:57.386437+00:00",
     "status_code": 200,
-    "latency_ms": 9.82,
+    "latency_ms": 146.93,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.2120981,
-    "iso_time": "2026-10-10T10:20:49.212103+00:00",
+    "timestamp": 1791744837.4609761,
+    "iso_time": "2026-10-11T18:53:57.460976+00:00",
     "status_code": 200,
-    "latency_ms": 24.12,
+    "latency_ms": 19.58,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.313468,
-    "iso_time": "2026-10-10T10:20:49.313477+00:00",
+    "timestamp": 1791744837.547764,
+    "iso_time": "2026-10-11T18:53:57.547764+00:00",
     "status_code": 200,
-    "latency_ms": 87.69,
+    "latency_ms": 6.06,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.416564,
-    "iso_time": "2026-10-10T10:20:49.416569+00:00",
+    "timestamp": 1791744837.742941,
+    "iso_time": "2026-10-11T18:53:57.742941+00:00",
     "status_code": 200,
-    "latency_ms": 91.24,
+    "latency_ms": 96.17,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.5176818,
-    "iso_time": "2026-10-10T10:20:49.517690+00:00",
+    "timestamp": 1791744837.758108,
+    "iso_time": "2026-10-11T18:53:57.758108+00:00",
     "status_code": 200,
-    "latency_ms": 17.94,
+    "latency_ms": 7.59,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.6210291,
-    "iso_time": "2026-10-10T10:20:49.621036+00:00",
+    "timestamp": 1791744837.8774421,
+    "iso_time": "2026-10-11T18:53:57.877442+00:00",
     "status_code": 200,
-    "latency_ms": 42.71,
+    "latency_ms": 23.64,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627649.7244759,
-    "iso_time": "2026-10-10T10:20:49.724482+00:00",
+    "timestamp": 1791744837.9647732,
+    "iso_time": "2026-10-11T18:53:57.964773+00:00",
     "status_code": 200,
-    "latency_ms": 20.34,
+    "latency_ms": 5.87,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.124962,
+    "iso_time": "2026-10-11T18:53:58.124962+00:00",
+    "status_code": 200,
+    "latency_ms": 60.99,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.174179,
+    "iso_time": "2026-10-11T18:53:58.174179+00:00",
+    "status_code": 200,
+    "latency_ms": 6.41,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.279925,
+    "iso_time": "2026-10-11T18:53:58.279925+00:00",
+    "status_code": 200,
+    "latency_ms": 8.33,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.379215,
+    "iso_time": "2026-10-11T18:53:58.379215+00:00",
+    "status_code": 200,
+    "latency_ms": 5.38,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.517759,
+    "iso_time": "2026-10-11T18:53:58.517759+00:00",
+    "status_code": 200,
+    "latency_ms": 38.78,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.588928,
+    "iso_time": "2026-10-11T18:53:58.588928+00:00",
+    "status_code": 200,
+    "latency_ms": 9.2,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.7130492,
+    "iso_time": "2026-10-11T18:53:58.713049+00:00",
+    "status_code": 200,
+    "latency_ms": 29.19,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.790142,
+    "iso_time": "2026-10-11T18:53:58.790142+00:00",
+    "status_code": 200,
+    "latency_ms": 6.09,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.917305,
+    "iso_time": "2026-10-11T18:53:58.917305+00:00",
+    "status_code": 200,
+    "latency_ms": 32.16,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744838.992482,
+    "iso_time": "2026-10-11T18:53:58.992482+00:00",
+    "status_code": 200,
+    "latency_ms": 6.9,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.124448,
+    "iso_time": "2026-10-11T18:53:59.124448+00:00",
+    "status_code": 200,
+    "latency_ms": 38.64,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.193325,
+    "iso_time": "2026-10-11T18:53:59.193325+00:00",
+    "status_code": 200,
+    "latency_ms": 5.1,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.397326,
+    "iso_time": "2026-10-11T18:53:59.397326+00:00",
+    "status_code": 200,
+    "latency_ms": 8.31,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.442778,
+    "iso_time": "2026-10-11T18:53:59.442778+00:00",
+    "status_code": 200,
+    "latency_ms": 154.2,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.511487,
+    "iso_time": "2026-10-11T18:53:59.511487+00:00",
+    "status_code": 200,
+    "latency_ms": 22.33,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.595432,
+    "iso_time": "2026-10-11T18:53:59.595432+00:00",
+    "status_code": 200,
+    "latency_ms": 4.83,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.753545,
+    "iso_time": "2026-10-11T18:53:59.753545+00:00",
+    "status_code": 200,
+    "latency_ms": 60.69,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.80363,
+    "iso_time": "2026-10-11T18:53:59.803630+00:00",
+    "status_code": 200,
+    "latency_ms": 7.63,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744839.91782,
+    "iso_time": "2026-10-11T18:53:59.917820+00:00",
+    "status_code": 200,
+    "latency_ms": 21.03,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627649.8293781,
-    "iso_time": "2026-10-10T10:20:49.829384+00:00",
+    "timestamp": 1791744840.16047,
+    "iso_time": "2026-10-11T18:54:00.160470+00:00",
     "status_code": 200,
-    "latency_ms": 139.08,
+    "latency_ms": 57.81,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627649.968485,
-    "iso_time": "2026-10-10T10:20:49.968487+00:00",
+    "timestamp": 1791744840.218009,
+    "iso_time": "2026-10-11T18:54:00.218009+00:00",
     "status_code": 200,
-    "latency_ms": 39.17,
+    "latency_ms": 12.39,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627650.070624,
-    "iso_time": "2026-10-10T10:20:50.070626+00:00",
+    "timestamp": 1791744840.3218272,
+    "iso_time": "2026-10-11T18:54:00.321827+00:00",
     "status_code": 200,
-    "latency_ms": 17.71,
+    "latency_ms": 12.13,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627650.172128,
-    "iso_time": "2026-10-10T10:20:50.172133+00:00",
+    "timestamp": 1791744840.5599701,
+    "iso_time": "2026-10-11T18:54:00.559970+00:00",
+    "status_code": 200,
+    "latency_ms": 44.38,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744840.625083,
+    "iso_time": "2026-10-11T18:54:00.625083+00:00",
+    "status_code": 200,
+    "latency_ms": 7.81,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744840.7276459,
+    "iso_time": "2026-10-11T18:54:00.727646+00:00",
+    "status_code": 200,
+    "latency_ms": 6.33,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744840.964409,
+    "iso_time": "2026-10-11T18:54:00.964409+00:00",
+    "status_code": 200,
+    "latency_ms": 38.76,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.037376,
+    "iso_time": "2026-10-11T18:54:01.037376+00:00",
+    "status_code": 200,
+    "latency_ms": 8.2,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.165084,
+    "iso_time": "2026-10-11T18:54:01.165084+00:00",
+    "status_code": 200,
+    "latency_ms": 33.01,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.375201,
+    "iso_time": "2026-10-11T18:54:01.375201+00:00",
+    "status_code": 200,
+    "latency_ms": 41.62,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.440277,
+    "iso_time": "2026-10-11T18:54:01.440277+00:00",
+    "status_code": 200,
+    "latency_ms": 6.67,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.541294,
+    "iso_time": "2026-10-11T18:54:01.541294+00:00",
+    "status_code": 200,
+    "latency_ms": 6.44,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.795152,
+    "iso_time": "2026-10-11T18:54:01.795152+00:00",
+    "status_code": 200,
+    "latency_ms": 51.86,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.855766,
+    "iso_time": "2026-10-11T18:54:01.855766+00:00",
+    "status_code": 200,
+    "latency_ms": 7.4,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744841.962398,
+    "iso_time": "2026-10-11T18:54:01.962398+00:00",
+    "status_code": 200,
+    "latency_ms": 8.97,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744842.1948411,
+    "iso_time": "2026-10-11T18:54:02.194841+00:00",
+    "status_code": 200,
+    "latency_ms": 34.39,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744842.272637,
+    "iso_time": "2026-10-11T18:54:02.272637+00:00",
+    "status_code": 200,
+    "latency_ms": 7.09,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744842.377813,
+    "iso_time": "2026-10-11T18:54:02.377813+00:00",
+    "status_code": 200,
+    "latency_ms": 10.08,
+    "is_error": false,
+    "event_tag": "EXP-002_active"
+  },
+  {
+    "timestamp": 1791744842.5035038,
+    "iso_time": "2026-10-11T18:54:02.503504+00:00",
     "status_code": 504,
-    "latency_ms": 2500.0,
+    "latency_ms": 2501.77,
     "is_error": true,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627652.674724,
-    "iso_time": "2026-10-10T10:20:52.674739+00:00",
+    "timestamp": 1791744842.600621,
+    "iso_time": "2026-10-11T18:54:02.600621+00:00",
     "status_code": 200,
-    "latency_ms": 74.75,
+    "latency_ms": 29.8,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627652.778924,
-    "iso_time": "2026-10-10T10:20:52.778931+00:00",
+    "timestamp": 1791744842.678584,
+    "iso_time": "2026-10-11T18:54:02.678584+00:00",
     "status_code": 200,
-    "latency_ms": 16.7,
+    "latency_ms": 6.38,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627652.8832011,
-    "iso_time": "2026-10-10T10:20:52.883204+00:00",
+    "timestamp": 1791744842.782243,
+    "iso_time": "2026-10-11T18:54:02.782243+00:00",
     "status_code": 200,
-    "latency_ms": 7.1,
+    "latency_ms": 6.48,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627652.9834151,
-    "iso_time": "2026-10-10T10:20:52.983421+00:00",
+    "timestamp": 1791744842.915652,
+    "iso_time": "2026-10-11T18:54:02.915652+00:00",
     "status_code": 200,
-    "latency_ms": 1468.47,
+    "latency_ms": 2500.87,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627654.4518971,
-    "iso_time": "2026-10-10T10:20:54.451898+00:00",
+    "timestamp": 1791744842.9158962,
+    "iso_time": "2026-10-11T18:54:02.915896+00:00",
     "status_code": 200,
-    "latency_ms": 261.83,
+    "latency_ms": 2091.27,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627654.7137432,
-    "iso_time": "2026-10-10T10:20:54.713745+00:00",
+    "timestamp": 1791744842.917472,
+    "iso_time": "2026-10-11T18:54:02.917472+00:00",
     "status_code": 200,
-    "latency_ms": 16.31,
+    "latency_ms": 1277.44,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627654.814241,
-    "iso_time": "2026-10-10T10:20:54.814244+00:00",
+    "timestamp": 1791744842.91885,
+    "iso_time": "2026-10-11T18:54:02.918850+00:00",
     "status_code": 200,
-    "latency_ms": 16.28,
+    "latency_ms": 861.21,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627654.917871,
-    "iso_time": "2026-10-10T10:20:54.917873+00:00",
+    "timestamp": 1791744842.9190688,
+    "iso_time": "2026-10-11T18:54:02.919069+00:00",
     "status_code": 200,
-    "latency_ms": 6.57,
+    "latency_ms": 42.37,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627655.0228858,
-    "iso_time": "2026-10-10T10:20:55.022897+00:00",
+    "timestamp": 1791744842.9236102,
+    "iso_time": "2026-10-11T18:54:02.923610+00:00",
     "status_code": 200,
-    "latency_ms": 57.37,
+    "latency_ms": 452.93,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627655.1282198,
-    "iso_time": "2026-10-10T10:20:55.128224+00:00",
+    "timestamp": 1791744842.923869,
+    "iso_time": "2026-10-11T18:54:02.923869+00:00",
     "status_code": 200,
-    "latency_ms": 173.86,
+    "latency_ms": 1691.11,
     "is_error": false,
     "event_tag": "EXP-002_active"
   },
   {
-    "timestamp": 1791627655.30214,
-    "iso_time": "2026-10-10T10:20:55.302144+00:00",
+    "timestamp": 1791744843.005858,
+    "iso_time": "2026-10-11T18:54:03.005858+00:00",
     "status_code": 200,
-    "latency_ms": 40.93,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627655.4023302,
-    "iso_time": "2026-10-10T10:20:55.402338+00:00",
-    "status_code": 200,
-    "latency_ms": 15.34,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627655.5073762,
-    "iso_time": "2026-10-10T10:20:55.507386+00:00",
-    "status_code": 200,
-    "latency_ms": 158.19,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627655.665609,
-    "iso_time": "2026-10-10T10:20:55.665611+00:00",
-    "status_code": 200,
-    "latency_ms": 89.4,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627655.767017,
-    "iso_time": "2026-10-10T10:20:55.767022+00:00",
-    "status_code": 200,
-    "latency_ms": 220.5,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627655.987576,
-    "iso_time": "2026-10-10T10:20:55.987578+00:00",
-    "status_code": 200,
-    "latency_ms": 42.18,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627656.088108,
-    "iso_time": "2026-10-10T10:20:56.088111+00:00",
-    "status_code": 200,
-    "latency_ms": 326.4,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627656.414538,
-    "iso_time": "2026-10-10T10:20:56.414541+00:00",
-    "status_code": 200,
-    "latency_ms": 21.48,
-    "is_error": false,
-    "event_tag": "EXP-002_active"
-  },
-  {
-    "timestamp": 1791627656.5193448,
-    "iso_time": "2026-10-10T10:20:56.519352+00:00",
-    "status_code": 200,
-    "latency_ms": 30.08,
+    "latency_ms": 24.1,
     "is_error": false,
     "event_tag": "EXP-002_recovery"
   },
   {
-    "timestamp": 1791627656.621286,
-    "iso_time": "2026-10-10T10:20:56.621297+00:00",
+    "timestamp": 1791744843.092042,
+    "iso_time": "2026-10-11T18:54:03.092042+00:00",
     "status_code": 200,
-    "latency_ms": 50.99,
+    "latency_ms": 7.31,
     "is_error": false,
     "event_tag": "EXP-002_recovery"
   },
   {
-    "timestamp": 1791627656.721601,
-    "iso_time": "2026-10-10T10:20:56.721614+00:00",
+    "timestamp": 1791744843.2040792,
+    "iso_time": "2026-10-11T18:54:03.204079+00:00",
     "status_code": 200,
-    "latency_ms": 145.51,
+    "latency_ms": 18.26,
     "is_error": false,
     "event_tag": "EXP-002_recovery"
   },
   {
-    "timestamp": 1791627656.867177,
-    "iso_time": "2026-10-10T10:20:56.867231+00:00",
+    "timestamp": 1791744843.294864,
+    "iso_time": "2026-10-11T18:54:03.294864+00:00",
     "status_code": 200,
-    "latency_ms": 40.67,
+    "latency_ms": 7.11,
     "is_error": false,
     "event_tag": "EXP-002_recovery"
   },
   {
-    "timestamp": 1791627656.968395,
-    "iso_time": "2026-10-10T10:20:56.968400+00:00",
+    "timestamp": 1791744843.480638,
+    "iso_time": "2026-10-11T18:54:03.480638+00:00",
     "status_code": 200,
-    "latency_ms": 37.78,
+    "latency_ms": 91.84,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744843.5003378,
+    "iso_time": "2026-10-11T18:54:03.500338+00:00",
+    "status_code": 200,
+    "latency_ms": 6.42,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744843.611678,
+    "iso_time": "2026-10-11T18:54:03.611678+00:00",
+    "status_code": 200,
+    "latency_ms": 14.03,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744843.706157,
+    "iso_time": "2026-10-11T18:54:03.706157+00:00",
+    "status_code": 200,
+    "latency_ms": 4.62,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744843.87576,
+    "iso_time": "2026-10-11T18:54:03.875760+00:00",
+    "status_code": 200,
+    "latency_ms": 71.89,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744843.9119518,
+    "iso_time": "2026-10-11T18:54:03.911952+00:00",
+    "status_code": 200,
+    "latency_ms": 6.18,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.014035,
+    "iso_time": "2026-10-11T18:54:04.014035+00:00",
+    "status_code": 200,
+    "latency_ms": 7.34,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.1143968,
+    "iso_time": "2026-10-11T18:54:04.114397+00:00",
+    "status_code": 200,
+    "latency_ms": 6.23,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.2710311,
+    "iso_time": "2026-10-11T18:54:04.271031+00:00",
+    "status_code": 200,
+    "latency_ms": 59.23,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.327917,
+    "iso_time": "2026-10-11T18:54:04.327917+00:00",
+    "status_code": 200,
+    "latency_ms": 13.39,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.522739,
+    "iso_time": "2026-10-11T18:54:04.522739+00:00",
+    "status_code": 200,
+    "latency_ms": 6.75,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.531327,
+    "iso_time": "2026-10-11T18:54:04.531327+00:00",
+    "status_code": 200,
+    "latency_ms": 115.65,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.888819,
+    "iso_time": "2026-10-11T18:54:04.888819+00:00",
+    "status_code": 200,
+    "latency_ms": 165.88,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744844.9498491,
+    "iso_time": "2026-10-11T18:54:04.949849+00:00",
+    "status_code": 200,
+    "latency_ms": 25.93,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.138036,
+    "iso_time": "2026-10-11T18:54:05.138036+00:00",
+    "status_code": 200,
+    "latency_ms": 13.16,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.190482,
+    "iso_time": "2026-10-11T18:54:05.190482+00:00",
+    "status_code": 200,
+    "latency_ms": 367.13,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.356825,
+    "iso_time": "2026-10-11T18:54:05.356825+00:00",
+    "status_code": 200,
+    "latency_ms": 25.63,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.405177,
+    "iso_time": "2026-10-11T18:54:05.405177+00:00",
+    "status_code": 200,
+    "latency_ms": 179.24,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.558363,
+    "iso_time": "2026-10-11T18:54:05.558363+00:00",
+    "status_code": 200,
+    "latency_ms": 22.36,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.070997,
-    "iso_time": "2026-10-10T10:20:57.071004+00:00",
+    "timestamp": 1791744845.639851,
+    "iso_time": "2026-10-11T18:54:05.639851+00:00",
     "status_code": 200,
-    "latency_ms": 23.93,
+    "latency_ms": 615.66,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.640325,
+    "iso_time": "2026-10-11T18:54:05.640325+00:00",
+    "status_code": 200,
+    "latency_ms": 1022.68,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.7492118,
+    "iso_time": "2026-10-11T18:54:05.749212+00:00",
+    "status_code": 200,
+    "latency_ms": 10.34,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.173889,
-    "iso_time": "2026-10-10T10:20:57.173893+00:00",
+    "timestamp": 1791744845.7633128,
+    "iso_time": "2026-10-11T18:54:05.763313+00:00",
     "status_code": 200,
-    "latency_ms": 109.04,
+    "latency_ms": 125.65,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.282954,
-    "iso_time": "2026-10-10T10:20:57.282956+00:00",
+    "timestamp": 1791744845.763573,
+    "iso_time": "2026-10-11T18:54:05.763573+00:00",
     "status_code": 200,
-    "latency_ms": 13.09,
+    "latency_ms": 327.79,
+    "is_error": false,
+    "event_tag": "EXP-002_recovery"
+  },
+  {
+    "timestamp": 1791744845.965385,
+    "iso_time": "2026-10-11T18:54:05.965385+00:00",
+    "status_code": 200,
+    "latency_ms": 19.78,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.3868349,
-    "iso_time": "2026-10-10T10:20:57.386840+00:00",
+    "timestamp": 1791744846.036513,
+    "iso_time": "2026-10-11T18:54:06.036513+00:00",
     "status_code": 200,
-    "latency_ms": 68.89,
+    "latency_ms": 193.06,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.4872751,
-    "iso_time": "2026-10-10T10:20:57.487281+00:00",
+    "timestamp": 1791744846.121058,
+    "iso_time": "2026-10-11T18:54:06.121058+00:00",
     "status_code": 200,
-    "latency_ms": 25.97,
+    "latency_ms": 73.45,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.5923781,
-    "iso_time": "2026-10-10T10:20:57.592388+00:00",
+    "timestamp": 1791744846.164544,
+    "iso_time": "2026-10-11T18:54:06.164544+00:00",
     "status_code": 200,
-    "latency_ms": 160.13,
+    "latency_ms": 13.37,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.752547,
-    "iso_time": "2026-10-10T10:20:57.752549+00:00",
+    "timestamp": 1791744846.3630238,
+    "iso_time": "2026-10-11T18:54:06.363024+00:00",
     "status_code": 200,
-    "latency_ms": 33.8,
+    "latency_ms": 9.54,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.8543,
-    "iso_time": "2026-10-10T10:20:57.854304+00:00",
+    "timestamp": 1791744846.402852,
+    "iso_time": "2026-10-11T18:54:06.402852+00:00",
     "status_code": 200,
-    "latency_ms": 11.84,
+    "latency_ms": 151.1,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627657.954338,
-    "iso_time": "2026-10-10T10:20:57.954343+00:00",
+    "timestamp": 1791744846.477843,
+    "iso_time": "2026-10-11T18:54:06.477843+00:00",
     "status_code": 200,
-    "latency_ms": 14.26,
+    "latency_ms": 21.17,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.0544782,
-    "iso_time": "2026-10-10T10:20:58.054483+00:00",
+    "timestamp": 1791744846.595705,
+    "iso_time": "2026-10-11T18:54:06.595705+00:00",
     "status_code": 200,
-    "latency_ms": 155.14,
+    "latency_ms": 33.94,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.209653,
-    "iso_time": "2026-10-10T10:20:58.209656+00:00",
+    "timestamp": 1791744846.7707741,
+    "iso_time": "2026-10-11T18:54:06.770774+00:00",
     "status_code": 200,
-    "latency_ms": 18.84,
+    "latency_ms": 108.75,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.3103092,
-    "iso_time": "2026-10-10T10:20:58.310318+00:00",
+    "timestamp": 1791744846.770965,
+    "iso_time": "2026-10-11T18:54:06.770965+00:00",
     "status_code": 200,
-    "latency_ms": 19.62,
+    "latency_ms": 8.31,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.410339,
-    "iso_time": "2026-10-10T10:20:58.410347+00:00",
+    "timestamp": 1791744846.8920698,
+    "iso_time": "2026-10-11T18:54:06.892070+00:00",
     "status_code": 200,
-    "latency_ms": 10.36,
+    "latency_ms": 29.19,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.511911,
-    "iso_time": "2026-10-10T10:20:58.511916+00:00",
+    "timestamp": 1791744846.972658,
+    "iso_time": "2026-10-11T18:54:06.972658+00:00",
     "status_code": 200,
-    "latency_ms": 82.4,
+    "latency_ms": 4.66,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.614402,
-    "iso_time": "2026-10-10T10:20:58.614412+00:00",
+    "timestamp": 1791744847.171712,
+    "iso_time": "2026-10-11T18:54:07.171712+00:00",
     "status_code": 200,
-    "latency_ms": 33.92,
+    "latency_ms": 103.15,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.7181592,
-    "iso_time": "2026-10-10T10:20:58.718164+00:00",
+    "timestamp": 1791744847.1909592,
+    "iso_time": "2026-10-11T18:54:07.190959+00:00",
     "status_code": 200,
-    "latency_ms": 38.05,
+    "latency_ms": 19.59,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.821441,
-    "iso_time": "2026-10-10T10:20:58.821454+00:00",
+    "timestamp": 1791744847.308894,
+    "iso_time": "2026-10-11T18:54:07.308894+00:00",
     "status_code": 200,
-    "latency_ms": 22.75,
+    "latency_ms": 32.52,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627658.925663,
-    "iso_time": "2026-10-10T10:20:58.925667+00:00",
+    "timestamp": 1791744847.382787,
+    "iso_time": "2026-10-11T18:54:07.382787+00:00",
     "status_code": 200,
-    "latency_ms": 1996.19,
+    "latency_ms": 5.95,
     "is_error": false,
     "event_tag": null
   },
   {
-    "timestamp": 1791627660.921951,
-    "iso_time": "2026-10-10T10:21:00.921955+00:00",
+    "timestamp": 1791744847.5264819,
+    "iso_time": "2026-10-11T18:54:07.526482+00:00",
     "status_code": 200,
-    "latency_ms": 93.56,
+    "latency_ms": 47.62,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744847.587177,
+    "iso_time": "2026-10-11T18:54:07.587177+00:00",
+    "status_code": 200,
+    "latency_ms": 7.4,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744847.707156,
+    "iso_time": "2026-10-11T18:54:07.707156+00:00",
+    "status_code": 200,
+    "latency_ms": 26.31,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744847.7872121,
+    "iso_time": "2026-10-11T18:54:07.787212+00:00",
+    "status_code": 200,
+    "latency_ms": 4.39,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744847.996151,
+    "iso_time": "2026-10-11T18:54:07.996151+00:00",
+    "status_code": 200,
+    "latency_ms": 7.35,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.0033479,
+    "iso_time": "2026-10-11T18:54:08.003348+00:00",
+    "status_code": 200,
+    "latency_ms": 115.46,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.12157,
+    "iso_time": "2026-10-11T18:54:08.121570+00:00",
+    "status_code": 200,
+    "latency_ms": 27.68,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.2012002,
+    "iso_time": "2026-10-11T18:54:08.201200+00:00",
+    "status_code": 200,
+    "latency_ms": 4.56,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.363765,
+    "iso_time": "2026-10-11T18:54:08.363765+00:00",
+    "status_code": 200,
+    "latency_ms": 63.88,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.40903,
+    "iso_time": "2026-10-11T18:54:08.409030+00:00",
+    "status_code": 200,
+    "latency_ms": 8.38,
+    "is_error": false,
+    "event_tag": null
+  },
+  {
+    "timestamp": 1791744848.515278,
+    "iso_time": "2026-10-11T18:54:08.515278+00:00",
+    "status_code": 200,
+    "latency_ms": 14.09,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.022443,
-    "iso_time": "2026-10-10T10:21:01.022448+00:00",
+    "timestamp": 1791744848.611443,
+    "iso_time": "2026-10-11T18:54:08.611443+00:00",
     "status_code": 200,
-    "latency_ms": 71.09,
+    "latency_ms": 5.47,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.125695,
-    "iso_time": "2026-10-10T10:21:01.125705+00:00",
+    "timestamp": 1791744848.81809,
+    "iso_time": "2026-10-11T18:54:08.818090+00:00",
     "status_code": 200,
-    "latency_ms": 168.24,
+    "latency_ms": 9.72,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.293982,
-    "iso_time": "2026-10-10T10:21:01.293986+00:00",
+    "timestamp": 1791744848.860945,
+    "iso_time": "2026-10-11T18:54:08.860945+00:00",
     "status_code": 200,
-    "latency_ms": 409.18,
+    "latency_ms": 153.05,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.703252,
-    "iso_time": "2026-10-10T10:21:01.703257+00:00",
+    "timestamp": 1791744848.9189918,
+    "iso_time": "2026-10-11T18:54:08.918992+00:00",
     "status_code": 200,
-    "latency_ms": 90.77,
+    "latency_ms": 10.51,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.804276,
-    "iso_time": "2026-10-10T10:21:01.804280+00:00",
+    "timestamp": 1791744849.0199099,
+    "iso_time": "2026-10-11T18:54:09.019910+00:00",
     "status_code": 200,
-    "latency_ms": 18.73,
+    "latency_ms": 8.11,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627661.905461,
-    "iso_time": "2026-10-10T10:21:01.905465+00:00",
+    "timestamp": 1791744849.2254012,
+    "iso_time": "2026-10-11T18:54:09.225401+00:00",
+    "status_code": 200,
+    "latency_ms": 9.4,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744849.330519,
+    "iso_time": "2026-10-11T18:54:09.330519+00:00",
+    "status_code": 200,
+    "latency_ms": 13.18,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744849.426452,
+    "iso_time": "2026-10-11T18:54:09.426452+00:00",
+    "status_code": 200,
+    "latency_ms": 7.82,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744849.636171,
+    "iso_time": "2026-10-11T18:54:09.636171+00:00",
+    "status_code": 200,
+    "latency_ms": 15.49,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744849.835999,
+    "iso_time": "2026-10-11T18:54:09.835999+00:00",
+    "status_code": 200,
+    "latency_ms": 14.2,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744849.971401,
+    "iso_time": "2026-10-11T18:54:09.971401+00:00",
+    "status_code": 200,
+    "latency_ms": 249.71,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.209554,
+    "iso_time": "2026-10-11T18:54:10.209554+00:00",
+    "status_code": 200,
+    "latency_ms": 181.4,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.240652,
+    "iso_time": "2026-10-11T18:54:10.240652+00:00",
+    "status_code": 200,
+    "latency_ms": 9.79,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.270338,
+    "iso_time": "2026-10-11T18:54:10.270338+00:00",
+    "status_code": 200,
+    "latency_ms": 141.06,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.4644759,
+    "iso_time": "2026-10-11T18:54:10.464476+00:00",
+    "status_code": 200,
+    "latency_ms": 30.95,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.582994,
+    "iso_time": "2026-10-11T18:54:10.582994+00:00",
+    "status_code": 200,
+    "latency_ms": 44.42,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.585643,
+    "iso_time": "2026-10-11T18:54:10.585643+00:00",
+    "status_code": 200,
+    "latency_ms": 1473.49,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.64711,
+    "iso_time": "2026-10-11T18:54:10.647110+00:00",
+    "status_code": 200,
+    "latency_ms": 7.41,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.7972748,
+    "iso_time": "2026-10-11T18:54:10.797275+00:00",
+    "status_code": 200,
+    "latency_ms": 1277.48,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.854316,
+    "iso_time": "2026-10-11T18:54:10.854316+00:00",
+    "status_code": 200,
+    "latency_ms": 8.65,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744850.985736,
+    "iso_time": "2026-10-11T18:54:10.985736+00:00",
+    "status_code": 200,
+    "latency_ms": 37.9,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.0594308,
+    "iso_time": "2026-10-11T18:54:11.059431+00:00",
+    "status_code": 200,
+    "latency_ms": 6.5,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.266919,
+    "iso_time": "2026-10-11T18:54:11.266919+00:00",
+    "status_code": 200,
+    "latency_ms": 9.03,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.315627,
+    "iso_time": "2026-10-11T18:54:11.315627+00:00",
+    "status_code": 200,
+    "latency_ms": 1389.57,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.368654,
+    "iso_time": "2026-10-11T18:54:11.368654+00:00",
+    "status_code": 200,
+    "latency_ms": 1035.43,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.3747892,
+    "iso_time": "2026-10-11T18:54:11.374789+00:00",
+    "status_code": 200,
+    "latency_ms": 11.8,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.476933,
+    "iso_time": "2026-10-11T18:54:11.476933+00:00",
+    "status_code": 200,
+    "latency_ms": 8.82,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.684387,
+    "iso_time": "2026-10-11T18:54:11.684387+00:00",
+    "status_code": 200,
+    "latency_ms": 7.64,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.783804,
+    "iso_time": "2026-10-11T18:54:11.783804+00:00",
+    "status_code": 200,
+    "latency_ms": 1039.98,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.7947211,
+    "iso_time": "2026-10-11T18:54:11.794721+00:00",
+    "status_code": 200,
+    "latency_ms": 17.04,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744851.888336,
+    "iso_time": "2026-10-11T18:54:11.888336+00:00",
+    "status_code": 200,
+    "latency_ms": 5.85,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.0952709,
+    "iso_time": "2026-10-11T18:54:12.095271+00:00",
+    "status_code": 200,
+    "latency_ms": 7.36,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.219499,
+    "iso_time": "2026-10-11T18:54:12.219499+00:00",
+    "status_code": 200,
+    "latency_ms": 1062.62,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.2454221,
+    "iso_time": "2026-10-11T18:54:12.245422+00:00",
+    "status_code": 200,
+    "latency_ms": 55.75,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.295522,
+    "iso_time": "2026-10-11T18:54:12.295522+00:00",
+    "status_code": 200,
+    "latency_ms": 4.4,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.500638,
+    "iso_time": "2026-10-11T18:54:12.500638+00:00",
+    "status_code": 200,
+    "latency_ms": 7.09,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.613621,
+    "iso_time": "2026-10-11T18:54:12.613621+00:00",
+    "status_code": 200,
+    "latency_ms": 19.91,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.648842,
+    "iso_time": "2026-10-11T18:54:12.648842+00:00",
+    "status_code": 200,
+    "latency_ms": 1076.12,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.7050261,
+    "iso_time": "2026-10-11T18:54:12.705026+00:00",
+    "status_code": 200,
+    "latency_ms": 8.3,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744852.90993,
+    "iso_time": "2026-10-11T18:54:12.909930+00:00",
+    "status_code": 200,
+    "latency_ms": 10.09,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.0336661,
+    "iso_time": "2026-10-11T18:54:13.033666+00:00",
+    "status_code": 200,
+    "latency_ms": 28.72,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.043068,
+    "iso_time": "2026-10-11T18:54:13.043068+00:00",
+    "status_code": 200,
+    "latency_ms": 1055.69,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.112222,
+    "iso_time": "2026-10-11T18:54:13.112222+00:00",
+    "status_code": 200,
+    "latency_ms": 4.38,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.3237498,
+    "iso_time": "2026-10-11T18:54:13.323750+00:00",
+    "status_code": 200,
+    "latency_ms": 7.8,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.435979,
+    "iso_time": "2026-10-11T18:54:13.435979+00:00",
+    "status_code": 200,
+    "latency_ms": 18.77,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.533139,
+    "iso_time": "2026-10-11T18:54:13.533139+00:00",
+    "status_code": 200,
+    "latency_ms": 15.31,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.605696,
+    "iso_time": "2026-10-11T18:54:13.605696+00:00",
+    "status_code": 200,
+    "latency_ms": 1212.96,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.7374022,
+    "iso_time": "2026-10-11T18:54:13.737402+00:00",
+    "status_code": 200,
+    "latency_ms": 12.68,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.842514,
+    "iso_time": "2026-10-11T18:54:13.842514+00:00",
+    "status_code": 200,
+    "latency_ms": 16.36,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.86361,
+    "iso_time": "2026-10-11T18:54:13.863610+00:00",
+    "status_code": 200,
+    "latency_ms": 1064.83,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744853.932883,
+    "iso_time": "2026-10-11T18:54:13.932883+00:00",
+    "status_code": 200,
+    "latency_ms": 5.01,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744854.146147,
+    "iso_time": "2026-10-11T18:54:14.146147+00:00",
+    "status_code": 200,
+    "latency_ms": 10.65,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744854.260405,
+    "iso_time": "2026-10-11T18:54:14.260405+00:00",
+    "status_code": 200,
+    "latency_ms": 19.63,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744854.319919,
+    "iso_time": "2026-10-11T18:54:14.319919+00:00",
+    "status_code": 200,
+    "latency_ms": 1107.21,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744854.351021,
+    "iso_time": "2026-10-11T18:54:14.351021+00:00",
+    "status_code": 200,
+    "latency_ms": 9.48,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744854.5539699,
+    "iso_time": "2026-10-11T18:54:14.553970+00:00",
     "status_code": 200,
     "latency_ms": 7.24,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627662.0062761,
-    "iso_time": "2026-10-10T10:21:02.006280+00:00",
+    "timestamp": 1791744854.720533,
+    "iso_time": "2026-10-11T18:54:14.720533+00:00",
     "status_code": 200,
-    "latency_ms": 2299.85,
+    "latency_ms": 1100.91,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627664.3108559,
-    "iso_time": "2026-10-10T10:21:04.310885+00:00",
+    "timestamp": 1791744854.726207,
+    "iso_time": "2026-10-11T18:54:14.726207+00:00",
     "status_code": 200,
-    "latency_ms": 91.28,
+    "latency_ms": 78.47,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627664.411241,
-    "iso_time": "2026-10-10T10:21:04.411247+00:00",
+    "timestamp": 1791744854.753035,
+    "iso_time": "2026-10-11T18:54:14.753035+00:00",
     "status_code": 200,
-    "latency_ms": 282.18,
+    "latency_ms": 5.19,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627664.694218,
-    "iso_time": "2026-10-10T10:21:04.694221+00:00",
+    "timestamp": 1791744854.961053,
+    "iso_time": "2026-10-11T18:54:14.961053+00:00",
     "status_code": 200,
-    "latency_ms": 86.73,
+    "latency_ms": 7.88,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627664.7956312,
-    "iso_time": "2026-10-10T10:21:04.795637+00:00",
-    "status_code": 504,
-    "latency_ms": 2500.0,
-    "is_error": true,
-    "event_tag": "EXP-003_active"
-  },
-  {
-    "timestamp": 1791627667.3062341,
-    "iso_time": "2026-10-10T10:21:07.306238+00:00",
+    "timestamp": 1791744855.1650612,
+    "iso_time": "2026-10-11T18:54:15.165061+00:00",
     "status_code": 200,
-    "latency_ms": 174.13,
+    "latency_ms": 10.16,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627667.480793,
-    "iso_time": "2026-10-10T10:21:07.480796+00:00",
+    "timestamp": 1791744855.37215,
+    "iso_time": "2026-10-11T18:54:15.372150+00:00",
     "status_code": 200,
-    "latency_ms": 290.26,
+    "latency_ms": 10.56,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627667.771719,
-    "iso_time": "2026-10-10T10:21:07.771722+00:00",
+    "timestamp": 1791744855.387098,
+    "iso_time": "2026-10-11T18:54:15.387098+00:00",
     "status_code": 200,
-    "latency_ms": 41.05,
+    "latency_ms": 333.33,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627667.876967,
-    "iso_time": "2026-10-10T10:21:07.876972+00:00",
+    "timestamp": 1791744855.5650718,
+    "iso_time": "2026-10-11T18:54:15.565072+00:00",
     "status_code": 200,
-    "latency_ms": 2284.23,
+    "latency_ms": 100.51,
     "is_error": false,
     "event_tag": "EXP-003_active"
   },
   {
-    "timestamp": 1791627670.165653,
-    "iso_time": "2026-10-10T10:21:10.165656+00:00",
+    "timestamp": 1791744855.571962,
+    "iso_time": "2026-10-11T18:54:15.571962+00:00",
     "status_code": 200,
-    "latency_ms": 40.09,
+    "latency_ms": 6.77,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.586734,
+    "iso_time": "2026-10-11T18:54:15.586734+00:00",
+    "status_code": 200,
+    "latency_ms": 1556.01,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.694108,
+    "iso_time": "2026-10-11T18:54:15.694108+00:00",
+    "status_code": 200,
+    "latency_ms": 1247.5,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.773616,
+    "iso_time": "2026-10-11T18:54:15.773616+00:00",
+    "status_code": 200,
+    "latency_ms": 7.82,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.920924,
+    "iso_time": "2026-10-11T18:54:15.920924+00:00",
+    "status_code": 200,
+    "latency_ms": 54.97,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.9735801,
+    "iso_time": "2026-10-11T18:54:15.973580+00:00",
+    "status_code": 200,
+    "latency_ms": 7.13,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744855.9871402,
+    "iso_time": "2026-10-11T18:54:15.987140+00:00",
+    "status_code": 200,
+    "latency_ms": 1134.22,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744856.185487,
+    "iso_time": "2026-10-11T18:54:16.185487+00:00",
+    "status_code": 200,
+    "latency_ms": 10.65,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744856.3027241,
+    "iso_time": "2026-10-11T18:54:16.302724+00:00",
+    "status_code": 200,
+    "latency_ms": 22.8,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744856.3856452,
+    "iso_time": "2026-10-11T18:54:16.385645+00:00",
+    "status_code": 200,
+    "latency_ms": 5.26,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.268922,
-    "iso_time": "2026-10-10T10:21:10.268926+00:00",
+    "timestamp": 1791744856.618243,
+    "iso_time": "2026-10-11T18:54:16.618243+00:00",
     "status_code": 200,
-    "latency_ms": 31.43,
+    "latency_ms": 33.44,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.369997,
-    "iso_time": "2026-10-10T10:21:10.370004+00:00",
+    "timestamp": 1791744856.7932212,
+    "iso_time": "2026-10-11T18:54:16.793221+00:00",
     "status_code": 200,
-    "latency_ms": 19.83,
+    "latency_ms": 7.5,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.4704242,
-    "iso_time": "2026-10-10T10:21:10.470428+00:00",
+    "timestamp": 1791744856.981127,
+    "iso_time": "2026-10-11T18:54:16.981127+00:00",
     "status_code": 200,
-    "latency_ms": 49.97,
+    "latency_ms": 1722.19,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744856.9939158,
+    "iso_time": "2026-10-11T18:54:16.993916+00:00",
+    "status_code": 200,
+    "latency_ms": 922.96,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744857.001376,
+    "iso_time": "2026-10-11T18:54:17.001376+00:00",
+    "status_code": 200,
+    "latency_ms": 316.32,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.5712051,
-    "iso_time": "2026-10-10T10:21:10.571210+00:00",
+    "timestamp": 1791744857.0018911,
+    "iso_time": "2026-10-11T18:54:17.001891+00:00",
     "status_code": 200,
-    "latency_ms": 20.5,
+    "latency_ms": 13.04,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.67384,
-    "iso_time": "2026-10-10T10:21:10.673860+00:00",
+    "timestamp": 1791744857.0020401,
+    "iso_time": "2026-10-11T18:54:17.002040+00:00",
     "status_code": 200,
-    "latency_ms": 67.32,
+    "latency_ms": 517.32,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.77465,
-    "iso_time": "2026-10-10T10:21:10.774654+00:00",
+    "timestamp": 1791744857.002176,
+    "iso_time": "2026-10-11T18:54:17.002176+00:00",
     "status_code": 200,
-    "latency_ms": 12.33,
+    "latency_ms": 1336.85,
+    "is_error": false,
+    "event_tag": "EXP-003_active"
+  },
+  {
+    "timestamp": 1791744857.074302,
+    "iso_time": "2026-10-11T18:54:17.074302+00:00",
+    "status_code": 200,
+    "latency_ms": 187.51,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.879822,
-    "iso_time": "2026-10-10T10:21:10.879827+00:00",
+    "timestamp": 1791744857.110902,
+    "iso_time": "2026-10-11T18:54:17.110902+00:00",
     "status_code": 200,
-    "latency_ms": 106.7,
+    "latency_ms": 21.88,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627670.986742,
-    "iso_time": "2026-10-10T10:21:10.986745+00:00",
+    "timestamp": 1791744857.199431,
+    "iso_time": "2026-10-11T18:54:17.199431+00:00",
     "status_code": 200,
-    "latency_ms": 26.7,
+    "latency_ms": 6.53,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   },
   {
-    "timestamp": 1791627671.090097,
-    "iso_time": "2026-10-10T10:21:11.090105+00:00",
+    "timestamp": 1791744857.4035578,
+    "iso_time": "2026-10-11T18:54:17.403558+00:00",
     "status_code": 200,
-    "latency_ms": 22.69,
+    "latency_ms": 7.81,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.403894,
+    "iso_time": "2026-10-11T18:54:17.403894+00:00",
+    "status_code": 200,
+    "latency_ms": 110.08,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.51265,
+    "iso_time": "2026-10-11T18:54:17.512650+00:00",
+    "status_code": 200,
+    "latency_ms": 16.21,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.606527,
+    "iso_time": "2026-10-11T18:54:17.606527+00:00",
+    "status_code": 200,
+    "latency_ms": 9.69,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.798984,
+    "iso_time": "2026-10-11T18:54:17.798984+00:00",
+    "status_code": 200,
+    "latency_ms": 101.27,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.8102531,
+    "iso_time": "2026-10-11T18:54:17.810253+00:00",
+    "status_code": 200,
+    "latency_ms": 12.04,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744857.923881,
+    "iso_time": "2026-10-11T18:54:17.923881+00:00",
+    "status_code": 200,
+    "latency_ms": 22.98,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.0080729,
+    "iso_time": "2026-10-11T18:54:18.008073+00:00",
+    "status_code": 200,
+    "latency_ms": 7.02,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.216788,
+    "iso_time": "2026-10-11T18:54:18.216788+00:00",
+    "status_code": 200,
+    "latency_ms": 11.1,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.238868,
+    "iso_time": "2026-10-11T18:54:18.238868+00:00",
+    "status_code": 200,
+    "latency_ms": 135.92,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.322874,
+    "iso_time": "2026-10-11T18:54:18.322874+00:00",
+    "status_code": 200,
+    "latency_ms": 17.06,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.4132411,
+    "iso_time": "2026-10-11T18:54:18.413241+00:00",
+    "status_code": 200,
+    "latency_ms": 6.31,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.5668259,
+    "iso_time": "2026-10-11T18:54:18.566826+00:00",
+    "status_code": 200,
+    "latency_ms": 58.94,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.616989,
+    "iso_time": "2026-10-11T18:54:18.616989+00:00",
+    "status_code": 200,
+    "latency_ms": 7.3,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.72623,
+    "iso_time": "2026-10-11T18:54:18.726230+00:00",
+    "status_code": 200,
+    "latency_ms": 11.41,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.820696,
+    "iso_time": "2026-10-11T18:54:18.820696+00:00",
+    "status_code": 200,
+    "latency_ms": 4.81,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744858.996639,
+    "iso_time": "2026-10-11T18:54:18.996639+00:00",
+    "status_code": 200,
+    "latency_ms": 75.94,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.0311801,
+    "iso_time": "2026-10-11T18:54:19.031180+00:00",
+    "status_code": 200,
+    "latency_ms": 6.04,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.1374772,
+    "iso_time": "2026-10-11T18:54:19.137477+00:00",
+    "status_code": 200,
+    "latency_ms": 10.75,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.235737,
+    "iso_time": "2026-10-11T18:54:19.235737+00:00",
+    "status_code": 200,
+    "latency_ms": 4.78,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.377543,
+    "iso_time": "2026-10-11T18:54:19.377543+00:00",
+    "status_code": 200,
+    "latency_ms": 42.6,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.443126,
+    "iso_time": "2026-10-11T18:54:19.443126+00:00",
+    "status_code": 200,
+    "latency_ms": 7.43,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.5446248,
+    "iso_time": "2026-10-11T18:54:19.544625+00:00",
+    "status_code": 200,
+    "latency_ms": 8.73,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.642303,
+    "iso_time": "2026-10-11T18:54:19.642303+00:00",
+    "status_code": 200,
+    "latency_ms": 6.33,
+    "is_error": false,
+    "event_tag": "EXP-003_recovery"
+  },
+  {
+    "timestamp": 1791744859.786527,
+    "iso_time": "2026-10-11T18:54:19.786527+00:00",
+    "status_code": 200,
+    "latency_ms": 50.37,
     "is_error": false,
     "event_tag": "EXP-003_recovery"
   }

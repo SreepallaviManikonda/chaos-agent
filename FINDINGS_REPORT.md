@@ -1,6 +1,6 @@
 # Chaos resilience audit
 
-Historical audit; score recalculated from saved summary metrics. Rollback timing and recovery estimates are unverified. No new experiment was run. 3 of 3 experiments produced evaluable results. Score: 46. Findings describe aggregate probe observations; architectural causes remain hypotheses.
+3 of 3 experiments produced evaluable results. Score: 36. Findings describe aggregate probe observations; architectural causes remain hypotheses.
 
 Score = max(15, 100 − 18×K − 10×E − 6×M). Penalties are additive.
 K: rollback triggered; E: peak probe errors >15%; M: recovery >4s or unconfirmed at timeout.
@@ -8,15 +8,15 @@ Not-run and failed injections are excluded. No evaluable experiments means no sc
 
 ## Baseline
 
-{"provenance": "historical baseline", "p50_latency_ms": 31.3, "p95_latency_ms": 464.9, "error_rate": 0, "total_requests": 30}
+{"total_requests": 48, "error_rate": 0.0, "p50_latency_ms": 10.24, "p95_latency_ms": 123.85, "avg_latency_ms": 41.89}
 
 ## Experiments
 
 | Target | Status | Peak p95 ms | Peak errors | Rollback seconds | Recovery seconds | Recovery confirmed |
 |---|---|---:|---:|---:|---:|---|
-| cart | aborted | 2500.0 | 10.0% | None | 0.51 | False |
-| valkey-cart | aborted | 2500.0 | 10.0% | None | 0.1 | False |
-| recommendation | aborted | 1996.2 | 0.0% | None | 0.51 | False |
+| cart | aborted | 2501.9 | 22.2% | 0.0418 | 2.52 | True |
+| valkey-cart | aborted | 2501.8 | 12.5% | 0.0282 | 2.52 | True |
+| recommendation | aborted | 1556.0 | 0.0% | 0.6418 | 3.51 | True |
 
 ## Evidence limits
 
@@ -29,13 +29,13 @@ Network faults require the configured netshoot image and an unmodified qdisc. Ex
 ## Findings
 
 ### cart: Observed degradation during fault
-Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.
+Aggregate probes reached p95 2501.9ms and error rate 22.2%. Root cause and affected user journeys require further investigation.
 Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established.
 
 ### valkey-cart: Observed degradation during fault
-Aggregate probes reached p95 2500.0ms and error rate 10.0%. Root cause and affected user journeys require further investigation.
+Aggregate probes reached p95 2501.8ms and error rate 12.5%. Root cause and affected user journeys require further investigation.
 Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established.
 
 ### recommendation: Observed degradation during fault
-Aggregate probes reached p95 1996.2ms and error rate 0.0%. Root cause and affected user journeys require further investigation.
+Aggregate probes reached p95 1556.0ms and error rate 0.0%. Root cause and affected user journeys require further investigation.
 Probe degradation observed; session loss, revenue impact, and missing circuit breakers are not established.

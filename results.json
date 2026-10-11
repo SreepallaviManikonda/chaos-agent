@@ -1,421 +1,206 @@
 {
-  "score": 46,
+  "schema_version": 2,
+  "provenance": "measured",
+  "score": 36,
   "baseline": {
-    "p50": 31.3,
-    "p95": 464.9,
+    "total_requests": 48,
     "error_rate": 0.0,
-    "probes": 30
+    "p50_latency_ms": 10.24,
+    "p95_latency_ms": 123.85,
+    "avg_latency_ms": 41.89
   },
   "experiments": [
     {
       "id": "EXP-001",
       "target": "cart",
-      "fault": "container pause (freeze)",
-      "duration": 8.0,
-      "peak_p95": 2500.0,
-      "peak_error_rate": 10.0,
-      "mttr": 0.51,
+      "fault": "container_pause",
+      "duration": 3.014,
+      "peak_p95": 2501.86,
+      "peak_error_rate": 22.220000000000002,
+      "mttr": 2.52,
       "kill_switch_triggered": true,
-      "timeline": [
-        {
-          "t": 0.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 0.5,
-          "p50": 32.0,
-          "p95": 465.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.0,
-          "p50": 32.8,
-          "p95": 467.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.5,
-          "p50": 33.5,
-          "p95": 468.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.5,
-          "p50": 420.9,
-          "p95": 1143.3,
-          "error_rate": 3.3
-        },
-        {
-          "t": 3.0,
-          "p50": 810.4,
-          "p95": 1821.6,
-          "error_rate": 6.7
-        },
-        {
-          "t": 3.5,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 4.0,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 4.5,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 5.0,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 5.5,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 6.0,
-          "p50": 1200.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 6.5,
-          "p50": 54.2,
-          "p95": 504.8,
-          "error_rate": 0.2
-        },
-        {
-          "t": 7.0,
-          "p50": 32.5,
-          "p95": 468.3,
-          "error_rate": 0.0
-        },
-        {
-          "t": 7.5,
-          "p50": 33.1,
-          "p95": 470.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 8.0,
-          "p50": 33.7,
-          "p95": 471.7,
-          "error_rate": 0.0
-        },
-        {
-          "t": 8.5,
-          "p50": 34.3,
-          "p95": 473.4,
-          "error_rate": 0.0
-        },
-        {
-          "t": 9.0,
-          "p50": 34.9,
-          "p95": 475.1,
-          "error_rate": 0.0
-        },
-        {
-          "t": 9.5,
-          "p50": 31.5,
-          "p95": 476.8,
-          "error_rate": 0.0
-        },
-        {
-          "t": 10.0,
-          "p50": 32.1,
-          "p95": 478.5,
-          "error_rate": 0.0
-        }
-      ],
+      "status": "aborted",
+      "rollback_sec": 0.0418,
+      "timeline": [],
       "raw": {
         "experiment_id": "EXP-001",
         "target_service": "cart",
         "experiment_type": "container_pause",
+        "planned_duration_sec": 8.0,
+        "actual_duration_sec": 3.014,
         "kill_switch_triggered": true,
-        "mttr_sec": 0.51,
-        "peak_p95_ms": 2500.0,
-        "peak_error_rate": 0.1,
-        "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
+        "trigger_reason": "Safety threshold breached: p95_latency_ms=2501.86",
+        "breached_metric": "p95_latency_ms",
+        "breached_value": 2501.86,
+        "baseline_metrics": {
+          "timestamp": 1791744831.202394,
+          "window_sec": 2.0,
+          "total_requests": 20,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 20.91,
+          "p95_latency_ms": 344.54,
+          "avg_latency_ms": 63.61,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744831.159922
+        },
+        "failure_metrics": {
+          "timestamp": 1791744834.279618,
+          "window_sec": 1.0,
+          "total_requests": 9,
+          "error_count": 2,
+          "error_rate": 0.2222,
+          "p50_latency_ms": 48.08,
+          "p95_latency_ms": 2501.86,
+          "avg_latency_ms": 579.07,
+          "healthy": false,
+          "latest_sample_timestamp": 1791744834.273804
+        },
+        "recovery_metrics": {
+          "timestamp": 1791744836.837802,
+          "window_sec": 2,
+          "total_requests": 19,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 10.12,
+          "p95_latency_ms": 73.3,
+          "avg_latency_ms": 16.71,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744836.731832
+        },
+        "mttr_sec": 2.52,
+        "status": "aborted",
+        "rollback_sec": 0.0418,
+        "recovery_confirmed": true
       }
     },
     {
       "id": "EXP-002",
       "target": "valkey-cart",
-      "fault": "redis datastore pause (freeze)",
-      "duration": 8.0,
-      "peak_p95": 2500.0,
-      "peak_error_rate": 10.0,
-      "mttr": 0.1,
+      "fault": "container_pause",
+      "duration": 3.01,
+      "peak_p95": 2501.77,
+      "peak_error_rate": 12.5,
+      "mttr": 2.52,
       "kill_switch_triggered": true,
-      "timeline": [
-        {
-          "t": 0.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 0.5,
-          "p50": 32.0,
-          "p95": 465.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.0,
-          "p50": 32.8,
-          "p95": 467.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.5,
-          "p50": 33.5,
-          "p95": 468.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.5,
-          "p50": 387.5,
-          "p95": 1143.3,
-          "error_rate": 3.3
-        },
-        {
-          "t": 3.0,
-          "p50": 743.8,
-          "p95": 1821.6,
-          "error_rate": 6.7
-        },
-        {
-          "t": 3.5,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 4.0,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 4.5,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 5.0,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 5.5,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 6.0,
-          "p50": 1100.0,
-          "p95": 2500.0,
-          "error_rate": 10.0
-        },
-        {
-          "t": 6.5,
-          "p50": 31.9,
-          "p95": 466.6,
-          "error_rate": 0.0
-        },
-        {
-          "t": 7.0,
-          "p50": 32.5,
-          "p95": 468.3,
-          "error_rate": 0.0
-        },
-        {
-          "t": 7.5,
-          "p50": 33.1,
-          "p95": 470.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 8.0,
-          "p50": 33.7,
-          "p95": 471.7,
-          "error_rate": 0.0
-        },
-        {
-          "t": 8.5,
-          "p50": 34.3,
-          "p95": 473.4,
-          "error_rate": 0.0
-        },
-        {
-          "t": 9.0,
-          "p50": 34.9,
-          "p95": 475.1,
-          "error_rate": 0.0
-        },
-        {
-          "t": 9.5,
-          "p50": 31.5,
-          "p95": 476.8,
-          "error_rate": 0.0
-        },
-        {
-          "t": 10.0,
-          "p50": 32.1,
-          "p95": 478.5,
-          "error_rate": 0.0
-        }
-      ],
+      "status": "aborted",
+      "rollback_sec": 0.0282,
+      "timeline": [],
       "raw": {
         "experiment_id": "EXP-002",
         "target_service": "valkey-cart",
         "experiment_type": "container_pause",
+        "planned_duration_sec": 8.0,
+        "actual_duration_sec": 3.01,
         "kill_switch_triggered": true,
-        "mttr_sec": 0.1,
-        "peak_p95_ms": 2500.0,
-        "peak_error_rate": 0.1,
-        "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 2500.0ms (Threshold: 1500.0ms)"
+        "trigger_reason": "Safety threshold breached: p95_latency_ms=2501.77",
+        "breached_metric": "p95_latency_ms",
+        "breached_value": 2501.77,
+        "baseline_metrics": {
+          "timestamp": 1791744839.8418372,
+          "window_sec": 2.0,
+          "total_requests": 20,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 9.2,
+          "p95_latency_ms": 60.99,
+          "avg_latency_ms": 26.73,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744839.80363
+        },
+        "failure_metrics": {
+          "timestamp": 1791744842.89407,
+          "window_sec": 1.0,
+          "total_requests": 8,
+          "error_count": 1,
+          "error_rate": 0.125,
+          "p50_latency_ms": 33.01,
+          "p95_latency_ms": 2501.77,
+          "avg_latency_ms": 325.62,
+          "healthy": false,
+          "latest_sample_timestamp": 1791744842.782243
+        },
+        "recovery_metrics": {
+          "timestamp": 1791744845.4401011,
+          "window_sec": 2,
+          "total_requests": 18,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 25.63,
+          "p95_latency_ms": 367.13,
+          "avg_latency_ms": 65.59,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744845.405177
+        },
+        "mttr_sec": 2.52,
+        "status": "aborted",
+        "rollback_sec": 0.0282,
+        "recovery_confirmed": true
       }
     },
     {
       "id": "EXP-003",
       "target": "recommendation",
-      "fault": "kernel tc netem 500ms delay",
-      "duration": 8.0,
-      "peak_p95": 1996.2,
+      "fault": "network_latency",
+      "duration": 6.533,
+      "peak_p95": 1556.01,
       "peak_error_rate": 0.0,
-      "mttr": 0.51,
+      "mttr": 3.51,
       "kill_switch_triggered": true,
-      "timeline": [
-        {
-          "t": 0.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 0.5,
-          "p50": 32.0,
-          "p95": 465.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.0,
-          "p50": 32.8,
-          "p95": 467.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 1.5,
-          "p50": 33.5,
-          "p95": 468.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.0,
-          "p50": 31.3,
-          "p95": 464.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 2.5,
-          "p50": 237.5,
-          "p95": 975.3,
-          "error_rate": 0.0
-        },
-        {
-          "t": 3.0,
-          "p50": 650.0,
-          "p95": 1996.2,
-          "error_rate": 0.0
-        },
-        {
-          "t": 3.5,
-          "p50": 43.4,
-          "p95": 494.9,
-          "error_rate": 0.0
-        },
-        {
-          "t": 4.0,
-          "p50": 32.5,
-          "p95": 468.3,
-          "error_rate": 0.0
-        },
-        {
-          "t": 4.5,
-          "p50": 33.1,
-          "p95": 470.0,
-          "error_rate": 0.0
-        },
-        {
-          "t": 5.0,
-          "p50": 33.7,
-          "p95": 471.7,
-          "error_rate": 0.0
-        },
-        {
-          "t": 5.5,
-          "p50": 34.3,
-          "p95": 473.4,
-          "error_rate": 0.0
-        },
-        {
-          "t": 6.0,
-          "p50": 34.9,
-          "p95": 475.1,
-          "error_rate": 0.0
-        },
-        {
-          "t": 6.5,
-          "p50": 31.5,
-          "p95": 476.8,
-          "error_rate": 0.0
-        },
-        {
-          "t": 7.0,
-          "p50": 32.1,
-          "p95": 478.5,
-          "error_rate": 0.0
-        }
-      ],
+      "status": "aborted",
+      "rollback_sec": 0.6418,
+      "timeline": [],
       "raw": {
         "experiment_id": "EXP-003",
         "target_service": "recommendation",
         "experiment_type": "network_latency",
+        "planned_duration_sec": 8.0,
+        "actual_duration_sec": 6.533,
         "kill_switch_triggered": true,
-        "mttr_sec": 0.51,
-        "peak_p95_ms": 1996.19,
-        "peak_error_rate": 0.0,
-        "evaluation": "Kill-switch actively intervened: CRITICAL SLA BREACH: p95 latency reached 1996.2ms (Threshold: 1500.0ms)"
+        "trigger_reason": "Safety threshold breached: p95_latency_ms=1556.01",
+        "breached_metric": "p95_latency_ms",
+        "breached_value": 1556.01,
+        "baseline_metrics": {
+          "timestamp": 1791744848.440948,
+          "window_sec": 2.0,
+          "total_requests": 20,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 26.31,
+          "p95_latency_ms": 108.75,
+          "avg_latency_ms": 34.01,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744848.40903
+        },
+        "failure_metrics": {
+          "timestamp": 1791744855.67487,
+          "window_sec": 1.0,
+          "total_requests": 10,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 78.47,
+          "p95_latency_ms": 1556.01,
+          "avg_latency_ms": 420.58,
+          "healthy": false,
+          "latest_sample_timestamp": 1791744855.586734
+        },
+        "recovery_metrics": {
+          "timestamp": 1791744859.830862,
+          "window_sec": 2,
+          "total_requests": 19,
+          "error_count": 0,
+          "error_rate": 0.0,
+          "p50_latency_ms": 10.75,
+          "p95_latency_ms": 135.92,
+          "avg_latency_ms": 26.1,
+          "healthy": true,
+          "latest_sample_timestamp": 1791744859.786527
+        },
+        "mttr_sec": 3.51,
+        "status": "aborted",
+        "rollback_sec": 0.6418,
+        "recovery_confirmed": true
       }
     }
-  ],
-  "legacy_score": 38,
-  "provenance": "legacy summary; score recalculated; timelines illustrative; recovery unverified"
+  ]
 }
